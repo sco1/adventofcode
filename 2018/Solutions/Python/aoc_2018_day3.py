@@ -53,7 +53,7 @@ def build_cloth(puzzle_input: List[list]) -> np.ndarray:
 
     return cloth
 
-puzzle_input_file = Path("../../.inputs/puzzle_input_d3.txt")
+puzzle_input_file = Path("../../Inputs/puzzle_input_d3.txt")
 with puzzle_input_file.open(mode="r") as f:
     """
     Parse the input lines

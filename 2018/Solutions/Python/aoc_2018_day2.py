@@ -38,7 +38,7 @@ def part2(puzzle_input: list) -> str:
                     return "".join(b)
 
 
-puzzle_input_file = Path("../../.inputs/puzzle_input_d2.txt")
+puzzle_input_file = Path("../../Inputs/puzzle_input_d2.txt")
 with puzzle_input_file.open(mode="r") as f:
     puzzle_input = f.readlines()
 

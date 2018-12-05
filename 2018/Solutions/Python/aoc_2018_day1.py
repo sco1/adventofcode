@@ -18,7 +18,7 @@ def part2(puzzle_input: list) -> int:
                 frequency_steps.add(frequency)
 
 
-puzzle_input_file = Path("../../.inputs/puzzle_input_d1.txt")
+puzzle_input_file = Path("../../Inputs/puzzle_input_d1.txt")
 with puzzle_input_file.open(mode="r") as f:
     puzzle_input = f.readlines()
 
