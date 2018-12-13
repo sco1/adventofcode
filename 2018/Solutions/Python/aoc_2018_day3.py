@@ -4,12 +4,14 @@ from typing import List
 
 import numpy as np
 
+
 def part1(cloth: np.ndarray) -> int:
     """
     Using the input cloth matrix, find total number of elements > 1, which indicates that claims
     have overlapped
     """
-    return np.count_nonzero(cloth>1)
+    return np.count_nonzero(cloth > 1)
+
 
 def part2(cloth: np.ndarray, puzzle_input: List[list]) -> int:
     """
@@ -21,8 +23,9 @@ def part2(cloth: np.ndarray, puzzle_input: List[list]) -> int:
         column_indices = (claim[1], (claim[1] + claim[3]))
 
         subarray = cloth[row_indices[0]:row_indices[1], column_indices[0]:column_indices[1]]
-        if np.all(subarray==1):
+        if np.all(subarray == 1):
             return claim[0]
+
 
 def find_cloth_size(puzzle_input: List[list]) -> tuple:
     """
@@ -36,6 +39,7 @@ def find_cloth_size(puzzle_input: List[list]) -> tuple:
 
     return (max_left + max_width), (max_top + max_height)
 
+
 def build_cloth(puzzle_input: List[list]) -> np.ndarray:
     """
     Iterate over the claims in puzzle_input and add a subarray of ones to the cloth for the cut in
@@ -44,7 +48,6 @@ def build_cloth(puzzle_input: List[list]) -> np.ndarray:
     cloth_dims = find_cloth_size(puzzle_input)
     cloth = np.zeros(cloth_dims)
 
-    no_overlap = []
     for claim in puzzle_input:
         row_indices = (claim[2], (claim[2] + claim[4]))
         column_indices = (claim[1], (claim[1] + claim[3]))
@@ -52,6 +55,7 @@ def build_cloth(puzzle_input: List[list]) -> np.ndarray:
         cloth[row_indices[0]:row_indices[1], column_indices[0]:column_indices[1]] += 1
 
     return cloth
+
 
 puzzle_input_file = Path("../../Inputs/puzzle_input_d3.txt")
 with puzzle_input_file.open(mode="r") as f:
