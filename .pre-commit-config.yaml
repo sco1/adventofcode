@@ -1,0 +1,16 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.2.3
+    hooks:
+    - id: flake8
+      additional_dependencies: [
+        "flake8-docstrings",
+        "flake8-import-order",
+        "flake8-string-format",
+        "flake8-tidy-imports",
+        "flake8-todo"
+      ]
+-   repo: https://github.com/ambv/black
+    rev: 19.3b0
+    hooks:
+    - id: black
