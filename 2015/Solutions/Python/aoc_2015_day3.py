@@ -2,7 +2,10 @@ from pathlib import Path
 
 
 class Sleigh:
+    """Basic helper class to model Santa's movement & present delivery."""
+
     def __init__(self):
+        """Initialize the sleigh object & deliver a present to the first household."""
         self.x = 0
         self.y = 0
 
@@ -16,18 +19,23 @@ class Sleigh:
         self.presents_delivered = {(self.x, self.y): 1}
 
     def move_left(self):
+        """Move the sleigh one grid left."""
         self.x -= 1
 
     def move_right(self):
+        """Move the sleigh one grid right."""
         self.x += 1
 
     def move_up(self):
+        """Move the sleigh one grid up."""
         self.y += 1
 
     def move_down(self):
+        """Move the sleigh one grid down."""
         self.y -= 1
 
     def make_moves(self, move_list: str):
+        """Make present deliveries based on the input `move_list`."""
         for move in move_list:
             self.movement_mapping[move]()
             try:
@@ -36,6 +44,7 @@ class Sleigh:
                 self.presents_delivered[(self.x, self.y)] = 1
 
     def at_least_one(self) -> int:
+        """Return the number of households with at least one present."""
         return len(self.presents_delivered)
 
 
@@ -53,6 +62,8 @@ santas_sleigh = Sleigh()
 robot_santas_sleigh = Sleigh()
 santas_sleigh.make_moves(puzzle_input[::2])
 robot_santas_sleigh.make_moves(puzzle_input[1::2])
+
+# Use a set intersection to remove duplicate households
 print(
     len(
         set(santas_sleigh.presents_delivered.keys())
