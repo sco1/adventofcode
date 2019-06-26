@@ -21,7 +21,7 @@ def mine_adventcoin(
             return ii
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d4.txt")
+puzzle_input_file = Path("./puzzle_input.txt")
 with puzzle_input_file.open(mode="r") as f:
     puzzle_input = f.read()
 

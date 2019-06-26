@@ -48,7 +48,7 @@ class Sleigh:
         return len(self.presents_delivered)
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d3.txt")
+puzzle_input_file = Path("./puzzle_input.txt")
 with puzzle_input_file.open(mode="r") as f:
     puzzle_input = f.read()
 
