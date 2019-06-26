@@ -84,7 +84,7 @@ def calculate_total_ribbon(present_dimensions: List[List[int]]) -> int:
     return total_ribbon
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d2.txt")
+puzzle_input_file = Path("./puzzle_input.txt")
 with puzzle_input_file.open(mode="r") as f:
     puzzle_input = [[int(dim) for dim in line.split("x")] for line in f]
 

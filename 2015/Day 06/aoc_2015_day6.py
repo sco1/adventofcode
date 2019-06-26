@@ -118,7 +118,7 @@ class BrightnessGrid(LightGrid):
         return np.sum(self.light_grid)
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d6.txt")
+puzzle_input_file = Path("./puzzle_input.txt")
 with puzzle_input_file.open(mode="r") as f:
     puzzle_input = f.readlines()
 

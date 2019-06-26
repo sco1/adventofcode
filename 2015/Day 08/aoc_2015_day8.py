@@ -75,7 +75,7 @@ def escaped_size_delta(santas_list: List[str]) -> int:
     return escaped_size - code_size
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d8.txt")
+puzzle_input_file = Path("./puzzle_input.txt")
 with puzzle_input_file.open(mode="r") as f:
     puzzle_input = [line.strip() for line in f]
 

@@ -76,7 +76,7 @@ def check_word_list(word_list: List[str]) -> Tuple[int]:
     return rule_a_count, rule_b_count
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d5.txt")
+puzzle_input_file = Path("./puzzle_input.txt")
 with puzzle_input_file.open(mode="r") as f:
     puzzle_input = f.readlines()
 
