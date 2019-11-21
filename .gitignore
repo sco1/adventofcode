@@ -4,6 +4,7 @@ __pycache__/
 
 # Virtual Envs
 .*env/
+.python-version
 
 # Jupyter
 *.ipynb*
