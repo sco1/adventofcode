@@ -1,6 +1,7 @@
 # Caches
 .vscode/
 __pycache__/
+*.asv
 
 # Virtual Envs
 .*env/
