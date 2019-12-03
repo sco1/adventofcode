@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import operator
 from functools import reduce
 from itertools import product
@@ -77,7 +79,7 @@ class IntcodeMachine:
     @classmethod
     def find_noun_verb(
         cls, in_program: List[int], target_output: int, max_noun_verb: int = 99
-    ) -> Optional["IntcodeMachine"]:
+    ) -> Optional[IntcodeMachine]:
         """From the starting program, iterate over noun & verb until desired output is reached."""
         machine = cls(in_program)
         for noun, verb in product(range(max_noun_verb + 1), repeat=2):
