@@ -30,7 +30,7 @@ class Coordinate(NamedTuple):
         elif isinstance(other, Tuple):
             return self.x == other[0] and self.y == other[1]
         else:
-            return NotImplementedError
+            return NotImplemented
 
     def dist(self, other: Coordinate) -> int:
         """Calculate the Manhattan distance between x,y pairs."""
