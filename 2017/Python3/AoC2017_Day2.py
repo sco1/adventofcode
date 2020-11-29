@@ -1,8 +1,9 @@
 import itertools
 
+
 def Day2a(filepath):
     """
-    For each row, determine the difference between the largest value and the 
+    For each row, determine the difference between the largest value and the
     smallest value; the checksum is the sum of all of these differences.
 
     For example, given the following spreadsheet:
@@ -29,11 +30,12 @@ def Day2a(filepath):
 
     return output
 
+
 def Day2b(filepath):
     """
-    It sounds like the goal is to find the only two numbers in each row where 
-    one evenly divides the other - that is, where the result of the division 
-    operation is a whole number. They would like you to find those numbers on 
+    It sounds like the goal is to find the only two numbers in each row where
+    one evenly divides the other - that is, where the result of the division
+    operation is a whole number. They would like you to find those numbers on
     each line, divide them, and add up each line's result.
 
     For example, given the following spreadsheet:
@@ -42,7 +44,7 @@ def Day2b(filepath):
     9 4 7 3
     3 8 6 5
 
-    In the first row, the only two numbers that evenly divide are 8 and 2; the 
+    In the first row, the only two numbers that evenly divide are 8 and 2; the
     result of this division is 4.
     In the second row, the two numbers are 9 and 3; the result is 3.
     In the third row, the result is 2.
@@ -57,18 +59,19 @@ def Day2b(filepath):
         for pair in itertools.combinations(row, 2):
             test = max(pair) % min(pair)
             if test == 0:
-                output += max(pair)//min(pair)
+                output += max(pair) // min(pair)
                 break
-            
+
     return output
+
 
 def readtxt(filepath):
     """
     Read in puzzle input
     """
     m = []
-    with open(filepath, mode='r') as fID:
+    with open(filepath, mode="r") as fID:
         for line in fID:
             m.append([int(x) for x in line.split()])
-    
+
     return m

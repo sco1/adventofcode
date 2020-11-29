@@ -80,7 +80,7 @@ def build_dataframe(puzzle_input: List[list]) -> pd.DataFrame:
         zipped_sleeps = zip_longest(sleepwake["sleep"], sleepwake["wake"], fillvalue=60)
         day_array = np.zeros(60, dtype=bool)
         for sleep in zipped_sleeps:
-            day_array[sleep[0]:sleep[1]] = True
+            day_array[sleep[0] : sleep[1]] = True
 
         sleep_schedule_list.append(day_array)
 

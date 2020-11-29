@@ -54,7 +54,7 @@ class OnOffGrid(LightGrid):
 
         Numpy indexing is (row, column) and coordinates are provided as (column, row)
         """
-        self.light_grid[top_left[1]:bottom_right[1]+1, top_left[0]:bottom_right[0]+1] = True
+        self.light_grid[top_left[1] : bottom_right[1] + 1, top_left[0] : bottom_right[0] + 1] = True
 
     def lights_off(self, top_left: List[int], bottom_right: List[int]):
         """
@@ -62,7 +62,9 @@ class OnOffGrid(LightGrid):
 
         Numpy indexing is (row, column) and coordinates are provided as (column, row)
         """
-        self.light_grid[top_left[1]:bottom_right[1]+1, top_left[0]:bottom_right[0]+1] = False
+        self.light_grid[
+            top_left[1] : bottom_right[1] + 1, top_left[0] : bottom_right[0] + 1
+        ] = False
 
     def lights_toggle(self, top_left: List[int], bottom_right: List[int]):
         """
@@ -73,7 +75,7 @@ class OnOffGrid(LightGrid):
         # Split coordinates to save typing
         y1, x1 = top_left
         y2, x2 = bottom_right
-        self.light_grid[x1:x2+1, y1:y2+1] = ~self.light_grid[x1:x2+1, y1:y2+1]
+        self.light_grid[x1 : x2 + 1, y1 : y2 + 1] = ~self.light_grid[x1 : x2 + 1, y1 : y2 + 1]
 
 
 class BrightnessGrid(LightGrid):
@@ -89,7 +91,7 @@ class BrightnessGrid(LightGrid):
 
         Numpy indexing is (row, column) and coordinates are provided as (column, row)
         """
-        self.light_grid[top_left[1]:bottom_right[1]+1, top_left[0]:bottom_right[0]+1] += 1
+        self.light_grid[top_left[1] : bottom_right[1] + 1, top_left[0] : bottom_right[0] + 1] += 1
 
     def lights_off(self, top_left: List[int], bottom_right: List[int]):
         """
@@ -99,11 +101,16 @@ class BrightnessGrid(LightGrid):
 
         Numpy indexing is (row, column) and coordinates are provided as (column, row)
         """
-        self.light_grid[top_left[1]:bottom_right[1]+1, top_left[0]:bottom_right[0]+1] -= 1
+        self.light_grid[top_left[1] : bottom_right[1] + 1, top_left[0] : bottom_right[0] + 1] -= 1
 
         # Reset any negative values to 0
-        mask = self.light_grid[top_left[1]:bottom_right[1]+1, top_left[0]:bottom_right[0]+1] < 0
-        self.light_grid[top_left[1]:bottom_right[1]+1, top_left[0]:bottom_right[0]+1] *= ~mask
+        mask = (
+            self.light_grid[top_left[1] : bottom_right[1] + 1, top_left[0] : bottom_right[0] + 1]
+            < 0
+        )
+        self.light_grid[
+            top_left[1] : bottom_right[1] + 1, top_left[0] : bottom_right[0] + 1
+        ] *= ~mask
 
     def lights_toggle(self, top_left: List[int], bottom_right: List[int]):
         """
@@ -111,7 +118,7 @@ class BrightnessGrid(LightGrid):
 
         Numpy indexing is (row, column) and coordinates are provided as (column, row)
         """
-        self.light_grid[top_left[1]:bottom_right[1]+1, top_left[0]:bottom_right[0]+1] += 2
+        self.light_grid[top_left[1] : bottom_right[1] + 1, top_left[0] : bottom_right[0] + 1] += 2
 
     def total_brightness(self):
         """Return the total brightness of the grid."""
