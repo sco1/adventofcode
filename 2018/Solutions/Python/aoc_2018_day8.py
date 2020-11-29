@@ -4,7 +4,7 @@ from pathlib import Path
 import networkx as nx
 
 
-def build_nodes(puzzle_input: deque, idx: int=0, dg: nx.DiGraph=nx.DiGraph()):
+def build_nodes(puzzle_input: deque, idx: int = 0, dg: nx.DiGraph = nx.DiGraph()):
     """
     Recurse & build the tree from the input puzzle_data
 

@@ -22,7 +22,7 @@ def build_grid(serial: int, width: int = 300, height: int = 300) -> np.ndarray:
 def get_max_subgrid_power(power_grid: np.ndarray, subgrid_size: int = 3) -> np.ndarray:
     """
     Use a rolling window to obtain the the power for each subgrid on the power grid
-    
+
     Assumes power_grid and subgrid(s) are square
     """
     # Use 2d convolution to get the sum of each subgrid
@@ -49,7 +49,7 @@ def part1(serial: int) -> Tuple[int]:
 def part2(serial: int, max_subgrid_size: int = 300) -> Tuple[int]:
     """
     Find the subgrid size that results in the highest total power
-    
+
     Brute force!
     """
     power_grid = build_grid(4455)

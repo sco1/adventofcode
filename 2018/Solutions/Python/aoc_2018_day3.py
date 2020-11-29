@@ -22,7 +22,7 @@ def part2(cloth: np.ndarray, puzzle_input: List[list]) -> int:
         row_indices = (claim[2], (claim[2] + claim[4]))
         column_indices = (claim[1], (claim[1] + claim[3]))
 
-        subarray = cloth[row_indices[0]:row_indices[1], column_indices[0]:column_indices[1]]
+        subarray = cloth[row_indices[0] : row_indices[1], column_indices[0] : column_indices[1]]
         if np.all(subarray == 1):
             return claim[0]
 
@@ -52,7 +52,7 @@ def build_cloth(puzzle_input: List[list]) -> np.ndarray:
         row_indices = (claim[2], (claim[2] + claim[4]))
         column_indices = (claim[1], (claim[1] + claim[3]))
 
-        cloth[row_indices[0]:row_indices[1], column_indices[0]:column_indices[1]] += 1
+        cloth[row_indices[0] : row_indices[1], column_indices[0] : column_indices[1]] += 1
 
     return cloth
 
