@@ -460,6 +460,20 @@ checkqa_mypy = ["mypy (==0.780)"]
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xmlschema"]
 
 [[package]]
+name = "pytest-check"
+version = "0.3.9"
+description = "A pytest plugin that allows multiple failures per test."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pytest = ">=3.1.1"
+
+[package.extras]
+test = ["tox"]
+
+[[package]]
 name = "pytest-cov"
 version = "2.10.1"
 description = "Pytest plugin for measuring coverage."
@@ -581,7 +595,7 @@ testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "68820dd5d626eb3dc8c4fbeef00d7eb0c0a147ad1ba95a401af064d85bb1d623"
+content-hash = "7f7efe3647bd0173aa3dc5f99d20f2009c21c599df986ea4b68601707f69c398"
 
 [metadata.files]
 appdirs = [
@@ -833,6 +847,10 @@ pyparsing = [
 pytest = [
     {file = "pytest-6.1.2-py3-none-any.whl", hash = "sha256:4288fed0d9153d9646bfcdf0c0428197dba1ecb27a33bb6e031d002fa88653fe"},
     {file = "pytest-6.1.2.tar.gz", hash = "sha256:c0a7e94a8cdbc5422a51ccdad8e6f1024795939cc89159a0ae7f0b316ad3823e"},
+]
+pytest-check = [
+    {file = "pytest_check-0.3.9-py2.py3-none-any.whl", hash = "sha256:2c668e513bd13c707df8e12b532d4f9cdbfc6ddbef259bdee52463dc04d21de0"},
+    {file = "pytest_check-0.3.9.tar.gz", hash = "sha256:496b455ee0889783d9977c15c81d0983fb9ebe69ce85af9dc3dccce7c0cf592b"},
 ]
 pytest-cov = [
     {file = "pytest-cov-2.10.1.tar.gz", hash = "sha256:47bd0ce14056fdd79f93e1713f88fad7bdcc583dcd7783da86ef2f085a0bb88e"},
