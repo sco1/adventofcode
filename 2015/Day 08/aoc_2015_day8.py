@@ -18,7 +18,7 @@ def size_in_memory(in_str: str) -> int:
     """
     Return the interpreted string length of the given string.
 
-    The only assumed valid escapes are: 
+    The only assumed valid escapes are:
         * \\\\  (Backslash)
         * \\"   (Single apostrophe)
         * \\x.. (Single ASCII character, hexadecimal)
@@ -46,11 +46,19 @@ def size_if_escaped(in_str: str) -> int:
 
     Note: The above example contains additonal escapes so they render properly after interpretation
     """
-    in_str = in_str.replace('"', r"\"")
-    in_str = in_str.replace(r"\\", "\\\\\\")
-    in_str = in_str.replace(r"\x", r"\\x")
+    # Let's do it by walking since I can't get string replacement to cooperate
+    escaped_str = ['"']
+    for char in in_str:
+        if char == "\\":
+            escaped_str.append("\\\\")
+        elif char == '"':
+            escaped_str.append('\\"')
+        else:
+            escaped_str.append(char)
+    else:
+        escaped_str.append('"')
 
-    return len(in_str) + 2  # Add 2 for new surrounding quotes
+    return len("".join(escaped_str))
 
 
 def list_size_delta(santas_list: List[str]) -> int:
@@ -75,9 +83,9 @@ def escaped_size_delta(santas_list: List[str]) -> int:
     return escaped_size - code_size
 
 
-puzzle_input_file = Path("./puzzle_input.txt")
-with puzzle_input_file.open(mode="r") as f:
-    puzzle_input = [line.strip() for line in f]
+if __name__ == "__main__":
+    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input = puzzle_input_file.read_text().splitlines()
 
-print(list_size_delta(puzzle_input))
-print(escaped_size_delta(puzzle_input))
+    print(f"Part 1: {list_size_delta(puzzle_input)}")
+    print(f"Part 2: {escaped_size_delta(puzzle_input)}")
