@@ -7,5 +7,7 @@ Visit the [Advent of Code site][1]!
 ## What is this repository?
 This repository contains my attempted solutions for each year's Advent of Code event. Time permitting, solutions will be written in Python and maybe MATLAB.
 
+In most cases the provided solutions represent a "first-thoughts" approach to the day's problem rather than the most efficient.
+
 
 [1]: https://adventofcode.com/
