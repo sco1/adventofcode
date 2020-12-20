@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from .aoc_2020_day11 import SeatMap
+from .aoc_2020_day11 import SeatMap, VisibleSeatMap
 
 
 SEAT_LAYOUT = dedent(
@@ -25,3 +25,11 @@ def test_seat_stabilization() -> None:
     seat_map.board_until_stable()
 
     assert seat_map.n_occupied() == 37
+
+
+def test_visible_seat_stabilization() -> None:
+    """Check the number of visible occupied seats after the Part Two boarding process stabilizes."""
+    seat_map = VisibleSeatMap(SEAT_LAYOUT, neighbor_threshold=5)
+    seat_map.board_until_stable()
+
+    assert seat_map.n_occupied() == 26
