@@ -12,3 +12,9 @@ __pycache__/
 
 # Test Data
 test_input.txt
+
+# Rust
+target/
+Cargo.lock
+*.rs.bk
+*.rustfmt
