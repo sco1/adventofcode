@@ -2,7 +2,7 @@ from collections import Counter
 from math import floor
 from pathlib import Path
 
-from fuzzywuzzy import process
+from rapidfuzz import process
 
 
 def part1(puzzle_input: list) -> int:
