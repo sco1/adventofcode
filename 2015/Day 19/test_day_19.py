@@ -50,6 +50,6 @@ REACTION_CASES = [
 
 @pytest.mark.parametrize("puzzle_input,n_expected_outputs", REACTION_CASES)
 def test_reactions(puzzle_input: str, n_expected_outputs: int) -> None:
-    """"""
+    """ """
     reactions, starting_molecule = parse_input(puzzle_input.splitlines())
     assert count_unique_products(reactions, starting_molecule) == n_expected_outputs
