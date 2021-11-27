@@ -2,7 +2,6 @@ from textwrap import dedent
 
 from .aoc_2020_day08 import GameGear, RepeatInstructionError, mutate_until_fixed
 
-
 SAMPLE_INSTRUCTIONS = dedent(
     """\
     nop +0

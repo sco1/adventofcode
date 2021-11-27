@@ -2,7 +2,6 @@ from textwrap import dedent
 
 from .aoc_2020_day14 import FerryComputer
 
-
 SAMPLE_PROGRAM = dedent(
     """\
     mask = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X

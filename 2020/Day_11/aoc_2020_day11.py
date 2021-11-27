@@ -2,7 +2,6 @@ import itertools as it
 from collections import abc
 from pathlib import Path
 
-
 COORD = tuple[int, int]
 
 

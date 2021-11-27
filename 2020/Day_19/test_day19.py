@@ -2,7 +2,6 @@ from textwrap import dedent
 
 from .aoc_2020_day19 import check_messages
 
-
 SAMPLE_1 = dedent(
     """\
     0: 4 1 5

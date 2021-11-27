@@ -3,7 +3,6 @@ from typing import List
 import pytest
 from aoc_2019_day8 import check_image, load_image, merge_layers
 
-
 # Provide test cases as (raw stream, width, height, check value) tuples
 PART_ONE = [
     ("123456789012", 3, 2, 1),

@@ -1,7 +1,6 @@
 import pytest
 from aoc_2019_day1 import calculate_propellant, calculate_stage_propellant
 
-
 # Test cases as (stage mass, fuel required) tuples
 PART_ONE = [(12, 2), (14, 2), (1969, 654), (100756, 33583)]
 PART_TWO = [(14, 2), (1969, 966), (100756, 50346)]

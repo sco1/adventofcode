@@ -3,7 +3,6 @@ from collections import defaultdict, deque
 from functools import partial
 from pathlib import Path
 
-
 SEEN_DEQUE = partial(deque, maxlen=2)
 
 

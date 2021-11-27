@@ -4,7 +4,6 @@ import operator
 import typing as t
 from pathlib import Path
 
-
 # Per the problem statement, we're working with 16-bit signals (0 to 65535) so some operators will
 # need to be corrected to keep in that range (and, for NOT, not a bool)
 OPS = {

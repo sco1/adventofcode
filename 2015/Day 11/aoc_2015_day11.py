@@ -1,6 +1,5 @@
 from pathlib import Path
 
-
 # Initialize some helper collections of letters for easier checking
 VALID_LETTERS = "abcdefghjkmnnpqrstuvwxyz"
 INVALID_LETTERS = "iol"  # Shouldn't be necessary but defined for the generic case

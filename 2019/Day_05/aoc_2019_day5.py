@@ -2,7 +2,6 @@ from pathlib import Path
 
 from IntcodeComputer import IntcodeMachine
 
-
 if __name__ == "__main__":
     puzzle_input = Path("./puzzle_input.txt")
 

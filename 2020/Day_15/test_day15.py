@@ -2,7 +2,6 @@ import pytest
 
 from .aoc_2020_day15 import NumberGame
 
-
 GAME_TEST_CASES = [
     ("0,3,6", 436, 175594),
     ("1,3,2", 1, 2578),

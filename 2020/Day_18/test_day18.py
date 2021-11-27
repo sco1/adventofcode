@@ -2,7 +2,6 @@ import pytest
 
 from .aoc_2020_day18 import calc_equation
 
-
 SAMPLE_EQUATIONS = [
     ("1 + 2 * 3 + 4 * 5 + 6", 71, 231),
     ("1 + (2 * 3) + (4 * (5 + 6))", 51, 51),

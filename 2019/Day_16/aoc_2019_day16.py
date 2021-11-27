@@ -3,7 +3,6 @@ from pathlib import Path
 
 import numpy as np
 
-
 BASE_PATTERN = np.array((0, 1, 0, -1))
 
 

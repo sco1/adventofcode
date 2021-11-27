@@ -4,7 +4,6 @@ import pytest
 
 from .aoc_2020_day13 import find_bus_id, find_golden_timestamp, parse_bus_schedule
 
-
 SAMPLE_SCHEDULE = dedent(
     """\
     939
