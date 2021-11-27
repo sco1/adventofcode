@@ -2,7 +2,6 @@ from textwrap import dedent
 
 from .aoc_2020_day01 import find_sum_combo
 
-
 SAMPLE_INPUT = dedent(
     """\
     1721

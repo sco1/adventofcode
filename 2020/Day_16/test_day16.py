@@ -2,7 +2,6 @@ from textwrap import dedent
 
 from .aoc_2020_day16 import calculate_error_rate, find_field_order, parse_puzzle_input
 
-
 SAMPLE_INPUT_P1 = dedent(
     """\
     class: 1-3 or 5-7

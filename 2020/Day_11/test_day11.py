@@ -2,7 +2,6 @@ from textwrap import dedent
 
 from .aoc_2020_day11 import SeatMap, VisibleSeatMap
 
-
 SEAT_LAYOUT = dedent(
     """\
     L.LL.LL.LL

@@ -2,7 +2,6 @@ from textwrap import dedent
 
 from .aoc_2020_day17 import ConwayCube
 
-
 STARTING_SLICE = dedent(
     """\
     .#.

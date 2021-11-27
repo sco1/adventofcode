@@ -3,7 +3,6 @@ from textwrap import dedent
 import pytest
 from aoc_2015_day7 import CircuitDiagram
 
-
 PART_ONE = {
     "input": dedent(
         """\

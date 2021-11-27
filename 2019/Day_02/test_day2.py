@@ -3,7 +3,6 @@ from typing import List
 import pytest
 from aoc_2019_day2 import IntcodeMachine
 
-
 # Test cases as (program, expected output) tuples
 # For Part 1's test cases in the problem description, noun and verb are not specified so the program
 # is not altered prior to processing.

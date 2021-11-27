@@ -3,7 +3,6 @@ from textwrap import dedent
 import pytest
 from aoc_2019_day14 import Reaction, react_for_fuel, react_max_fuel
 
-
 # Test cases provided as (reaction list, ore required)
 PART_ONE = [
     (

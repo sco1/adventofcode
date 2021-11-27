@@ -4,7 +4,6 @@ import pytest
 
 from .aoc_2020_day03 import TobogganMap
 
-
 TOBOGGAN_MAP = dedent(
     """\
     ..##.......

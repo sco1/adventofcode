@@ -2,8 +2,11 @@ from itertools import islice
 from textwrap import dedent
 
 import pytest
-from aoc_2019_day10 import find_best_observation_station_location, map_asteroids, sweep_laser
-
+from aoc_2019_day10 import (
+    find_best_observation_station_location,
+    map_asteroids,
+    sweep_laser,
+)
 
 # Test cases provided as (asteroid map, truth x, truth y, truth asteroids seen)
 PART_ONE = [
