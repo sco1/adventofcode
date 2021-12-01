@@ -32,7 +32,7 @@ if __name__ == "__main__":
     puzzle_input_file = Path("./puzzle_input.txt")
     puzzle_input = [int(line) for line in puzzle_input_file.read_text().splitlines()]
 
-    n_ascending_1 = count_adjacent(puzzle_input, 2)
+    n_ascending_1 = count_adjacent(puzzle_input)
     print(f"Part One: {n_ascending_1}")
 
     n_ascending_2 = count_sums(puzzle_input, 3)
