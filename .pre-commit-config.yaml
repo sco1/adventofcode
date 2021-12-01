@@ -24,6 +24,11 @@ repos:
     hooks:
       -  id: python-check-blanket-noqa
       -  id: python-check-blanket-type-ignore
+  - repo: https://github.com/sco1/pre-commit-matlab
+    rev: v1.2.0
+    hooks:
+    -   id: matlab-reflow-comments
+        args: [--line-length=100]
   - repo: local
     hooks:
       - id: flake8
