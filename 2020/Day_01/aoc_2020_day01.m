@@ -18,9 +18,9 @@ end
 
 
 function [result_prod] = find_entry_product(expense_report, target, n_values)
-% Iterate over all combinations of N_VALUES expense values from the provided expense report
-% until a combination is found that sums to the provided TARGET value, then return the product
-% of the value combination.
+% Iterate over all combinations of N_VALUES expense values from the provided expense report until a
+% combination is found that sums to the provided TARGET value, then return the product of the value
+% combination.
 arguments
     expense_report (1, :)
     target {mustBePositive}

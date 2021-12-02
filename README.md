@@ -1,4 +1,4 @@
-# Advent of Code! :santa: :santa: :santa:  
+# Advent of Code! :santa: :santa: :santa:
 Visit the [Advent of Code site][1]!
 
 ## What is Advent of Code?

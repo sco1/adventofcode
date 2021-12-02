@@ -90,7 +90,7 @@ Player 2 wins the round!
 
 
 == Post-game results ==
-Player 1's deck: 
+Player 1's deck:
 Player 2's deck: 3, 2, 10, 6, 8, 5, 9, 4, 7, 1
 ```
 
