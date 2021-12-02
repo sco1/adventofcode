@@ -1,0 +1,63 @@
+fun split_on(in_str, delimiter) {
+    // Split the input string on the specified delimiter & return a LoxArray of strings
+    var split_txt = string_array(in_str);
+    var out = array(0);
+    var substr = "";
+    for (var i = 0; i < len(in_str); i = i + 1) {
+        if (split_txt.get(i) == delimiter) {
+            out.append(str2num(substr));
+            substr = "";
+        }
+        else {
+            substr = substr + split_txt.get(i);
+        }
+    }
+
+    // Catch any stragglers
+    if (len(substr) > 0) {
+        out.append(substr);
+    }
+    return out;
+}
+
+fun array_sum(in_array) {
+    // Calculate the sum of the input array.
+    // The array is assumed to contain only numeric values.
+    var total = 0;
+    for (var i = 0; i < len(in_array); i = i + 1) {
+        total = total + in_array.get(i);
+    }
+    return total;
+}
+
+fun count_adjacent(in_array) {
+    // Count the number of times the depth sounding increases from the previous measurement.
+    var n_ascending = 0;
+    for (var i = 0; i < (len(in_array)-1); i = i + 1) {
+        if (in_array.get(i+1) - in_array.get(i) > 0) {
+            n_ascending = n_ascending + 1;
+        }
+    }
+
+    return n_ascending;
+}
+
+fun count_sum(in_array, width) {
+    // Count the number of times the sliding window sum increases from the previous window's sum.
+    var n_windows = len(in_array) - width + 1;
+    var window_sums = array(0);
+    for (var i = 0; i < n_windows; i = i + 1) {
+        window_sums.append(array_sum(in_array.slice(i, i+width, 1)));
+    }
+
+    return count_adjacent(window_sums);
+}
+
+var soundings = read_text("puzzle_input.txt");
+soundings = split_on(soundings, "\n");
+
+print "Part 1:";
+print count_adjacent(soundings);
+
+print "Part 2:";
+print count_sum(soundings, 3);
