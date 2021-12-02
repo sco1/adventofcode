@@ -16,7 +16,7 @@ numpy = "^1.21"
 pandas = "^1.3"
 rapidfuzz = "^1.8"
 scipy = "^1.7"
-sco1-pylox = "^0.1"
+sco1-pylox = "^0.4"
 sympy = "^1.9"
 
 [tool.poetry.dev-dependencies]
