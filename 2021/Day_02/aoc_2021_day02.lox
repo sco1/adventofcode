@@ -1,0 +1,84 @@
+fun split_on(in_str, delimiter) {
+    // Split the input string on the specified delimiter & return a LoxArray of strings
+    var split_txt = string_array(in_str);
+    var out = array(0);
+    var substr = "";
+    for (var i = 0; i < len(in_str); i = i + 1) {
+        if (split_txt.get(i) == delimiter) {
+            out.append(substr);
+            substr = "";
+        }
+        else {
+            substr = substr + split_txt.get(i);
+        }
+    }
+
+    // Catch any stragglers
+    if (len(substr) > 0) {
+        out.append(substr);
+    }
+    return out;
+}
+
+fun parse_commands(raw_commands) {
+    var parsed_commands = array(0);
+    for (var i = 0; i < len(raw_commands); i = i + 1) {
+        var split_command = split_on(raw_commands.get(i), " ");
+        split_command.append(str2num(split_command.pop()));
+
+        parsed_commands.append(split_command);
+    }
+
+    return parsed_commands;
+}
+
+
+fun run_basic_sub(commands) {
+    var depth = 0;
+    var horizontal = 0;
+
+    for (var i = 0; i < len(commands); i = i + 1) {
+        var command = commands.get(i);
+        var instruction = command.get(0);
+        var magnitude = command.get(1);
+
+        if (instruction == "forward") horizontal = horizontal + magnitude;
+        else if (instruction == "down") depth = depth + magnitude;
+        else if (instruction == "up") depth = depth - magnitude;
+    }
+
+    return depth * horizontal;
+}
+
+fun run_aiming_sub(commands) {
+    var aim = 0;
+    var depth = 0;
+    var horizontal = 0;
+
+    for (var i = 0; i < len(commands); i = i + 1) {
+        var command = commands.get(i);
+        var instruction = command.get(0);
+        var magnitude = command.get(1);
+
+        if (instruction == "forward") {
+            horizontal = horizontal + magnitude;
+            depth = depth + (aim * magnitude);
+        }
+        else if (instruction == "down") aim = aim + magnitude;
+        else if (instruction == "up") aim = aim - magnitude;
+    }
+
+    return depth * horizontal;
+}
+
+var raw_commands = read_text("puzzle_input.txt");
+// var raw_commands = read_text("sample_input.txt");
+
+raw_commands = split_on(raw_commands, "\n");
+var parsed_commands = parse_commands(raw_commands);
+
+print "Part 1:";
+print run_basic_sub(parsed_commands);
+
+print "Part 2:";
+print run_aiming_sub(parsed_commands);
