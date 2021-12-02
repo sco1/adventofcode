@@ -52,9 +52,9 @@ To simplify things for the example, however, suppose you only have help from one
 
 ```
 Second   Worker 1   Worker 2   Done
-   0        C          .        
-   1        C          .        
-   2        C          .        
+   0        C          .
+   1        C          .
+   2        C          .
    3        A          F       C
    4        B          F       CA
    5        B          F       CA
