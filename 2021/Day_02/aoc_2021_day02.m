@@ -1,4 +1,4 @@
-instructions = parse_commands('./puzzle_input.txt');
+commands = parse_commands('./puzzle_input.txt');
 % commands = parse_commands('./sample_input.txt');
 
 fprintf('Part One: %u\n', run_basic_sub(commands));
