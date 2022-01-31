@@ -74,7 +74,7 @@ def react_for_fuel(reactions: Dict[str, Reaction], fuel_req: int = 1) -> int:
     return ingredient_store["ORE"]
 
 
-def react_max_fuel(reactions: Dict[str, Reaction], ore_cargo: int = 10 ** 12) -> int:
+def react_max_fuel(reactions: Dict[str, Reaction], ore_cargo: int = 10**12) -> int:
     """
     Determine maximum fuel production capability for the provided starting inventory of ORE.
 
