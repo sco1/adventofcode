@@ -67,7 +67,7 @@ def n_paths(adapter_graph: nx.DiGraph) -> int:
     outlet_idx = n_nodes - 2
     device_idx = n_nodes - 1
 
-    return sum((adj ** n)[outlet_idx, device_idx] for n in range(1, n_nodes))
+    return sum((adj**n)[outlet_idx, device_idx] for n in range(1, n_nodes))
 
 
 if __name__ == "__main__":

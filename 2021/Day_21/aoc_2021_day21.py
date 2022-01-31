@@ -137,8 +137,8 @@ def play_quantum(
             next_player_pos, new_pos, next_player_score, curr_player_score + (new_pos + 1)
         )
 
-        n_wins_curr += (n_combinations * current_wins)
-        n_wins_next += (n_combinations * next_wins)
+        n_wins_curr += n_combinations * current_wins
+        n_wins_next += n_combinations * next_wins
 
     # Once we finish recursing through everything, we will get back Player 1's wins, then Player 2's
     return n_wins_curr, n_wins_next

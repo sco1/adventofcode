@@ -74,7 +74,7 @@ class FerryComputer:  # noqa: D101
             address = address & self._andmask | self._ormask
             for power, bit in zip(powers, flip_bits):
                 if bit:  # Since our AND mask replaces X with 0, we can skip these
-                    address |= 2 ** power  # Use bitwise or to flip the appropriate bit
+                    address |= 2**power  # Use bitwise or to flip the appropriate bit
 
             self.memory_register[address] = value
 
