@@ -1,34 +1,7 @@
-fun split_on(in_str, delimiter) {
-    // Split the input string on the specified delimiter & return a LoxArray of strings
-    var split_txt = string_array(in_str);
-    var out = array(0);
-    var substr = "";
-    for (var i = 0; i < len(in_str); i = i + 1) {
-        if (split_txt.get(i) == delimiter) {
-            out.append(str2num(substr));
-            substr = "";
-        }
-        else {
-            substr = substr + split_txt.get(i);
-        }
-    }
+include <array_sum>
+include <map>
+include <split_on>
 
-    // Catch any stragglers
-    if (len(substr) > 0) {
-        out.append(substr);
-    }
-    return out;
-}
-
-fun array_sum(in_array) {
-    // Calculate the sum of the input array.
-    // The array is assumed to contain only numeric values.
-    var total = 0;
-    for (var i = 0; i < len(in_array); i = i + 1) {
-        total = total + in_array.get(i);
-    }
-    return total;
-}
 
 fun count_adjacent(in_array) {
     // Count the number of times the depth sounding increases from the previous measurement.
@@ -55,6 +28,7 @@ fun count_sum(in_array, width) {
 
 var soundings = read_text("puzzle_input.txt");
 soundings = split_on(soundings, "\n");
+soundings = map(soundings, str2num);
 
 print "Part 1:";
 print count_adjacent(soundings);
