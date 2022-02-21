@@ -68,7 +68,7 @@ def Day7a(filepath):
     programlist = readfile(filepath)
 
     tower = nx.DiGraph()
-    pattern = "(\w+)\s*\((\d+)\)(?:\s*->\s*)?(.+)?"
+    pattern = r"(\w+)\s*\((\d+)\)(?:\s*->\s*)?(.+)?"
     for response in programlist:
         responseinfo = list(filter(None, re.findall(pattern, response)[0]))
         tower.add_node(responseinfo[0], weight=int(responseinfo[1]))
