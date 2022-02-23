@@ -1,11 +1,12 @@
 import collections
+from pathlib import Path
 
 
-def Day4a(filepath):
+def Day4a(passlist: list[list[str]]) -> int:
     """
-    A new system policy has been put in place that requires all accounts to use
-    a passphrase instead of simply a password. A passphrase consists of a series
-    of words (lowercase letters) separated by spaces.
+    A new system policy has been put in place that requires all accounts to use a passphrase instead
+    of simply a password. A passphrase consists of a series of words (lowercase letters) separated
+    by spaces.
 
     To ensure security, a valid passphrase must contain no duplicate words.
 
@@ -18,8 +19,6 @@ def Day4a(filepath):
     The system's full passphrase list is available as your puzzle input.
     How many passphrases are valid?
     """
-    passlist = loadfile(filepath)
-
     nvalid = 0
     for passphrase in passlist:
         wordcounts = collections.Counter(passphrase)
@@ -29,28 +28,24 @@ def Day4a(filepath):
     return nvalid
 
 
-def Day4b(filepath):
+def Day4b(passlist: list[list[str]]) -> int:
     """
-    For added security, yet another system policy has been put in place. Now, a
-    valid passphrase must contain no two words that are anagrams of each other -
-    that is, a passphrase is invalid if any word's letters can be rearranged to
-    form any other word in the passphrase.
+    For added security, yet another system policy has been put in place. Now, a valid passphrase
+    must contain no two words that are anagrams of each other - that is, a passphrase is invalid if
+    any word's letters can be rearranged to form any other word in the passphrase.
 
     For example:
 
     abcde fghij is a valid passphrase.
-    abcde xyz ecdab is not valid - the letters from the third word can be
-                    rearranged to form the first word.
-    a ab abc abd abf abj is a valid passphrase, because all letters need to be
-                         used when forming another word.
+    abcde xyz ecdab is not valid - the letters from the third word can be rearranged to form the
+                                   first word.
+    a ab abc abd abf abj is a valid passphrase, because all letters need to be used when forming
+                         another word.
     iiii oiii ooii oooi oooo is valid.
-    oiii ioii iioi iiio is not valid - any of these words can be rearranged to
-                        form any other word.
+    oiii ioii iioi iiio is not valid - any of these words can be rearranged to form any other word.
 
     Under this new system policy, how many passphrases are valid?
     """
-    passlist = loadfile(filepath)
-
     nvalid = 0
     for passphrase in passlist:
         wordcounts = collections.Counter(["".join(sorted(phrase)) for phrase in passphrase])
@@ -60,10 +55,10 @@ def Day4b(filepath):
     return nvalid
 
 
-def loadfile(filepath):
-    passlist = []
-    with open(filepath, mode="r") as fID:
-        for line in fID:
-            passlist.append(line.split())
+if __name__ == "__main__":
+    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input = puzzle_input_file.read_text().splitlines()
+    password_list = [line.split() for line in puzzle_input]
 
-    return passlist
+    print(f"Part One: {Day4a(password_list)}")
+    print(f"Part Two: {Day4b(password_list)}")

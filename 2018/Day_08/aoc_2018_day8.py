@@ -43,9 +43,10 @@ def part1(tree: nx.DiGraph) -> int:
     return metadata_sum
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d8.txt")
-with puzzle_input_file.open(mode="r") as f:
-    puzzle_input = deque([int(x) for x in f.read().strip().split()])
+if __name__ == "__main__":
+    puzzle_input_file = Path("puzzle_input.txt")
+    with puzzle_input_file.open(mode="r") as f:
+        puzzle_input = deque([int(x) for x in f.read().strip().split()])
 
-tree, _ = build_nodes(puzzle_input)
-print(part1(tree))
+    tree, _ = build_nodes(puzzle_input)
+    print(part1(tree))

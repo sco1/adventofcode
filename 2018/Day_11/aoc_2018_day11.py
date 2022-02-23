@@ -68,9 +68,10 @@ def part2(serial: int, max_subgrid_size: int = 300) -> Tuple[int]:
         return max_power_subgrid_loc, max_power_subgrid_size
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d11.txt")
-with puzzle_input_file.open(mode="r") as f:
-    serial = int(f.read())
+if __name__ == "__main__":
+    puzzle_input_file = Path("puzzle_input.txt")
+    with puzzle_input_file.open(mode="r") as f:
+        serial = int(f.read())
 
-print(part1(serial))
-print(part2(serial))
+    print(part1(serial))
+    print(part2(serial))

@@ -5,7 +5,7 @@ from pathlib import Path
 from rapidfuzz import process
 
 
-def part1(puzzle_input: list) -> int:
+def part1(puzzle_input: list[str]) -> int:
     counted_input = [Counter(container) for container in puzzle_input]
 
     n_doubles = 0
@@ -20,7 +20,7 @@ def part1(puzzle_input: list) -> int:
     return n_doubles * n_triples
 
 
-def part2(puzzle_input: list) -> str:
+def part2(puzzle_input: list[str]) -> str:
     for teststr in puzzle_input:
         # Get closest match, ignore self match
         test = process.extract(teststr, puzzle_input, limit=2)[1]
@@ -38,11 +38,9 @@ def part2(puzzle_input: list) -> str:
                     return "".join(b)
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d2.txt")
-with puzzle_input_file.open(mode="r") as f:
-    puzzle_input = f.readlines()
+if __name__ == "__main__":
+    puzzle_input_file = Path("puzzle_input.txt")
+    puzzle_input = puzzle_input_file.read_text().splitlines()
 
-puzzle_input = [line.strip() for line in puzzle_input]
-
-print(part1(puzzle_input))
-print(part2(puzzle_input))
+    print(part1(puzzle_input))
+    print(part2(puzzle_input))

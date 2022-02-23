@@ -29,15 +29,16 @@ def part1(puzzle_input: List[str]) -> str:
     return "".join(out_path)
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d7.txt")
-with puzzle_input_file.open(mode="r") as f:
-    """
-    Parse the input lines
+if __name__ == "__main__":
+    puzzle_input_file = Path("puzzle_input.txt")
+    with puzzle_input_file.open(mode="r") as f:
+        """
+        Parse the input lines
 
-    Group 1: Step that must be finished
-    Group 2: Step to begin
-    """
-    exp = r"(?<=[Ss]tep\s)(\w)"
-    puzzle_input = [re.findall(exp, line) for line in f]
+        Group 1: Step that must be finished
+        Group 2: Step to begin
+        """
+        exp = r"(?<=[Ss]tep\s)(\w)"
+        puzzle_input = [re.findall(exp, line) for line in f]
 
-print(part1(puzzle_input))
+    print(part1(puzzle_input))

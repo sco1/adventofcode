@@ -51,17 +51,18 @@ def star_message(star_position: np.ndarray, star_velocity: np.ndarray) -> str:
             elapsed_seconds += 1
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d10.txt")
-with puzzle_input_file.open(mode="r") as f:
-    exp = r"(-?\d+)"
-    puzzle_input = []
-    for line in f:
-        x, y, dx, dy = map(int, re.findall(exp, line))
-        puzzle_input.append(([x, y], (dx, dy)))
+if __name__ == "__main__":
+    puzzle_input_file = Path("puzzle_input.txt")
+    with puzzle_input_file.open(mode="r") as f:
+        exp = r"(-?\d+)"
+        puzzle_input = []
+        for line in f:
+            x, y, dx, dy = map(int, re.findall(exp, line))
+            puzzle_input.append(([x, y], (dx, dy)))
 
-star_position = np.array([star[0] for star in puzzle_input])
-star_velocity = np.array([star[1] for star in puzzle_input])
-message, time_elapsed = star_message(star_position, star_velocity)
+    star_position = np.array([star[0] for star in puzzle_input])
+    star_velocity = np.array([star[1] for star in puzzle_input])
+    message, time_elapsed = star_message(star_position, star_velocity)
 
-[print("".join(row)) for row in message.tolist()]
-print(time_elapsed)
+    [print("".join(row)) for row in message.tolist()]
+    print(time_elapsed)

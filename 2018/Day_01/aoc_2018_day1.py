@@ -1,11 +1,11 @@
 from pathlib import Path
 
 
-def part1(puzzle_input: list) -> int:
+def part1(puzzle_input: list[int]) -> int:
     return sum(puzzle_input)
 
 
-def part2(puzzle_input: list) -> int:
+def part2(puzzle_input: list[int]) -> int:
     frequency = 0
     frequency_steps = set([frequency])
 
@@ -18,11 +18,9 @@ def part2(puzzle_input: list) -> int:
                 frequency_steps.add(frequency)
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d1.txt")
-with puzzle_input_file.open(mode="r") as f:
-    puzzle_input = f.readlines()
+if __name__ == "__main__":
+    puzzle_input_file = Path("puzzle_input.txt")
+    puzzle_input = [int(freq) for freq in puzzle_input_file.read_text().splitlines()]
 
-puzzle_input = [int(freq) for freq in puzzle_input]
-
-print(part1(puzzle_input))
-print(part2(puzzle_input))
+    print(part1(puzzle_input))
+    print(part2(puzzle_input))

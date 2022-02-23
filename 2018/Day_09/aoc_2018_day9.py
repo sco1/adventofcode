@@ -28,11 +28,12 @@ def play_game(n_players: int, n_marbles: int) -> int:
     return max(scores)
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d9.txt")
-with puzzle_input_file.open(mode="r") as f:
-    exp = r"(\d+) players; last marble is worth (\d+) points"
-    match = re.search(exp, f.read())
-    n_players, n_marbles = map(int, match.groups())
+if __name__ == "__main__":
+    puzzle_input_file = Path("puzzle_input.txt")
+    with puzzle_input_file.open(mode="r") as f:
+        exp = r"(\d+) players; last marble is worth (\d+) points"
+        match = re.search(exp, f.read())
+        n_players, n_marbles = map(int, match.groups())
 
-print(play_game(n_players, n_marbles))
-print(play_game(n_players, n_marbles * 100))
+    print(play_game(n_players, n_marbles))
+    print(play_game(n_players, n_marbles * 100))

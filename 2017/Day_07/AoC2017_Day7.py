@@ -1,9 +1,10 @@
 import re
+from pathlib import Path
 
 import networkx as nx
 
 
-def Day7a(filepath):
+def Day7a(programlist: list[str]) -> str:
     """
     One program at the bottom supports the entire tower. It's holding a large
     disc, and on the disc are balanced several more sub-towers. At the bottom of
@@ -65,8 +66,6 @@ def Day7a(filepath):
     Before you're ready to help them, you need to make sure your information is
     correct. What is the name of the bottom program?
     """
-    programlist = readfile(filepath)
-
     tower = nx.DiGraph()
     pattern = r"(\w+)\s*\((\d+)\)(?:\s*->\s*)?(.+)?"
     for response in programlist:
@@ -80,7 +79,7 @@ def Day7a(filepath):
 
     for indegree in tower.in_degree:
         if indegree[1] == 0:
-            return indegree[0], tower
+            return indegree[0]
 
 
 def Day7b(digraph, basenode):
@@ -117,10 +116,9 @@ def Day7b(digraph, basenode):
     pass
 
 
-def readfile(filepath):
-    outlist = []
-    with open(filepath, mode="r") as fID:
-        for line in fID:
-            outlist.append(line)
+if __name__ == "__main__":
+    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input = puzzle_input_file.read_text().splitlines()
 
-    return outlist
+    print(f"Part One: {Day7a(puzzle_input)}")
+    # print(f"Part Two: {Day7b(puzzle_input)}")
