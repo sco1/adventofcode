@@ -101,19 +101,20 @@ def part2(puzzle_input: List[list]) -> int:
     raise NotImplementedError
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d4.txt")
-with puzzle_input_file.open(mode="r") as f:
-    """
-    Parse the input lines
+if __name__ == "__main__":
+    puzzle_input_file = Path("puzzle_input.txt")
+    with puzzle_input_file.open(mode="r") as f:
+        """
+        Parse the input lines
 
-    Group 1: Date (YYYY-MM-DD HH:MM)
-    Group 2: Log Entry (full string)
-    """
-    exp = r"\[([\w\d\s\:\-]+)\]\s+([\w\s\#]+)"
-    date_fmt = r"%Y-%m-%d %H:%M"
-    puzzle_input = []
-    for log_entry in f.readlines():
-        match = re.match(exp, log_entry).groups()
-        puzzle_input.append([datetime.strptime(match[0], date_fmt), match[1]])
+        Group 1: Date (YYYY-MM-DD HH:MM)
+        Group 2: Log Entry (full string)
+        """
+        exp = r"\[([\w\d\s\:\-]+)\]\s+([\w\s\#]+)"
+        date_fmt = r"%Y-%m-%d %H:%M"
+        puzzle_input = []
+        for log_entry in f.readlines():
+            match = re.match(exp, log_entry).groups()
+            puzzle_input.append([datetime.strptime(match[0], date_fmt), match[1]])
 
-print(part1(puzzle_input))
+    print(part1(puzzle_input))

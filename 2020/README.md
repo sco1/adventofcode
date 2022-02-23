@@ -1,4 +1,7 @@
 # Solution Tracker
+:x: - Not complete
+:white_circle: - Partially complete
+:white_check_mark: - Complete
 
 |    |       Python       |       MATLAB       |        Rust        |         Lox        |        Julia       |
 |----|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|

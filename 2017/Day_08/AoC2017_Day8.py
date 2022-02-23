@@ -85,6 +85,8 @@ def instructionparser(filepath: Path):
     return maxval, programmaticmax
 
 
-filepath = "../Inputs/Day8.txt"
-print(f"Largest value at end: {Day8a(filepath)}")
-print(f"Largest value during execution: {Day8b(filepath)}")
+if __name__ == "__main__":
+    puzzle_input_file = Path("./puzzle_input.txt")
+
+    print(f"Part One: {Day8a(puzzle_input_file)}")
+    print(f"Part Two: {Day8b(puzzle_input_file)}")

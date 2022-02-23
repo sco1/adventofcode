@@ -57,24 +57,25 @@ def build_cloth(puzzle_input: List[list]) -> np.ndarray:
     return cloth
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d3.txt")
-with puzzle_input_file.open(mode="r") as f:
-    """
-    Parse the input lines
+if __name__ == "__main__":
+    puzzle_input_file = Path("puzzle_input.txt")
+    with puzzle_input_file.open(mode="r") as f:
+        """
+        Parse the input lines
 
-    Group 1: ID
-    Group 2: Left edge
-    Group 3: Top edge
-    Group 4: Width
-    Group 5: Height
-    """
-    exp = r"#(\d+)\s+@\s+(\d+),(\d+):\s+(\d+)x(\d+)"
-    puzzle_input = []
-    for claim in f.readlines():
-        match = re.match(exp, claim)
-        puzzle_input.append([int(param) for param in match.groups()])
+        Group 1: ID
+        Group 2: Left edge
+        Group 3: Top edge
+        Group 4: Width
+        Group 5: Height
+        """
+        exp = r"#(\d+)\s+@\s+(\d+),(\d+):\s+(\d+)x(\d+)"
+        puzzle_input = []
+        for claim in f.readlines():
+            match = re.match(exp, claim)
+            puzzle_input.append([int(param) for param in match.groups()])
 
-cloth = build_cloth(puzzle_input)
+    cloth = build_cloth(puzzle_input)
 
-print(part1(cloth))
-print(part2(cloth, puzzle_input))
+    print(part1(cloth))
+    print(part2(cloth, puzzle_input))

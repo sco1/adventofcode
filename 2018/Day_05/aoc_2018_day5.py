@@ -41,9 +41,9 @@ def part2(puzzle_input: str):
     )
 
 
-puzzle_input_file = Path("../../Inputs/puzzle_input_d5.txt")
-with puzzle_input_file.open(mode="r") as f:
-    puzzle_input = f.readlines()[0]
+if __name__ == "__main__":
+    puzzle_input_file = Path("puzzle_input.txt")
+    puzzle_input = puzzle_input_file.read_text().strip()
 
-print(part1(puzzle_input))
-print(part2(puzzle_input))
+    print(part1(puzzle_input))
+    print(part2(puzzle_input))

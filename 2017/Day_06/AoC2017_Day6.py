@@ -1,4 +1,7 @@
-def Day6a(filepath):
+from pathlib import Path
+
+
+def Day6a(banklist: list[int]) -> int:
     """
     The reallocation routine operates in cycles. In each cycle, it finds the
     memory bank with the most blocks (ties won by the lowest-numbered memory
@@ -35,7 +38,6 @@ def Day6a(filepath):
     cycles must be completed before a configuration is produced that has been
     seen before?
     """
-    banklist = readfile(filepath)
     nbanks = len(banklist)
 
     memmemo = []
@@ -52,10 +54,10 @@ def Day6a(filepath):
 
         nsteps += 1
 
-    return nsteps, banklist
+    return nsteps
 
 
-def Day6b(banklist):
+def Day6b(banklist: list[int]) -> int:
     """
     Out of curiosity, the debugger would also like to know the size of the loop:
     starting from a state that has already been seen, how many block
@@ -86,9 +88,10 @@ def Day6b(banklist):
     return nsteps
 
 
-def readfile(filepath):
-    # Assume one line
-    with open(filepath, mode="r") as fID:
-        outlist = [int(x) for x in fID.readline().split()]
+if __name__ == "__main__":
+    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input = puzzle_input_file.read_text().strip()
+    banks = [int(line) for line in puzzle_input.split()]
 
-    return outlist
+    print(f"Part One: {Day6a(banks)}")
+    print(f"Part Two: {Day6b(banks)}")

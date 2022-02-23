@@ -1,7 +1,8 @@
 import itertools
+from pathlib import Path
 
 
-def Day3a(n):
+def Day3a(n: int) -> int:
     """
     Each square on the grid is allocated in a spiral pattern starting at a
     location marked 1 and then counting up while spiraling outward. For
@@ -33,7 +34,7 @@ def Day3a(n):
     return sum([abs(x) for x in digitpos[0]])
 
 
-def spiralizer(n):
+def spiralizer(n: int) -> int:
     # Set up the moves
     north = lambda x, y: (x, y + 1)
     south = lambda x, y: (x, y - 1)
@@ -57,3 +58,11 @@ def spiralizer(n):
                 pos = move(*pos)  # Apply the move lambda
                 step += 1
         nmoves += 1
+
+
+if __name__ == "__main__":
+    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input = int(puzzle_input_file.read_text().strip())
+
+    print(f"Part One: {Day3a(puzzle_input)}")
+    # print(f"Part Two: {Day3a(puzzle_input)}")
