@@ -2,63 +2,40 @@ import collections
 from pathlib import Path
 
 
-def Day4a(passlist: list[list[str]]) -> int:
+def _validate_password(password: str, check_anagram: bool = False) -> bool:
     """
-    A new system policy has been put in place that requires all accounts to use a passphrase instead
-    of simply a password. A passphrase consists of a series of words (lowercase letters) separated
-    by spaces.
+    Validate the provided password.
 
-    To ensure security, a valid passphrase must contain no duplicate words.
-
-    For example:
-
-    aa bb cc dd ee is valid.
-    aa bb cc dd aa is not valid - the word aa appears more than once.
-    aa bb cc dd aaa is valid - aa and aaa count as different words.
-
-    The system's full passphrase list is available as your puzzle input.
-    How many passphrases are valid?
+    A password is considered valid if it contains no duplicate words. If `check_anagram` is `True`,
+    the password also cannot contain any words that can be rearranged to form any other word.
     """
-    nvalid = 0
-    for passphrase in passlist:
-        wordcounts = collections.Counter(passphrase)
-        if max(wordcounts.values()) == 1:
-            nvalid += 1
+    if check_anagram:
+        # If 2 words are anagrams, their sorted characters will be the same
+        # e.g. "acbde" and "ecdab" both resolve to "abcde"
+        sorted_chars = ["".join(sorted(word)) for word in password.split()]
+        word_count = collections.Counter(sorted_chars)
+    else:
+        word_count = collections.Counter(password.split())
 
-    return nvalid
+    if max(word_count.values()) == 1:
+        return True
+    else:
+        return False
 
 
-def Day4b(passlist: list[list[str]]) -> int:
+def validate_password_list(passwords: list[str], check_anagram: bool = False) -> int:
     """
-    For added security, yet another system policy has been put in place. Now, a valid passphrase
-    must contain no two words that are anagrams of each other - that is, a passphrase is invalid if
-    any word's letters can be rearranged to form any other word in the passphrase.
+    Count the number of valid passwords in the provided password list.
 
-    For example:
-
-    abcde fghij is a valid passphrase.
-    abcde xyz ecdab is not valid - the letters from the third word can be rearranged to form the
-                                   first word.
-    a ab abc abd abf abj is a valid passphrase, because all letters need to be used when forming
-                         another word.
-    iiii oiii ooii oooi oooo is valid.
-    oiii ioii iioi iiio is not valid - any of these words can be rearranged to form any other word.
-
-    Under this new system policy, how many passphrases are valid?
+    A password is considered valid if it contains no duplicate words. If `check_anagram` is `True`,
+    the password also cannot contain any words that can be rearranged to form any other word.
     """
-    nvalid = 0
-    for passphrase in passlist:
-        wordcounts = collections.Counter(["".join(sorted(phrase)) for phrase in passphrase])
-        if max(wordcounts.values()) == 1:
-            nvalid += 1
-
-    return nvalid
+    return sum(_validate_password(password, check_anagram) for password in passwords)
 
 
 if __name__ == "__main__":
     puzzle_input_file = Path("./puzzle_input.txt")
     puzzle_input = puzzle_input_file.read_text().splitlines()
-    password_list = [line.split() for line in puzzle_input]
 
-    print(f"Part One: {Day4a(password_list)}")
-    print(f"Part Two: {Day4b(password_list)}")
+    print(f"Part One: {validate_password_list(puzzle_input)}")
+    print(f"Part Two: {validate_password_list(puzzle_input, check_anagram=True)}")

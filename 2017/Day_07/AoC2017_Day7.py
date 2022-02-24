@@ -1,124 +1,106 @@
+import collections
 import re
 from pathlib import Path
 
 import networkx as nx
 
+NODE_RE = re.compile(r"(\w+)\s+\((\d+)\)")
 
-def Day7a(programlist: list[str]) -> str:
+
+def _build_tower(programs: list[str]) -> nx.DiGraph:
     """
-    One program at the bottom supports the entire tower. It's holding a large
-    disc, and on the disc are balanced several more sub-towers. At the bottom of
-    these sub-towers, standing on the bottom disc, are other programs, each
-    holding their own disc, and so on. At the very tops of these
-    sub-sub-sub-...-towers, many programs stand simply keeping the disc below
-    them balanced but with no disc of their own.
+    Construct a digraph from the provided program responses.
 
-    You offer to help, but first you need to understand the structure of these
-    towers. You ask each program to yell out their name, their weight, and
-    (if they're holding a disc) the names of the programs immediately above them
-    balancing on that disc. You write this information down (your puzzle input).
-    Unfortunately, in their panic, they don't do this in an orderly fashion; by
-    the time you're done, you're not sure which program gave which information.
+    Responses are assumed to be of the following forms:
+        * `pbga (66)`
+        * `fwft (72) -> ktlj, cntj, xhth`
 
-    For example, if your list is the following:
-
-    pbga (66)
-    xhth (57)
-    ebii (61)
-    havc (66)
-    ktlj (57)
-    fwft (72) -> ktlj, cntj, xhth
-    qoyq (66)
-    padx (45) -> pbga, havc, qoyq
-    tknk (41) -> ugml, padx, fwft
-    jptl (61)
-    ugml (68) -> gyxo, ebii, jptl
-    gyxo (61)
-    cntj (57)
-
-    ...then you would be able to recreate the structure of the towers that looks
-    like this:
-
-                    gyxo
-                /
-            ugml - ebii
-        /      \
-        |         jptl
-        |
-        |         pbga
-        /        /
-    tknk --- padx - havc
-        \        \
-        |         qoyq
-        |
-        |         ktlj
-        \      /
-            fwft - cntj
-                \
-                    xhth
-
-    In this example, tknk is at the bottom of the tower (the bottom program),
-    and is holding up ugml, padx, and fwft. Those programs are, in turn, holding
-    up other programs; in this example, none of those programs are holding up
-    any other programs, and are all the tops of their own towers. (The actual
-    tower balancing in front of you is much larger.)
-
-    Before you're ready to help them, you need to make sure your information is
-    correct. What is the name of the bottom program?
+    Where `<name> (<weight>)` provides the node information and `-> <name(s)>`, if present provides
+    any edges (comma separated) from the node.
     """
     tower = nx.DiGraph()
-    pattern = r"(\w+)\s*\((\d+)\)(?:\s*->\s*)?(.+)?"
-    for response in programlist:
-        responseinfo = list(filter(None, re.findall(pattern, response)[0]))
-        tower.add_node(responseinfo[0], weight=int(responseinfo[1]))
+    for response in programs:
+        node_info, _, edges = response.partition(" -> ")
+        node, weight = NODE_RE.findall(node_info)[0]
+        tower.add_node(node, weight=int(weight))
 
-        if len(responseinfo) == 3:
-            dest = [x.strip() for x in responseinfo[2].split(",")]
-            for destnode in dest:
-                tower.add_edge(responseinfo[0], destnode)
+        # Add edges if we've found any
+        if edges:
+            for dest in edges.split(","):
+                tower.add_edge(node, dest.strip())
 
-    for indegree in tower.in_degree:
-        if indegree[1] == 0:
-            return indegree[0]
+    return tower
 
 
-def Day7b(digraph, basenode):
+def find_bottom_program(tower: nx.DiGraph) -> str:
     """
-    The programs explain the situation: they can't get down. Rather, they could
-    get down, if they weren't expending all of their energy trying to keep the
-    tower balanced. Apparently, one program has the wrong weight, and until it's
-     fixed, they're stuck here.
+    Locate the base of the program tower described by the provided program responses.
 
-    For any program holding a disc, each program standing on that disc forms a
-    sub-tower. Each of those sub-towers are supposed to be the same weight, or
-    the disc itself isn't balanced. The weight of a tower is the sum of the
-    weights of the programs in that tower.
+    Responses are assumed to be of the following forms:
+        * `pbga (66)`
+        * `fwft (72) -> ktlj, cntj, xhth`
 
-    In the example above, this means that for ugml's disc to be balanced, gyxo,
-    ebii, and jptl must all have the same weight, and they do: 61.
-
-    However, for tknk to be balanced, each of the programs standing on its disc
-    and all programs above it must each match. This means that the following
-    sums must all be the same:
-
-    ugml + (gyxo + ebii + jptl) = 68 + (61 + 61 + 61) = 251
-    padx + (pbga + havc + qoyq) = 45 + (66 + 66 + 66) = 243
-    fwft + (ktlj + cntj + xhth) = 72 + (57 + 57 + 57) = 243
-
-    As you can see, tknk's disc is unbalanced: ugml's stack is heavier than the
-    other two. Even though the nodes above ugml are balanced, ugml itself is too
-    heavy: it needs to be 8 units lighter for its stack to weigh 243 and keep
-    the towers balanced. If this change were made, its weight would be 60.
-
-    Given that exactly one program is the wrong weight, what would its weight
-    need to be to balance the entire tower?
+    Where `<name> (<weight>)` provides the node information and `-> <name(s)>`, if present provides
+    any edges (comma separated) from the node.
     """
-    pass
+    # The base of the tower should have an in degree of 0 since it only has outward edges
+    for node, in_degree in tower.in_degree:
+        if in_degree == 0:
+            return node
+
+
+def balance_tower(tower: nx.DiGraph) -> int:
+    """
+    Locate the incorrectly weighted program and calculate the weight needed to rebalance the tower.
+
+    For any program holding a disc, each program standing on the disk forms a sub-tower. Each of
+    these sub-towers needs to be the same weight, or the disc isn't balanced. The weight of a tower
+    is the sum of the weights of the programs in the tower.
+
+    NOTE: It is assumed that there is only one incorrectly weighted program for the provided tower.
+    """
+    # To check for balance, start with the leaves of the tower & work downward to the base, storing
+    # the sub-tower weights as we go along in order to find the black sheep node
+    # A reversed topological sort gets us to the leaves first
+    seen_weights = {}
+    for node in reversed(list(nx.topological_sort(tower))):
+        # Init the sub-tower weight with its base node
+        sub_tower_weight = tower.nodes[node]["weight"]
+
+        # Populate the seen sub-tower weights
+        # This will start empty at the leaves and populate as we traverse towards the base
+        weight_counts = collections.Counter(seen_weights[child] for child in tower[node])
+
+        black_sheep = None
+        for supported in tower[node]:
+            # If this node is supporting multiple sub-towers then each sub-tower must have the same
+            # weight. Since there is assumed to be only one mismatched weight, if we're supporting
+            # more than one sub-tower and we have a unique weight, then this is the black sheep
+            if len(weight_counts) > 1 and weight_counts[seen_weights[supported]] == 1:
+                black_sheep = supported
+                break
+
+            # Otherwise we can calculate the total sub-tower weight and add it to what we've seen
+            sub_tower_weight += seen_weights[supported]
+
+        if black_sheep is not None:
+            # If we've gotten here then we have at least one sub-tower at this level to compare
+            # the correct weight to
+            # Get rid of the black sheep weight from the counts to guard against a base with only 2
+            # edges
+            weight_counts.pop(seen_weights[supported])
+            target_weight, _ = weight_counts.most_common(1)[0]
+            delta = target_weight - seen_weights[supported]
+            return tower.nodes[black_sheep]["weight"] + delta
+
+        # Otherwise, update the subtower & continue our trek
+        seen_weights[node] = sub_tower_weight
 
 
 if __name__ == "__main__":
     puzzle_input_file = Path("./puzzle_input.txt")
     puzzle_input = puzzle_input_file.read_text().splitlines()
+    tower = _build_tower(puzzle_input)
 
-    print(f"Part One: {Day7a(puzzle_input)}")
-    # print(f"Part Two: {Day7b(puzzle_input)}")
+    print(f"Part One: {find_bottom_program(tower)}")
+    print(f"Part Two: {balance_tower(tower)}")

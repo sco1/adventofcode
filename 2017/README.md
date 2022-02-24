@@ -7,11 +7,11 @@
 |----|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|
 |  1 | :white_check_mark: | :white_check_mark: |         :x:        |         :x:        |         :x:        |
 |  2 | :white_check_mark: | :white_check_mark: |         :x:        |         :x:        |         :x:        |
-|  3 |   :white_circle:   |   :white_circle:   |         :x:        |         :x:        |         :x:        |
+|  3 | :white_check_mark: |   :white_circle:   |         :x:        |         :x:        |         :x:        |
 |  4 | :white_check_mark: | :white_check_mark: |         :x:        |         :x:        |         :x:        |
 |  5 | :white_check_mark: | :white_check_mark: |         :x:        |         :x:        |         :x:        |
 |  6 | :white_check_mark: | :white_check_mark: |         :x:        |         :x:        |         :x:        |
-|  7 |   :white_circle:   |   :white_circle:   |         :x:        |         :x:        |         :x:        |
+|  7 | :white_check_mark: |   :white_circle:   |         :x:        |         :x:        |         :x:        |
 |  8 | :white_check_mark: |         :x:        |         :x:        |         :x:        |         :x:        |
 |  9 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
 | 10 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
