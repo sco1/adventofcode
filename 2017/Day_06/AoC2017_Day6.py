@@ -1,91 +1,44 @@
 from pathlib import Path
 
 
-def Day6a(banklist: list[int]) -> int:
+def _findmax(banks: list[int]) -> tuple[int, int]:
+    """Find the maximum value and its first location in the provided list."""
+    max_blocks = max(banks)
+    max_idx = banks.index(max_blocks)
+
+    return max_blocks, max_idx
+
+
+def reallocate_banks(banks: list[int]) -> tuple[int, int]:
     """
-    The reallocation routine operates in cycles. In each cycle, it finds the
-    memory bank with the most blocks (ties won by the lowest-numbered memory
-    bank) and redistributes those blocks among the banks. To do this, it removes
-    all of the blocks from the selected bank, then moves to the next (by index)
-    memory bank and inserts one of the blocks. It continues doing this until it
-    runs out of blocks; if it reaches the last memory bank, it wraps around to
-    the first one.
+    Perform the memory reallocation routine & determine how many cycles before a loop is reached.
 
-    The debugger would like to know how many redistributions can be done before
-    a blocks-in-banks configuration is produced that has been seen before.
+    For each step in the reallocation cycle, the memory bank with the most blocks is found (ties are
+    won by the lowest-numbered memory bank), and its blocks are redistributed across all the banks.
+    Distribution is accomplished by moving to the next block (by index) and inserting a block,
+    continuing until blocks are exhausted and wrapping around if necessary.
 
-    For example, imagine a scenario with only four memory banks:
-
-    The banks start with 0, 2, 7, and 0 blocks. The third bank has the most
-    blocks, so it is chosen for redistribution.
-    Starting with the next bank (the fourth bank) and then continuing to the
-    first bank, the second bank, and so on, the 7 blocks are spread out over the
-    memory banks. The fourth, first, and second banks get two blocks each, and
-    the third bank gets one back. The final result looks like this: 2 4 1 2.
-    Next, the second bank is chosen because it contains the most blocks (four).
-    Because there are four memory banks, each gets one block. The result is:
-    3 1 2 3. Now, there is a tie between the first and fourth memory banks, both
-    of which have three blocks. The first bank wins the tie, and its three
-    blocks are distributed evenly over the other three banks, leaving it with
-    none: 0 2 3 4. The fourth bank is chosen, and its four blocks are
-    distributed such that each of the four banks receives one: 1 3 4 1. The
-    third bank is chosen, and the same thing happens: 2 4 1 2. At this point,
-    we've reached a state we've seen before: 2 4 1 2 was already seen. The
-    infinite loop is detected after the fifth block redistribution cycle, and so
-    the answer in this example is 5.
-
-    Given the initial block counts in your puzzle input, how many redistribution
-    cycles must be completed before a configuration is produced that has been
-    seen before?
+    Once a loop is detected, the total number of steps is provided along with the number of cycles
+    from when the repeated memory state was first encountered to loop detection.
     """
-    nbanks = len(banklist)
-
-    memmemo = []
-    nsteps = 0
-    while banklist not in memmemo:
-        memmemo.append(banklist.copy())
-        maxmem = max(banklist)
-        maxloc = banklist.index(maxmem)
-
-        banklist[maxloc] = 0
-        idxlist = [x % nbanks for x in range(maxloc + 1, maxloc + maxmem + 1)]
+    # Track the cycle count when a bank configuration is seen so we can calculate loop size
+    seen = {tuple(banks): 0}
+    n_steps = 0
+    while True:
+        # Find the memory bank with the most blocks & redistribute its blocks across all the banks,
+        # wrapping around if necessary (the bank can possibly get some back)
+        n_blocks, max_idx = _findmax(banks)
+        banks[max_idx] = 0
+        idxlist = (x % len(banks) for x in range(max_idx + 1, max_idx + n_blocks + 1))
         for idx in idxlist:
-            banklist[idx] += 1
+            banks[idx] += 1
 
-        nsteps += 1
-
-    return nsteps
-
-
-def Day6b(banklist: list[int]) -> int:
-    """
-    Out of curiosity, the debugger would also like to know the size of the loop:
-    starting from a state that has already been seen, how many block
-    redistribution cycles must be performed before that same state is seen again?
-
-    In the example above, 2 4 1 2 is seen again after four cycles, and so the
-    answer in that example would be 4.
-
-    How many cycles are in the infinite loop that arises from the configuration
-    in your puzzle input?
-    """
-    nbanks = len(banklist)
-
-    memmemo = []
-    nsteps = 0
-    while banklist not in memmemo:
-        memmemo.append(banklist.copy())
-        maxmem = max(banklist)
-        maxloc = banklist.index(maxmem)
-
-        banklist[maxloc] = 0
-        idxlist = [x % nbanks for x in range(maxloc + 1, maxloc + maxmem + 1)]
-        for idx in idxlist:
-            banklist[idx] += 1
-
-        nsteps += 1
-
-    return nsteps
+        n_steps += 1
+        next_bank = tuple(banks)
+        if next_bank in seen:
+            return n_steps, n_steps - seen[next_bank]
+        else:
+            seen[next_bank] = n_steps
 
 
 if __name__ == "__main__":
@@ -93,5 +46,6 @@ if __name__ == "__main__":
     puzzle_input = puzzle_input_file.read_text().strip()
     banks = [int(line) for line in puzzle_input.split()]
 
-    print(f"Part One: {Day6a(banks)}")
-    print(f"Part Two: {Day6b(banks)}")
+    n_steps, loop_size = reallocate_banks(banks)
+    print(f"Part One: {n_steps}")
+    print(f"Part Two: {loop_size}")

@@ -20,5 +20,4 @@ exclude=
     __pycache__,.cache,
     venv,.venv,
 per-file-ignores =
-    test_*.py:D103 E501,
-    2017/*/*.py:D205 D415,
+    test_*.py:D103,E501
