@@ -1,4 +1,6 @@
 # --- Day 6: Chronal Coordinates ---
+https://adventofcode.com/2018/day/6
+
 The device on your wrist beeps several times, and once again you feel like you're falling.
 
 "Situation critical," the device announces. "Destination indeterminate. Chronal interference detected. Please specify new target coordinates."
@@ -8,7 +10,6 @@ The device then produces a list of coordinates (your puzzle input). Are they pla
 If they're dangerous, maybe you can minimize the danger by finding the coordinate that gives the largest distance from the other points.
 
 ## --- Part One ---
-
 Using only the Manhattan distance, determine the area around each coordinate by counting the number of integer `X,Y` locations that are closest to that coordinate (and aren't tied in distance to any other coordinate).
 
 Your goal is to find the size of the largest area that isn't infinite. For example, consider the following list of coordinates:

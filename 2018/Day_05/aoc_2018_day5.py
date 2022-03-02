@@ -1,43 +1,53 @@
+from functools import cache
 from pathlib import Path
 from string import ascii_lowercase, ascii_uppercase
-from typing import List
 
 
-def build_pairs() -> List[str]:
-    """
-    Return a list of pairs of caseswapped ASCII characters
-    """
+def _build_pairs() -> list[str]:
+    """Return a list of pairs of caseswapped ASCII characters."""
     out = [f"{letter}{letter.upper()}" for letter in ascii_lowercase]
     out += [pair.swapcase() for pair in out]
 
     return out
 
 
-def part1(puzzle_input: str) -> int:
-    reacting_pairs = build_pairs()
+REACTING_PAIRS = _build_pairs()
 
-    n_units = len(puzzle_input)
+
+@cache
+def react_polymer(polymer: str) -> int:
+    """
+    React the polymer until it is fully reacted and return its size.
+
+    The polymer's units' types are represented by letters; units' polarity is represented by
+    capitalization. During the reaction, if two adjacent units have the same type and opposite
+    polarity then they are destroyed.
+
+    NOTE: Reactions are assumed to occur atomically, so only one reaction can occur at a time.
+    """
+    pre = len(polymer)
     while True:
-        for pair in reacting_pairs:
-            puzzle_input = puzzle_input.replace(pair, "")
+        for pair in REACTING_PAIRS:
+            polymer = polymer.replace(pair, "")
 
-        # Break out if nothing has changed, meaning all of the reactions are complete
-        reacted_length = len(puzzle_input)
-        if reacted_length == n_units:
+        # If the polymer length hasn't changed, then the reaction is complete
+        reacted_length = len(polymer)
+        if reacted_length == pre:
             break
         else:
-            n_units = reacted_length
+            pre = reacted_length
 
     return reacted_length
 
 
-def part2(puzzle_input: str):
+def improve_polymer(polymer: str) -> int:
+    """Locate the unit type that, when removed, minimizes the resulting reacted polymer."""
     # Swap out each letter & rerun part 1 to see which is the best to remove
     return min(
-        [
-            part1(puzzle_input.replace(lletter, "").replace(uletter, ""))
+        (
+            react_polymer(polymer.replace(lletter, "").replace(uletter, ""))
             for lletter, uletter in zip(ascii_lowercase, ascii_uppercase)
-        ]
+        )
     )
 
 
@@ -45,5 +55,5 @@ if __name__ == "__main__":
     puzzle_input_file = Path("puzzle_input.txt")
     puzzle_input = puzzle_input_file.read_text().strip()
 
-    print(part1(puzzle_input))
-    print(part2(puzzle_input))
+    print(f"Part One: {react_polymer(puzzle_input)}")
+    print(f"Part Two: {improve_polymer(puzzle_input)}")

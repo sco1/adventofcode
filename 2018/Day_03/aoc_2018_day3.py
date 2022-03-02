@@ -1,81 +1,94 @@
 import re
+import typing as t
 from pathlib import Path
-from typing import List
 
 import numpy as np
 
-
-def part1(cloth: np.ndarray) -> int:
-    """
-    Using the input cloth matrix, find total number of elements > 1, which indicates that claims
-    have overlapped
-    """
-    return np.count_nonzero(cloth > 1)
+CLAIM_RE = re.compile(r"#(\d+) @ (\d+),(\d+): (\d+)x(\d+)")
 
 
-def part2(cloth: np.ndarray, puzzle_input: List[list]) -> int:
-    """
-    Iterate over the input cloth matrix and the claims in puzzle_input and find the claim with no
-    overlap. This will be where the claim's subarray all equals 1
-    """
-    for claim in puzzle_input:
-        row_indices = (claim[2], (claim[2] + claim[4]))
-        column_indices = (claim[1], (claim[1] + claim[3]))
-
-        subarray = cloth[row_indices[0] : row_indices[1], column_indices[0] : column_indices[1]]
-        if np.all(subarray == 1):
-            return claim[0]
+class Claim(t.NamedTuple):  # noqa: D101
+    claim_id: int
+    left_edge: int
+    top_edge: int
+    width: int
+    height: int
 
 
-def find_cloth_size(puzzle_input: List[list]) -> tuple:
+def _parse_claims(raw_claims: list[str]) -> list[Claim]:
     """
-    Iterate over the claims in puzzle_input and find the coordinates of the bottom right corner of
-    the cloth
+    Parse the provided cloth claims into their dimensional components.
+
+    Claims are assumed to be of the form:
+        * `#<int> @ <int>,<int>: <int>x<int>`
+
+    Each claim's rectangle is defined as follows:
+        * Inches between the left edge of the fabric and the left edge of the rectangle
+        * Inches between the top edge of the fabric and the top edge of the rectangle
+        * The width of the rectangle in inches
+        * The height of the rectangle in inches
     """
-    max_left = max([claim[1] for claim in puzzle_input])
-    max_top = max([claim[2] for claim in puzzle_input])
-    max_width = max([claim[3] for claim in puzzle_input])
-    max_height = max([claim[4] for claim in puzzle_input])
+    parsed_claims = []
+    for claim in raw_claims:
+        components = CLAIM_RE.findall(claim)[0]
+        parsed_claims.append(Claim(*(int(component) for component in components)))
+
+    return parsed_claims
+
+
+def _find_cloth_size(claims: list[Claim]) -> tuple:
+    """Calculate the bottom right coordinates of the box bounding the provided claims."""
+    max_left = max((claim.left_edge for claim in claims))
+    max_top = max((claim.top_edge for claim in claims))
+    max_width = max((claim.width for claim in claims))
+    max_height = max((claim.height for claim in claims))
 
     return (max_left + max_width), (max_top + max_height)
 
 
-def build_cloth(puzzle_input: List[list]) -> np.ndarray:
-    """
-    Iterate over the claims in puzzle_input and add a subarray of ones to the cloth for the cut in
-    each claim
-    """
-    cloth_dims = find_cloth_size(puzzle_input)
+def _build_cloth(claims: list[Claim]) -> np.ndarray:
+    """Build an array representing the provided claims on the cloth to be cut."""
+    cloth_dims = _find_cloth_size(claims)
     cloth = np.zeros(cloth_dims)
 
-    for claim in puzzle_input:
-        row_indices = (claim[2], (claim[2] + claim[4]))
-        column_indices = (claim[1], (claim[1] + claim[3]))
+    for claim in claims:
+        row_indices = (claim.top_edge, (claim.top_edge + claim.height))
+        column_indices = (claim.left_edge, (claim.left_edge + claim.width))
 
         cloth[row_indices[0] : row_indices[1], column_indices[0] : column_indices[1]] += 1
 
     return cloth
 
 
+def calculate_overlap(cloth: np.ndarray) -> int:
+    """Calculate the square inches of cloth covered by more than one claim."""
+    return np.count_nonzero(cloth > 1)
+
+
+def find_nonoverlapping_claim(cloth: np.ndarray, claims: list[Claim]) -> int:
+    """
+    Identify the fabric claim that contains no overlap with any other claim.
+
+    NOTE: It is assumed that there is exactly one non-overlapping claim in the provided claims.
+    """
+    # The non-overlapping claim will describe a subarray where all values are 1
+    for claim in claims:
+        row_indices = (claim.top_edge, (claim.top_edge + claim.height))
+        column_indices = (claim.left_edge, (claim.left_edge + claim.width))
+
+        subarray = cloth[row_indices[0] : row_indices[1], column_indices[0] : column_indices[1]]
+        if np.all(subarray == 1):
+            return claim.claim_id
+
+    raise ValueError("No non-overlapping claim found.")
+
+
 if __name__ == "__main__":
     puzzle_input_file = Path("puzzle_input.txt")
-    with puzzle_input_file.open(mode="r") as f:
-        """
-        Parse the input lines
+    puzzle_input = puzzle_input_file.read_text().splitlines()
 
-        Group 1: ID
-        Group 2: Left edge
-        Group 3: Top edge
-        Group 4: Width
-        Group 5: Height
-        """
-        exp = r"#(\d+)\s+@\s+(\d+),(\d+):\s+(\d+)x(\d+)"
-        puzzle_input = []
-        for claim in f.readlines():
-            match = re.match(exp, claim)
-            puzzle_input.append([int(param) for param in match.groups()])
+    claims = _parse_claims(puzzle_input)
+    cloth = _build_cloth(claims)
 
-    cloth = build_cloth(puzzle_input)
-
-    print(part1(cloth))
-    print(part2(cloth, puzzle_input))
+    print(f"Part One: {calculate_overlap(cloth)}")
+    print(f"Part Two: {find_nonoverlapping_claim(cloth, claims)}")

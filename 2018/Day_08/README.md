@@ -1,4 +1,6 @@
 # --- Day 8: Memory Maneuver ---
+https://adventofcode.com/2018/day/8
+
 The sleigh is much easier to pull than you'd expect for something its weight. Unfortunately, neither you nor the Elves know which way the North Pole is from here.
 
 You check your wrist device for anything that might help. It seems to have some kind of navigation system! Activating the navigation system produces more bad news: "Failed to start navigation system. Could not read software license file."
@@ -11,8 +13,8 @@ The tree is made up of nodes; a single, outermost node forms the tree's root, an
 Specifically, a node consists of:
 
  - A header, which is always exactly two numbers:
-   - The quantity of child nodes.
-   - The quantity of metadata entries.
+  - The quantity of child nodes.
+  - The quantity of metadata entries.
  - Zero or more child nodes (as specified in the header).
  - One or more metadata entries (as specified in the header).
 

@@ -1,120 +1,146 @@
+import datetime as dt
 import re
-from datetime import datetime, timedelta
-from itertools import zip_longest
+import typing as t
+from collections import defaultdict, deque
+from enum import Enum, auto
+from operator import itemgetter
 from pathlib import Path
-from typing import List
 
-import numpy as np
-import pandas as pd
+LOG_RE = re.compile(r"\[([\w\s\:\-]+)\] ([\w\s\#]+)")
+SHIFT_RE = re.compile(r"Guard #(\d+)")
 
+DT_FMT = r"%Y-%m-%d %H:%M"
 
-def part1(puzzle_input: List[list]) -> int:
-    log_df = build_dataframe(puzzle_input)
-
-    sleep_stats = {}
-    guard_groupby = log_df.groupby("guard")
-    for guard, schedule in guard_groupby:
-        minutes_asleep = (schedule.iloc[:, 1:] == True).sum().sum()
-        sleep_stats[guard] = minutes_asleep
-
-    sleepiest_guard = max(sleep_stats, key=lambda key: sleep_stats[key])
-    sleepiest_minute = (guard_groupby.get_group(sleepiest_guard) == True).sum().idxmax()
-
-    return sleepiest_guard * sleepiest_minute
+SLEEP_SCHEDULE = dict[int, dict[int, int]]
 
 
-def build_dataframe(puzzle_input: List[list]) -> pd.DataFrame:
-    key_format = r"%Y-%m-%d"
-    guard_on_duty = {}  # Keys: date as str, Values: guard ID as int
-    sleep_tracker = (
-        {}
-    )  # Keys: date as str, Values: dict with 'sleep', 'wake' keys, minute values as int
-    exp = r"Guard \#(\d+) begins shift"
-    for entry in puzzle_input:
-        # Keep track of guards on duty for each day
-        if entry[1].startswith("Guard"):
-            guard_id = int(re.match(exp, entry[1]).groups()[0])
+class LogType(Enum):  # noqa: D101
+    SLEEP = auto()
+    WAKE = auto()
+    SHIFT = auto()
 
-            # Check the timestamp for when the guard comes on duty
-            tmp_date = entry[0]
-            if tmp_date.hour == 23:
-                # If they started before midnight, bump them to the next day
-                tmp_date += timedelta(hours=1)
 
-            guard_on_duty[tmp_date.strftime(key_format)] = guard_id
+class LogEntry(t.NamedTuple):  # noqa: D101
+    timestamp: dt.datetime
+    log_type: LogType
+    guard_id: int
+
+
+def _parse_logs(log_entries: list[str]) -> list[LogEntry]:
+    """
+    Parse the provided log entries into a chronological feed.
+
+    Entries are assumed to be one of the following types:
+        * `[<timestamp>] Guard #<id> begins shift`
+        * `[<timestamp>] falls asleep`
+        * `[<timestamp>] wakes up`
+
+    NOTE: The guard sleeping/waking is assumed to be the one whose shift most recently started.
+    NOTE: All asleep/awake times are assumed to be during the midnight hour.
+    NOTE: Input log entries are not guaranteed to be in chronologal order
+    """
+    # In order to correctly associate log entries with their guard, we need to parse the timestamps
+    # first so we can sort chronologically
+    semi_parsed = []
+    for log in log_entries:
+        raw_timestamp, raw_entry = LOG_RE.findall(log)[0]
+        timestamp = dt.datetime.strptime(raw_timestamp, DT_FMT)
+        semi_parsed.append((timestamp, raw_entry))
+
+    chronological = sorted(semi_parsed, key=itemgetter(0))
+
+    # Now we have a chronological feed & can associate events with their respective guard on duty
+    on_duty = -1
+    parsed_schedule = []
+    for timestamp, raw_entry in chronological:
+        # Check for shift change first so we can update the guard on duty
+        if shift_change := SHIFT_RE.findall(raw_entry):
+            on_duty = int(shift_change[0])
+            parsed_schedule.append(LogEntry(timestamp, LogType.SHIFT, on_duty))
             continue
 
-        date_str = entry[0].strftime(key_format)
-        minute = entry[0].minute
+        match raw_entry:
+            case "falls asleep":
+                parsed_schedule.append(LogEntry(timestamp, LogType.SLEEP, on_duty))
+            case "wakes up":
+                parsed_schedule.append(LogEntry(timestamp, LogType.WAKE, on_duty))
+            case _:
+                raise ValueError(f"Unknown log entry at {timestamp}, '{raw_entry}'")
 
-        if date_str not in sleep_tracker.keys():
-            sleep_tracker[date_str] = {}
-
-        if entry[1] == "falls asleep":
-            if "sleep" in sleep_tracker[date_str].keys():
-                sleep_tracker[date_str]["sleep"].append(minute)
-            else:
-                sleep_tracker[date_str]["sleep"] = [minute]
-        elif entry[1] == "wakes up":
-            if "wake" in sleep_tracker[date_str].keys():
-                sleep_tracker[date_str]["wake"].append(minute)
-            else:
-                sleep_tracker[date_str]["wake"] = [minute]
-    else:
-        # Sort all sleep/wake times
-        for day in sleep_tracker:
-            if "sleep" in sleep_tracker[day]:
-                sleep_tracker[day]["sleep"].sort()
-            else:
-                sleep_tracker[day]["sleep"] = []
-
-            if "wake" in sleep_tracker[day]:
-                sleep_tracker[day]["wake"].sort()
-            else:
-                sleep_tracker[day]["wake"] = []
-
-    # Generate a boolean array for the guards' sleep patterns
-    # False: Awake, True: Asleep
-    sleep_schedule_list = []
-    for day, sleepwake in sleep_tracker.items():
-        zipped_sleeps = zip_longest(sleepwake["sleep"], sleepwake["wake"], fillvalue=60)
-        day_array = np.zeros(60, dtype=bool)
-        for sleep in zipped_sleeps:
-            day_array[sleep[0] : sleep[1]] = True
-
-        sleep_schedule_list.append(day_array)
-
-    sleep_schedule = np.vstack(sleep_schedule_list)
-
-    # Generate DataFrame from sleep_schedule
-    sleep_schedule_df = pd.DataFrame(sleep_schedule, index=sleep_tracker.keys())
-    # Add column for guard on duty
-    guard_series = pd.DataFrame(
-        [guard_on_duty[day] for day in sleep_tracker], index=sleep_tracker.keys(), columns=["guard"]
-    )
-    sleep_schedule_df = pd.concat([guard_series, sleep_schedule_df], axis=1)
-
-    return sleep_schedule_df
+    return parsed_schedule
 
 
-def part2(puzzle_input: List[list]) -> int:
-    raise NotImplementedError
+def _build_sleep_schedule(logs: list[LogEntry]) -> SLEEP_SCHEDULE:
+    """
+    Generate a sleep schedule for the guard(s) on duty from the provided log entries.
+
+    For each guard, a dictionary is built whose keys are the minute(s) they're found asleep and
+    whose values are a count of the number of times they're encountered asleep at that minute.
+
+    NOTE: Per the problem statement, it's assumed that all asleep/awake times are between `00:00`
+    and `00:59`, so only the minute portion of the timestamp is considered for this schedule.
+    """
+    sleep_schedule: SLEEP_SCHEDULE = defaultdict(lambda: defaultdict(int))
+    log_queue = deque(logs)
+
+    sleep_time = wake_time = None
+    while log_queue:
+        entry = log_queue.popleft()
+        if entry.log_type == LogType.SHIFT:
+            # Don't care about shift changes any more
+            continue
+
+        if entry.log_type == LogType.SLEEP:
+            sleep_time = entry.timestamp
+            continue
+
+        # Once the guard wakes up we can increment their time spent sleeping
+        if entry.log_type == LogType.WAKE:
+            wake_time = entry.timestamp
+            for minute in range(sleep_time.minute, wake_time.minute):
+                sleep_schedule[entry.guard_id][minute] += 1
+
+            sleep_time = wake_time = None
+
+    return sleep_schedule
+
+
+def find_sleepiest_guard(schedule: SLEEP_SCHEDULE) -> tuple[int, int]:
+    """Identify the sleepiest guard and the minute they're asleep the most."""
+    time_asleep = []
+    for guard in schedule:
+        asleep = sum(schedule[guard].values())
+        time_asleep.append((guard, asleep))
+
+    time_asleep.sort(key=itemgetter(1))
+    sleepiest_guard = time_asleep[-1][0]
+    sleepiest_minute = max(schedule[sleepiest_guard], key=schedule[sleepiest_guard].get)
+
+    return sleepiest_guard, sleepiest_minute
+
+
+def find_sleepiest_minute(schedule: SLEEP_SCHEDULE) -> tuple[int, int]:
+    """Identify the guard most frequently asleep on the same minute, along with the minute."""
+    max_minutes = []
+    for guard in schedule:
+        sleepiest_minute = max(schedule[guard], key=schedule[guard].get)
+        max_minutes.append((guard, sleepiest_minute, schedule[guard][sleepiest_minute]))
+
+    max_minutes.sort(key=itemgetter(2))
+    sleepiest_guard, sleepiest_minute, _ = max_minutes[-1]
+
+    return sleepiest_guard, sleepiest_minute
 
 
 if __name__ == "__main__":
     puzzle_input_file = Path("puzzle_input.txt")
-    with puzzle_input_file.open(mode="r") as f:
-        """
-        Parse the input lines
+    puzzle_input = puzzle_input_file.read_text().splitlines()
 
-        Group 1: Date (YYYY-MM-DD HH:MM)
-        Group 2: Log Entry (full string)
-        """
-        exp = r"\[([\w\d\s\:\-]+)\]\s+([\w\s\#]+)"
-        date_fmt = r"%Y-%m-%d %H:%M"
-        puzzle_input = []
-        for log_entry in f.readlines():
-            match = re.match(exp, log_entry).groups()
-            puzzle_input.append([datetime.strptime(match[0], date_fmt), match[1]])
+    logs = _parse_logs(puzzle_input)
+    schedule = _build_sleep_schedule(logs)
 
-    print(part1(puzzle_input))
+    guard_id, minutes_asleep = find_sleepiest_guard(schedule)
+    print(f"Part One: {guard_id * minutes_asleep}")
+
+    guard_id, sleepiest_minute = find_sleepiest_minute(schedule)
+    print(f"Part Two: {guard_id * sleepiest_minute}")
