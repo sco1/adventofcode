@@ -9,42 +9,40 @@ homepage = "https://adventofcode.com"
 repository = "https://github.com/sco1/adventofcode"
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.11"
-more-itertools = "^8.12"
-networkx = "^2.6"
-numpy = "^1.22"
-pandas = "^1.4"
-rapidfuzz = "^1.8"
-scipy = "^1.8"
+python = "^3.10"
+more-itertools = "^9.0"
+networkx = "^2.8"
+numpy = "^1.23"
+pandas = "^1.5"
+rapidfuzz = "^2.11"
+scipy = "^1.9"
 sco1-pylox = "^0.5.1"
-sympy = "^1.9"
+sympy = "^1.11"
 
 [tool.poetry.dev-dependencies]
-black = "^22.1"
-flake8 = "^4.0"
-flake8-annotations = "^2.7"
-flake8-bugbear = "^22.1"
+black = "^22.8"
+flake8 = "^5.0"
+flake8-annotations = "^2.9"
+flake8-bugbear = "^22.9"
 flake8-docstrings = "^1.6"
-flake8-fixme = "^1.1"
-flake8-import-order = "^0.18"
-flake8-tidy-imports = "^4.6"
-isort = "^5.9"
-mypy = "^0.931"
-pep8-naming = "^0.12"
-pre-commit = "^2.17"
-pytest = "^7.0"
+isort = "^5.10"
+mypy = "^0.982"
+pep8-naming = "^0.13"
+pre-commit = "^2.20"
+pytest = "^7.1"
 pytest-check = "^1.0"
-pytest-cov = "^3.0"
+pytest-cov = "^4.0"
+pytest-randomly = "^3.12"
 
 [tool.black]
 line-length = 100
-target-version = ["py310"]
 
 [tool.isort]
 case_sensitive = true
 no_lines_before = "LOCALFOLDER"
 order_by_type = false
 profile = "black"
+line_length = 100
 
 [tool.mypy]
 disallow_incomplete_defs = true
@@ -60,5 +58,5 @@ warn_unused_configs = true
 warn_unused_ignores = true
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=1.2"]
 build-backend = "poetry.core.masonry.api"
