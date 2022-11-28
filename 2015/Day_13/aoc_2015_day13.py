@@ -50,17 +50,17 @@ def parse_seating_instructions(
     return guest_list, preference_digraph
 
 
-def calculate_happiness(seating_arrangement: Tuple[str], preference_DiGraph: nx.DiGraph) -> int:
+def calculate_happiness(seating_arrangement: Tuple[str], preferences: nx.DiGraph) -> int:
     """Calculate the happiness of a given seating arrangement based on the preference DiGraph."""
     happiness_score = 0
     for left, right in zip(seating_arrangement, seating_arrangement[1:]):
-        happiness_score += preference_DiGraph.get_edge_data(left, right)["happiness"]
-        happiness_score += preference_DiGraph.get_edge_data(right, left)["happiness"]
+        happiness_score += preferences.get_edge_data(left, right)["happiness"]
+        happiness_score += preferences.get_edge_data(right, left)["happiness"]
 
     # Wrap tails
     left, right = seating_arrangement[0], seating_arrangement[-1]
-    happiness_score += preference_DiGraph.get_edge_data(left, right)["happiness"]
-    happiness_score += preference_DiGraph.get_edge_data(right, left)["happiness"]
+    happiness_score += preferences.get_edge_data(left, right)["happiness"]
+    happiness_score += preferences.get_edge_data(right, left)["happiness"]
 
     return happiness_score
 

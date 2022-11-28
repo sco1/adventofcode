@@ -2,12 +2,7 @@ from textwrap import dedent
 
 import numpy as np
 
-from .aoc_2021_day09 import (
-    find_low_points,
-    n_largest_basins,
-    parse_topography,
-    total_risk_level,
-)
+from .aoc_2021_day09 import find_low_points, n_largest_basins, parse_topography, total_risk_level
 
 SAMPLE_INPUT = dedent(
     """\

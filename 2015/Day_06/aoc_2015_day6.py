@@ -8,12 +8,12 @@ import numpy as np
 class LightGrid:
     """Represents a grid of holiday lights!"""
 
-    def __init__(self, length: int = 1000, width: int = 1000):
+    def __init__(self, length: int = 1000, width: int = 1000) -> None:
         """Initialize the grid of holiday lights based on the given dimensions."""
         self.length = length
         self.width = width
 
-    def process_instructions(self, instruction_set: List[str]):
+    def process_instructions(self, instruction_set: List[str]) -> None:
         """Process the lighting instructions, provided as a list of strings."""
         coord_exp = r"(\d+,\d+)"  # Regex pattern to extract coordinate pairs
         for instruction in instruction_set:
@@ -42,13 +42,13 @@ class LightGrid:
 
 
 class OnOffGrid(LightGrid):
-    """Represents a light grid where lights only have on/off state"""
+    """Represents a light grid where lights only have on/off state."""
 
-    def __init__(self, length=1000, width=1000):
+    def __init__(self, length: int = 1000, width: int = 1000):
         super().__init__(length=length, width=width)
         self.light_grid = np.zeros((self.length, self.width), dtype=bool)  # All lights start off
 
-    def lights_on(self, top_left: List[int], bottom_right: List[int]):
+    def lights_on(self, top_left: List[int], bottom_right: List[int]) -> None:
         """
         Turn the lights in the grid specified by the input corner coordinate pairs.
 
@@ -56,7 +56,7 @@ class OnOffGrid(LightGrid):
         """
         self.light_grid[top_left[1] : bottom_right[1] + 1, top_left[0] : bottom_right[0] + 1] = True
 
-    def lights_off(self, top_left: List[int], bottom_right: List[int]):
+    def lights_off(self, top_left: List[int], bottom_right: List[int]) -> None:
         """
         Turn off the lights in the grid specified by the input corner coordinate pairs.
 
@@ -66,7 +66,7 @@ class OnOffGrid(LightGrid):
             top_left[1] : bottom_right[1] + 1, top_left[0] : bottom_right[0] + 1
         ] = False
 
-    def lights_toggle(self, top_left: List[int], bottom_right: List[int]):
+    def lights_toggle(self, top_left: List[int], bottom_right: List[int]) -> None:
         """
         Toggle the lights in the grid specified by the input corner coordinate pairs.
 
@@ -79,13 +79,13 @@ class OnOffGrid(LightGrid):
 
 
 class BrightnessGrid(LightGrid):
-    """Represents a light grid where lights have a brightness"""
+    """Represents a light grid where lights have a brightness."""
 
-    def __init__(self, length=1000, width=1000):
+    def __init__(self, length: int = 1000, width: int = 1000):
         super().__init__(length=length, width=width)
         self.light_grid = np.zeros((self.length, self.width), dtype=int)  # All lights start off
 
-    def lights_on(self, top_left: List[int], bottom_right: List[int]):
+    def lights_on(self, top_left: List[int], bottom_right: List[int]) -> None:
         """
         Increase light brightness by 1 in the grid specified by the input corner coordinate pairs.
 
@@ -93,7 +93,7 @@ class BrightnessGrid(LightGrid):
         """
         self.light_grid[top_left[1] : bottom_right[1] + 1, top_left[0] : bottom_right[0] + 1] += 1
 
-    def lights_off(self, top_left: List[int], bottom_right: List[int]):
+    def lights_off(self, top_left: List[int], bottom_right: List[int]) -> None:
         """
         Decrease light brightness by 1 in the grid specified by the input corner coordinate pairs.
 
@@ -112,7 +112,7 @@ class BrightnessGrid(LightGrid):
             top_left[1] : bottom_right[1] + 1, top_left[0] : bottom_right[0] + 1
         ] *= ~mask
 
-    def lights_toggle(self, top_left: List[int], bottom_right: List[int]):
+    def lights_toggle(self, top_left: List[int], bottom_right: List[int]) -> None:
         """
         Increase light brightness by 2 in the grid specified by the input corner coordinate pairs.
 
@@ -120,7 +120,7 @@ class BrightnessGrid(LightGrid):
         """
         self.light_grid[top_left[1] : bottom_right[1] + 1, top_left[0] : bottom_right[0] + 1] += 2
 
-    def total_brightness(self):
+    def total_brightness(self) -> None:
         """Return the total brightness of the grid."""
         return np.sum(self.light_grid)
 

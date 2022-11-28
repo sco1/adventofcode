@@ -6,7 +6,7 @@ import numpy as np
 BASE_PATTERN = np.array((0, 1, 0, -1))
 
 
-def expand_pattern(n_elements: int, element_index: int) -> np.array:
+def expand_pattern(n_elements: int, element_index: int) -> np.array:  # noqa: D103
     expanded_base = np.repeat(BASE_PATTERN, element_index + 1)
 
     if expanded_base.size <= n_elements:

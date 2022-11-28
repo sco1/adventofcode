@@ -4,7 +4,7 @@ from pathlib import Path
 class Sleigh:
     """Basic helper class to model Santa's movement & present delivery."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize the sleigh object & deliver a present to the first household."""
         self.x = 0
         self.y = 0
@@ -18,23 +18,23 @@ class Sleigh:
 
         self.presents_delivered = {(self.x, self.y): 1}
 
-    def move_left(self):
+    def move_left(self) -> None:
         """Move the sleigh one grid left."""
         self.x -= 1
 
-    def move_right(self):
+    def move_right(self) -> None:
         """Move the sleigh one grid right."""
         self.x += 1
 
-    def move_up(self):
+    def move_up(self) -> None:
         """Move the sleigh one grid up."""
         self.y += 1
 
-    def move_down(self):
+    def move_down(self) -> None:
         """Move the sleigh one grid down."""
         self.y -= 1
 
-    def make_moves(self, move_list: str):
+    def make_moves(self, move_list: str) -> None:
         """Make present deliveries based on the input `move_list`."""
         for move in move_list:
             self.movement_mapping[move]()

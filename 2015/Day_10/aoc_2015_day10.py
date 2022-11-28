@@ -5,7 +5,7 @@ from typing import List
 
 def run_length_endcode(in_str: str) -> List[tuple]:
     """
-    Generate the run-length encoding of the input string of single-digit integers as a list of tuple
+    Generate the run-length encoding of the input string of single-digit integers.
 
     e.g. "111221" becomes: [("1", 3), ("2", 2), ("1", 1)]
     """

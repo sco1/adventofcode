@@ -8,7 +8,7 @@ import networkx as nx
 
 def process_route(route_list: List[str]) -> List[List]:
     """
-    Process Santa's route into a list of lists with the necessary information to build a graph
+    Process Santa's route into a list of lists with the necessary information to build a graph.
 
     Input is assumed to be of the form: "Faerun to Tristram = 65"
 
@@ -28,9 +28,7 @@ def process_route(route_list: List[str]) -> List[List]:
 
 
 def find_route_min_max(santas_route: nx.Graph) -> Tuple[int]:
-    """
-    Find the length of the shortest & longest paths in Santa's route that visit every location once.
-    """
+    """Find the length of the shortest & longest paths that visit every location once."""
     route_summary = []
     # Iterate over all combinations of the nodes and calculate the distance if they form a path
     for route in permutations(list(santas_route.nodes)):

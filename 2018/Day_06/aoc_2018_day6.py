@@ -2,7 +2,7 @@ from pathlib import Path
 
 
 def _parse_coordinates(puzzle_input: list[str]) -> list[tuple[int, int]]:
-    """"""
+    """Parse the puzzle input into a list of (x,y) coordinate tuples."""
     coords = []
     for line in puzzle_input:
         x, y = line.split(",")
