@@ -44,13 +44,13 @@ def count_unique_products(reactions: dict[str, list[str]], base_molecule: str) -
 
 
 def make_reaction(reactions: dict[str, list[str]], base_molecule: str) -> abc.Iterator[str]:
-    """ """
+    """Make the provided reactions to the base molecule."""
     # Split into atoms so we're not iterating over individual letters
     # Assume any possible atom is a capital letter followed by either 0 or 1 lowercase letters
     atoms = re.findall(r"[A-Z][a-z]?", base_molecule)
     for idx, atom in enumerate(atoms):
         for product in reactions.get(atom, []):
-            yield "".join(atoms[:idx] + [product] + atoms[(idx + 1) :])  # noqa: E203 black bug
+            yield "".join(atoms[:idx] + [product] + atoms[(idx + 1) :])
 
 
 if __name__ == "__main__":

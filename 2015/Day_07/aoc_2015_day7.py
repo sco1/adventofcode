@@ -7,12 +7,12 @@ from pathlib import Path
 # Per the problem statement, we're working with 16-bit signals (0 to 65535) so some operators will
 # need to be corrected to keep in that range (and, for NOT, not a bool)
 OPS = {
-    "INPUT": lambda l, _: l,
-    "NOT": lambda _, r: ~r & 0xFFFF,
+    "INPUT": lambda left, _: left,
+    "NOT": lambda _, right: ~right & 0xFFFF,
     "AND": operator.and_,
     "OR": operator.or_,
-    "LSHIFT": lambda l, r: (l << r) & 0xFFFF,
-    "RSHIFT": lambda l, r: (l >> r) & 0xFFFF,
+    "LSHIFT": lambda left, right: (left << right) & 0xFFFF,
+    "RSHIFT": lambda left, right: (left >> right) & 0xFFFF,
 }
 
 

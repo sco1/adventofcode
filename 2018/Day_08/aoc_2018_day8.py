@@ -4,12 +4,17 @@ from pathlib import Path
 import networkx as nx
 
 
-def build_nodes(puzzle_input: deque, idx: int = 0, dg: nx.DiGraph = nx.DiGraph()):
+def build_nodes(
+    puzzle_input: deque, idx: int = 0, dg: nx.DiGraph | None = None
+) -> tuple[nx.DiGraph, int]:
     """
-    Recurse & build the tree from the input puzzle_data
+    Recurse & build the tree from the input puzzle_data.
 
     Thanks PyDis user Phoenix#2694 for fixing my recursion <3
     """
+    if dg is None:
+        dg = nx.DiGraph()
+
     n_child_nodes = puzzle_input.popleft()
     n_metadata_entries = puzzle_input.popleft()
 
@@ -31,9 +36,7 @@ def build_nodes(puzzle_input: deque, idx: int = 0, dg: nx.DiGraph = nx.DiGraph()
 
 
 def part1(tree: nx.DiGraph) -> int:
-    """
-    Calculate the sum of all of the node's metadata
-    """
+    """Calculate the sum of all of the node's metadata."""
     metadata_sum = 0
     tree_metadata = nx.get_node_attributes(tree, "metadata")
 

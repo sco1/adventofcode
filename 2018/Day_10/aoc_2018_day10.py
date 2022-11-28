@@ -5,9 +5,7 @@ import numpy as np
 
 
 def starfield_params(star_position: np.ndarray) -> int:
-    """
-    Calculate starfield bounding box dimensions & area
-    """
+    """Calculate starfield bounding box dimensions & area."""
     xmin = min(star_position[:, 0])
     xmax = max(star_position[:, 0])
     ymin = min(star_position[:, 1])

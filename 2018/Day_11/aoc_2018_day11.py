@@ -6,9 +6,7 @@ from scipy import signal
 
 
 def build_grid(serial: int, width: int = 300, height: int = 300) -> np.ndarray:
-    """
-    Build a power grid for the given grid serial number
-    """
+    """Build a power grid for the given grid serial number."""
     x, y = np.meshgrid(np.arange(1, width + 1), np.arange(1, height + 1))
 
     rack_ID = x + 10
@@ -21,7 +19,7 @@ def build_grid(serial: int, width: int = 300, height: int = 300) -> np.ndarray:
 
 def get_max_subgrid_power(power_grid: np.ndarray, subgrid_size: int = 3) -> np.ndarray:
     """
-    Use a rolling window to obtain the the power for each subgrid on the power grid
+    Use a rolling window to obtain the the power for each subgrid on the power grid.
 
     Assumes power_grid and subgrid(s) are square
     """
@@ -37,22 +35,17 @@ def get_max_subgrid_power(power_grid: np.ndarray, subgrid_size: int = 3) -> np.n
 
 
 def part1(serial: int) -> Tuple[int]:
-    """
-    Find the coordinates of the top left corner of the subgrid with the most power
-    """
-    power_grid = build_grid(4455)
-    max_subgrid_power, subgrid_corner = get_max_subgrid_power(power_grid)
+    """Find the coordinates of the top left corner of the subgrid with the most power."""
+    power_grid = build_grid(serial)
+    _, subgrid_corner = get_max_subgrid_power(power_grid)
 
     return subgrid_corner
 
 
 def part2(serial: int, max_subgrid_size: int = 300) -> Tuple[int]:
-    """
-    Find the subgrid size that results in the highest total power
-
-    Brute force!
-    """
-    power_grid = build_grid(4455)
+    """Find the subgrid size that results in the highest total power."""
+    # Brute force!
+    power_grid = build_grid(serial)
 
     max_power = 0
     max_power_subgrid_loc = None

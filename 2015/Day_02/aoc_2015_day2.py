@@ -12,7 +12,7 @@ def calculate_side_surface_areas(length: int, width: int, height: int) -> List[i
 
 
 def calculate_present_volume(length: int, width: int, height: int) -> int:
-    """Calculate the volume of a present, assuming a rectangular prism with the given dimensions"""
+    """Calculate the volume of a present, assuming a rectangular prism with the given dimensions."""
     return length * width * height
 
 

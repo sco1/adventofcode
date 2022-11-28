@@ -1,7 +1,5 @@
 from textwrap import dedent
 
-import pytest
-
 SAMPLE_STEPS = [
     dedent(
         """\

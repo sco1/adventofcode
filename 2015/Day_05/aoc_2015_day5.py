@@ -70,7 +70,7 @@ def rolling_window(word: str, window_size: int) -> str:
 
 
 def check_word_list(word_list: List[str]) -> Tuple[int]:
-    """Count the number of nice words in the input word list based on the two rulesets"""
+    """Count the number of nice words in the input word list based on the two rulesets."""
     rule_a_count = [is_nice_a(word) for word in word_list].count(True)
     rule_b_count = [is_nice_b(word) for word in word_list].count(True)
     return rule_a_count, rule_b_count
