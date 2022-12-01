@@ -25,9 +25,15 @@ repos:
       - id: check-yaml
       - id: end-of-file-fixer
       - id: mixed-line-ending
+      - id: trailing-whitespace
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.9.0
     hooks:
       -  id: python-check-blanket-noqa
       -  id: python-check-blanket-type-ignore
       -  id: python-use-type-annotations
+  - repo: https://github.com/sco1/pre-commit-matlab
+    rev: v1.2.0
+    hooks:
+      - id: matlab-reflow-comments
+        args: [--line-length=100]
