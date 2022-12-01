@@ -20,17 +20,16 @@ SAMPLE_INPUT = dedent(
     10000
     """
 )
+TRUTH_CALORIE_COUNT = [6_000, 4_000, 11_000, 24_000, 10_000]
 
 
 def test_puzzle_conversion() -> None:
-    assert parse_puzzle_input(SAMPLE_INPUT) == [6_000, 4_000, 11_000, 24_000, 10_000]
+    assert parse_puzzle_input(SAMPLE_INPUT) == TRUTH_CALORIE_COUNT
 
 
 def test_part_one() -> None:
-    puzzle_input = parse_puzzle_input(SAMPLE_INPUT)
-    assert find_most_caloric_dense_elf(puzzle_input) == 24_000
+    assert find_most_caloric_dense_elf(TRUTH_CALORIE_COUNT) == 24_000
 
 
 def test_part_two() -> None:
-    puzzle_input = parse_puzzle_input(SAMPLE_INPUT)
-    assert find_best_snack_trio(puzzle_input) == 45_000
+    assert find_best_snack_trio(TRUTH_CALORIE_COUNT) == 45_000
