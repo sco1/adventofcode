@@ -453,14 +453,13 @@ testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.
 
 [[package]]
 name = "pytest-check"
-version = "1.2.0"
+version = "1.2.1"
 description = "A pytest plugin that allows multiple failures per test."
 category = "dev"
 optional = false
 python-versions = ">3.7"
 
 [package.dependencies]
-colorama = ">=0.4.6"
 pytest = "*"
 
 [[package]]
@@ -975,8 +974,8 @@ pytest = [
     {file = "pytest-7.2.0.tar.gz", hash = "sha256:c4014eb40e10f11f355ad4e3c2fb2c6c6d1919c73f3b5a433de4708202cade59"},
 ]
 pytest-check = [
-    {file = "pytest-check-1.2.0.tar.gz", hash = "sha256:b0d6bbf152c7d3adb0a181bf11928bde9acfaf0e97e582018d6d68593a71d021"},
-    {file = "pytest_check-1.2.0-py3-none-any.whl", hash = "sha256:23d51214f87c8e0e17859b0611b2127cc7045b92e1c5144514dd961ac5aa866b"},
+    {file = "pytest-check-1.2.1.tar.gz", hash = "sha256:2017d1f9f73adaa1f82c38c3f90adb85b852d69535bb65c3f757147f99656a52"},
+    {file = "pytest_check-1.2.1-py3-none-any.whl", hash = "sha256:492cf0aeadc72e163245206b28e4ff5d1c9607ffed0e765f662b74c979b1aa3b"},
 ]
 pytest-cov = [
     {file = "pytest-cov-4.0.0.tar.gz", hash = "sha256:996b79efde6433cdbd0088872dbc5fb3ed7fe1578b68cdbba634f14bb8dd0470"},
