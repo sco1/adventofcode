@@ -7,6 +7,10 @@ authors = ["sco1 <sco1.git@gmail.com>"]
 readme = "README.md"
 homepage = "https://adventofcode.com"
 repository = "https://github.com/sco1/adventofcode"
+packages = [{include="helpers"}]
+
+[tool.poetry.scripts]
+aoc-init = "helpers.init_puzzle:main"
 
 [tool.poetry.dependencies]
 python = "^3.10"
