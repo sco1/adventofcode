@@ -17,8 +17,8 @@ if __name__ == "__main__":
     puzzle_input_file = Path("./puzzle_input.txt")
     puzzle_input = puzzle_input_file.read_text()
 
-    print(f"Part One: {}")
-    print(f"Part Two: {}")
+    print(f"Part One: {...}")
+    print(f"Part Two: {...}")
 """
 
 PY_FILES = (
@@ -44,7 +44,7 @@ def init_puzzle_day(year: int, day: int) -> None:  # noqa: D103
             filename = filename.format(day)
             (day_dir / filename).write_text(contents)
         else:
-            filename = filename.format(day)
+            filename = file.format(day)
             (day_dir / filename).touch()
 
 
