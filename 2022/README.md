@@ -12,7 +12,7 @@
 |  5 | :white_check_mark: |         :x:        |         :x:        |         :x:        |         :x:        |
 |  6 | :white_check_mark: | :white_check_mark: |         :x:        |         :x:        |         :x:        |
 |  7 | :white_check_mark: |         :x:        |         :x:        |         :x:        |         :x:        |
-|  8 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
+|  8 | :white_check_mark: |         :x:        |         :x:        |         :x:        |         :x:        |
 |  9 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
 | 10 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
 | 11 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
