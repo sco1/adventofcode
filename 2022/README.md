@@ -15,8 +15,8 @@
 |  8 | :white_check_mark: |         :x:        |         :x:        |         :x:        |         :x:        |
 |  9 | :white_check_mark: |         :x:        |         :x:        |         :x:        |         :x:        |
 | 10 | :white_check_mark: |         :x:        |         :x:        |         :x:        |         :x:        |
-| 11 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
-| 12 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
+| 11 | :white_check_mark: |         :x:        |         :x:        |         :x:        |         :x:        |
+| 12 | :white_check_mark: |         :x:        |         :x:        |         :x:        |         :x:        |
 | 13 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
 | 14 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
 | 15 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
