@@ -35,7 +35,6 @@ pep8-naming = "^0.13"
 pre-commit = "^2.20"
 pytest = "^7.2"
 pytest-check = "^1.2"
-pytest-cov = "^4.0"
 pytest-randomly = "^3.12"
 
 [tool.black]
