@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 
-CD = Path()
+BASE_DIR = Path(__file__).parent.parent
 
 PUZZLE_FILES = (
     "puzzle_input.txt",
@@ -21,15 +21,25 @@ if __name__ == "__main__":
     print(f"Part Two: {...}")
 """
 
+TEST_BASE = '''\
+from textwrap import dedent
+
+
+SAMPLE_INPUT = dedent(
+    """\
+    """
+)
+'''
+
 PY_FILES = (
     "__init__.py",
     ("aoc_2022_day{:02d}.py", PY_BASE),
-    "test_day{:02d}.py",
+    ("test_day{:02d}.py", TEST_BASE),
 )
 
 
 def init_puzzle_day(year: int, day: int) -> None:  # noqa: D103
-    year_dir = CD / f"{year}"
+    year_dir = BASE_DIR / f"{year}"
     year_dir.mkdir(exist_ok=True)
 
     day_dir = year_dir / f"Day_{day:02d}"
