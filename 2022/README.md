@@ -24,7 +24,7 @@
 | 17 |   :white_circle:   |         :x:        |         :x:        |         :x:        |         :x:        |
 | 18 | :white_check_mark: |         :x:        |         :x:        |         :x:        |         :x:        |
 | 19 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
-| 20 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
+| 20 | :white_check_mark: |         :x:        |         :x:        |         :x:        |         :x:        |
 | 21 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
 | 22 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
 | 23 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
