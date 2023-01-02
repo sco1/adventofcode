@@ -27,6 +27,6 @@
 | 20 | :white_check_mark: |         :x:        |         :x:        |         :x:        |         :x:        |
 | 21 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
 | 22 |   :white_circle:   |         :x:        |         :x:        |         :x:        |         :x:        |
-| 23 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
+| 23 | :white_check_mark: |         :x:        |         :x:        |         :x:        |         :x:        |
 | 24 |         :x:        |         :x:        |         :x:        |         :x:        |         :x:        |
 | 25 | :white_check_mark: |         :x:        |         :x:        |         :x:        |         :x:        |
