@@ -5,27 +5,14 @@ import typing as t
 from pathlib import Path
 from textwrap import dedent
 
-COORD: t.TypeAlias = tuple[int, int]
-
-
-def _get_bounds(piece_comp: t.Iterable[COORD]) -> tuple[range, range]:
-    """Calculate the bounding ranges for the bounding box containing the provided coordinates."""
-    bounds = []
-    for dim in (0, 1):
-        lbound = min(comp[dim] for comp in piece_comp)
-        rbound = max(comp[dim] for comp in piece_comp)
-
-        # Include the max
-        bounds.append(range(lbound, rbound + 1))
-
-    return tuple(bounds)  # type: ignore[return-value]
+from helpers.geometry import COORD, get_bounds
 
 
 class Elfomino:  # noqa: D101
     def __init__(self, coords: t.Iterable[COORD]) -> None:
         self.coords = frozenset(coords)
 
-        w_bound, h_bound = _get_bounds(coords)
+        w_bound, h_bound = get_bounds(coords)
         self.width = max(w_bound) + 1
         self.height = max(h_bound)
 

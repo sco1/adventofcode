@@ -3,7 +3,8 @@ from pathlib import Path
 
 import networkx as nx
 
-COORD: t.TypeAlias = tuple[int, int]
+from helpers.geometry import COORD, iter_neighbors
+
 MAP: t.TypeAlias = dict[COORD, int]
 
 
@@ -45,14 +46,6 @@ def parse_map(heightmap: str) -> tuple[MAP, COORD, COORD]:
     return elevation_map, start_pos, target_pos
 
 
-def iter_neighbors(x: int, y: int) -> t.Iterable[COORD]:
-    """Iterate over the vertical & lateral neighbors (LRUD) of the provided center point."""
-    yield x - 1, y
-    yield x + 1, y
-    yield x, y - 1
-    yield x, y + 1
-
-
 def build_valid_steps(elevation_map: MAP) -> nx.DiGraph:
     """
     Convert the provided elevation map into a digraph whose edges represent valid hiking steps.
@@ -62,10 +55,10 @@ def build_valid_steps(elevation_map: MAP) -> nx.DiGraph:
     """
     edge_height = _char2height("~")  # Use a value higher than "z" to keep from leaping off the edge
     valid_steps = nx.DiGraph()
-    for (x, y), height in elevation_map.items():
-        for (tx, ty) in iter_neighbors(x, y):
+    for coord, height in elevation_map.items():
+        for (tx, ty) in iter_neighbors(coord):
             if elevation_map.get((tx, ty), edge_height) <= (height + 1):
-                valid_steps.add_edge((x, y), (tx, ty))
+                valid_steps.add_edge(coord, (tx, ty))
 
     return valid_steps
 

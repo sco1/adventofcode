@@ -1,6 +1,8 @@
 import typing as t
 from pathlib import Path
 
+from helpers.geometry import get_bounds
+
 COORD: t.TypeAlias = tuple[int, int, int]
 CUBES: t.TypeAlias = set[COORD]
 
@@ -43,23 +45,10 @@ def calc_surface_area(cubes: CUBES) -> int:
     return surface_area
 
 
-def _get_bounds(cubes: CUBES) -> tuple[range, range, range]:
-    """Generate a 1-width padded bounding cube around the provided set of coordinates."""
-    bounds = []
-    for dim in (0, 1, 2):
-        lbound = min(cube[dim] for cube in cubes)
-        rbound = max(cube[dim] for cube in cubes)
-
-        # Include the max & pad the bounds by 1 in case there's a cube on the boundary
-        bounds.append(range(lbound - 1, rbound + 2))
-
-    return tuple(bounds)  # type: ignore[return-value]
-
-
 def calc_exterior_surface_area(cubes: CUBES) -> int:
     """Calculate the exposed exterior surface area of the provided cube map."""
     # Build an outer boundary to stop the flood fill from going forever
-    bounds = _get_bounds(cubes)
+    bounds = get_bounds(cubes, padding=1)
 
     # Start the fill from a cube just outside the lava
     air_start: COORD = tuple(min(dim) for dim in bounds)  # type: ignore[assignment]
