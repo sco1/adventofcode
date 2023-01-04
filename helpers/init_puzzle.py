@@ -49,13 +49,13 @@ def init_puzzle_day(year: int, day: int) -> None:  # noqa: D103
         (day_dir / filename).touch()
 
     for file in PY_FILES:
-        if len(file) == 2:
+        if isinstance(file, str):
+            filename = file.format(day)
+            (day_dir / filename).touch()
+        else:
             filename, contents = file
             filename = filename.format(day)
             (day_dir / filename).write_text(contents)
-        else:
-            filename = file.format(day)
-            (day_dir / filename).touch()
 
 
 def main() -> None:  # noqa: D103
