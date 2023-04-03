@@ -32,7 +32,7 @@ def run_sim(elf_coords: set[COORD], n_rounds: int = 10) -> int:
 
     for _ in range(n_rounds):
         proposed: dict[COORD, list[COORD]] = defaultdict(list)
-        for (x, y) in elf_coords:
+        for x, y in elf_coords:
             # At least one neighbor must be occupied for the elf to move
             if all(
                 check not in elf_coords for check in iter_neighbors((x, y), include_diagonal=True)
@@ -90,7 +90,7 @@ def run_until_static(elf_coords: set[COORD]) -> int:
     while True:
         n_steps += 1
         proposed: dict[COORD, list[COORD]] = defaultdict(list)
-        for (x, y) in elf_coords:
+        for x, y in elf_coords:
             # At least one neighbor must be occupied for the elf to move
             if all(
                 check not in elf_coords for check in iter_neighbors((x, y), include_diagonal=True)

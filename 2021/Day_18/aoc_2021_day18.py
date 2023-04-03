@@ -31,6 +31,7 @@ def _explode_pair(snailfish_number: str, pair: re.Match) -> str:
 
     Exploding pairs will always consist of two regular numbers.
     """
+
     # Use nested replacement functions so they have the snailfish number & pair in scope
     def explode_left(match: re.Match) -> str:
         """Add the pair's left value to the first regular number to the left of the pair."""
