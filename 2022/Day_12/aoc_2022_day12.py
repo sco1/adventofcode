@@ -56,7 +56,7 @@ def build_valid_steps(elevation_map: MAP) -> nx.DiGraph:
     edge_height = _char2height("~")  # Use a value higher than "z" to keep from leaping off the edge
     valid_steps = nx.DiGraph()
     for coord, height in elevation_map.items():
-        for (tx, ty) in iter_neighbors(coord):
+        for tx, ty in iter_neighbors(coord):
             if elevation_map.get((tx, ty), edge_height) <= (height + 1):
                 valid_steps.add_edge(coord, (tx, ty))
 
