@@ -2,6 +2,7 @@
 .vscode/
 __pycache__/
 *.asv
+.DS_Store
 
 # Virtual Envs
 .*env/

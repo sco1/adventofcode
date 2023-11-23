@@ -11,6 +11,7 @@ packages = [{include="helpers"}]
 
 [tool.poetry.scripts]
 aoc-init = "helpers.init_puzzle:main"
+set-prog = "helpers.update_progress:main"
 
 [tool.poetry.dependencies]
 python = "^3.10"

@@ -19,5 +19,5 @@ extend-ignore=
 extend-exclude=
     .venv,
 per-file-ignores =
-    test_*.py:D101,D103,E501
-    2021\Day_18\aoc_2021_day18.py:D202
+    test_*.py: D101 D103 E501,
+    2021/Day_18/aoc_2021_day18.py: D202
