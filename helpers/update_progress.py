@@ -52,7 +52,8 @@ def build_table(data: DATA_T) -> str:  # noqa: D103
             f"|{day+1:^4}|{'|'.join(ICONS[data[la][day]].center(MIN_WIDTH+2) for la in Lang)}|"
         )
 
-    return f"{header}\n{divider}\n{'\n'.join(rows)}"
+    all_rows = "\n".join(rows)
+    return f"{header}\n{divider}\n{all_rows}"
 
 
 def ensure_lang(data: DATA_T) -> DATA_T:
@@ -61,6 +62,54 @@ def ensure_lang(data: DATA_T) -> DATA_T:
         data[lang] = [State.NOT] * 25
 
     return data
+
+
+def parse_progress_json(filepath: Path) -> DATA_T:
+    """
+    Parse the progress data from the provided README file.
+
+    If a new language has been added since the README file was generated, an empty column for the
+    new language will be created.
+    """
+    with filepath.open("r") as f:
+        first_line = f.readline()
+
+    if first_line.startswith("<!--"):
+        data_table = json.loads(
+            first_line.rstrip().removeprefix("<!--").removesuffix("-->").strip()
+        )
+        data_table = ensure_lang(data_table)
+    else:
+        data_table = {lang.value: ([State.NOT] * 25) for lang in Lang}
+
+    return data_table  # type: ignore[no-any-return]
+
+
+def build_summary_table() -> str:
+    """Build a completion stats summary table from the data in each year's README."""
+    col_width = 8
+    header = f"|        |{'|'.join(la.title().center(col_width+2) for la in Lang)}|"
+    header = header.replace("Matlab", "MATLAB")  # Special case name
+
+    sub_div = f":{'-'*col_width}:|"
+    divider = f"|--------|{sub_div*len(Lang)}"
+
+    rows = []
+    for filepath in sorted(BASE_DIR.glob("2*/README.md"), key=lambda x: x.parent):
+        year = filepath.parent.name
+        data = parse_progress_json(filepath)
+
+        row = []
+        for la in Lang:
+            partial = sum((day == State.PARTIAL) for day in data[la])
+            full = sum((day == State.DONE) for day in data[la])
+
+            row.append(f"`{full:2}, {partial:2}`")
+
+        rows.append(f"| `{year}` |{'|'.join(col.center(col_width+2) for col in row)}|")
+
+    all_rows = "\n".join(rows)
+    return f"{header}\n{divider}\n{all_rows}"
 
 
 def main() -> None:  # noqa: D103
@@ -73,16 +122,7 @@ def main() -> None:  # noqa: D103
     args = parser.parse_args()
 
     filepath = BASE_DIR / f"{args.year}" / "README.md"
-    with filepath.open("r") as f:
-        first_line = f.readline()
-
-    if first_line.startswith("<!--"):
-        data_table = json.loads(
-            first_line.rstrip().removeprefix("<!--").removesuffix("-->").strip()
-        )
-        data_table = ensure_lang(data_table)
-    else:
-        data_table = {lang.value: ([State.NOT] * 25) for lang in Lang}
+    data_table = parse_progress_json(filepath)
 
     data_table[args.lang][args.day - 1] = State[args.state.upper()]
 
