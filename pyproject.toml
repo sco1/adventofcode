@@ -19,24 +19,25 @@ more-itertools = "^10.1"
 networkx = "^3.1"
 numpy = {version="^1.26", python = "<3.13"}
 pandas = "^2.1"
-rapidfuzz = "^2.13"
+rapidfuzz = "^3.5"
 scipy = {version="^1.11", python = "<3.13"}
 sco1-pylox = "^0.5.1"
 sympy = "^1.11"
 
 [tool.poetry.dev-dependencies]
-black = "*"
-flake8 = "*"
-flake8-annotations = "*"
-flake8-bugbear = "*"
-flake8-docstrings = "*"
-isort = "*"
-mypy = "*"
-pep8-naming = "*"
-pre-commit = "*"
-pytest = "*"
-pytest-check = "*"
-pytest-randomly = "*"
+black = "^23.1"
+cogapp = "^3.3"
+flake8 = "^6.1"
+flake8-annotations = "^3.0"
+flake8-bugbear = "^23.1"
+flake8-docstrings = "^1.7"
+flake8-fixme = "^1.1"
+isort = "^5.12"
+mypy = "^1.0"
+pep8-naming = "^0.13"
+pre-commit = "^3.0"
+pytest = "^7.2"
+pytest-randomly = "^3.12"
 
 [tool.black]
 line-length = 100
