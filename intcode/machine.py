@@ -12,7 +12,7 @@ class MachineInstruction:  # noqa: D101
     name: str
     op: t.Callable
     n_params: int
-    writes: bool
+    writes: bool  # Set True if the final param is assumed to always be a position
 
 
 class IntcodeMachine:
@@ -36,6 +36,10 @@ class IntcodeMachine:
             2: MachineInstruction(name="mul", op=self.mul, n_params=3, writes=True),
             3: MachineInstruction(name="input", op=self.inp, n_params=1, writes=True),
             4: MachineInstruction(name="output", op=self.out, n_params=1, writes=False),
+            5: MachineInstruction(name="jump_true", op=self.jump_true, n_params=2, writes=False),
+            6: MachineInstruction(name="jump_false", op=self.jump_false, n_params=2, writes=False),
+            7: MachineInstruction(name="lt", op=self.lt, n_params=3, writes=True),
+            8: MachineInstruction(name="eq", op=self.eq, n_params=3, writes=True),
         }
 
         self.PARAMETER_MODE = {
@@ -43,15 +47,15 @@ class IntcodeMachine:
             1: lambda x: x,  # Immediate (aka value)
         }
 
-        self._initial_state = tuple(int(c) for c in program.split(","))
-        self.reset()
-
         if stdin:
             self.stdin = deque([stdin])
         else:
             self.stdin = deque()
 
         self.stdout = deque()
+
+        self._initial_state = tuple(int(c) for c in program.split(","))
+        self.reset()
 
     @property
     def output(self) -> int:
@@ -62,6 +66,7 @@ class IntcodeMachine:
         """Reset the machine's memory to its original state."""
         self._state = list(self._initial_state)
         self._cur = 0
+        self.stdout.clear()
 
     def _apply_noun_verb(self, noun: int | None, verb: int | None) -> None:
         """Replace values at addresses `1` (noun) & `2` (verb), if provided."""
@@ -152,9 +157,16 @@ class IntcodeMachine:
                 modes=opc_chunk // 100,
                 instruction=instruction,
             )
-            instruction.op(params)
 
-            self.step()
+            if opc in (5, 6):
+                # Don't increment the pointer if a jump instruction made a jump
+                jumped = instruction.op(params)
+                if not jumped:
+                    self.step()
+            else:
+                instruction.op(params)
+                self.step()
+
             cycle += 1
 
     def add(self, params: t.Iterable[int]) -> None:
@@ -179,13 +191,51 @@ class IntcodeMachine:
         *vals, put_idx = params
         self._state[put_idx] = math.prod(vals)
 
-    def inp(self, put_idx: int) -> None:
+    def inp(self, params: t.Iterable[int]) -> None:
         """Pop input from stdin and place it at the specified index."""
+        (put_idx,) = params  # Should only have one incoming parameter
         self._state[put_idx] = int(self.stdin.pop())
 
-    def out(self, idx: int) -> None:
-        """Append input to stdout, newest -> oldest."""
-        self.stdout.appendleft(str(self._state[idx]))
+    def out(self, params: t.Iterable[int]) -> None:
+        """Append the specified input to stdout, newest -> oldest."""
+        (val,) = params  # Should only have one incoming parameter
+        self.stdout.appendleft(str(val))
+
+    def jump_true(self, params: t.Iterable[int]) -> bool:
+        """If the first param is non-zero, move the instruction pointer to the specified index."""
+        predicate, jump_idx = params
+        if predicate:
+            self.jump(jump_idx)
+            return True
+
+        return False
+
+    def jump_false(self, params: t.Iterable[int]) -> bool:
+        """If the first param is zero, move the instruction pointer to the specified index."""
+        predicate, jump_idx = params
+        if not predicate:
+            self.jump(jump_idx)
+            return True
+
+        return False
+
+    def lt(self, params: t.Iterable[int]) -> None:
+        """If left is less than right, store 1 in the specified output index, otherwise 0."""
+        left, right, put_idx = params
+
+        if left < right:
+            self._state[put_idx] = 1
+        else:
+            self._state[put_idx] = 0
+
+    def eq(self, params: t.Iterable[int]) -> None:
+        """If left is equal to right, store 1 in the specified output index, otherwise 0."""
+        left, right, put_idx = params
+
+        if left == right:
+            self._state[put_idx] = 1
+        else:
+            self._state[put_idx] = 0
 
 
 def find_noun_verb(program: str, target_output: int, max_val: int = 99) -> tuple[int, int]:
