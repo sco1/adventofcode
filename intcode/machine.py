@@ -7,6 +7,10 @@ from collections import deque
 from dataclasses import dataclass
 
 
+class NoInput(Exception):  # noqa: D101
+    pass
+
+
 @dataclass(frozen=True, slots=True)
 class MachineInstruction:  # noqa: D101
     name: str
@@ -30,7 +34,7 @@ class IntcodeMachine:
     _state: list[int]
     _cur: int
 
-    def __init__(self, program: str, stdin: str = "") -> None:
+    def __init__(self, program: str, stdin: t.Iterable[str] = ("")) -> None:
         self.OPCODES = {
             1: MachineInstruction(name="add", op=self.add, n_params=3, writes=True),
             2: MachineInstruction(name="mul", op=self.mul, n_params=3, writes=True),
@@ -48,7 +52,7 @@ class IntcodeMachine:
         }
 
         if stdin:
-            self.stdin = deque([stdin])
+            self.stdin = deque(stdin)
         else:
             self.stdin = deque()
 
@@ -56,11 +60,6 @@ class IntcodeMachine:
 
         self._initial_state = tuple(int(c) for c in program.split(","))
         self.reset()
-
-    @property
-    def output(self) -> int:
-        """Return the machine's output, as stored at address 0 of the processed program."""
-        return self._state[0]
 
     def reset(self) -> None:
         """Reset the machine's memory to its original state."""
@@ -123,49 +122,80 @@ class IntcodeMachine:
 
         return params
 
-    def run(self, noun: int | None = None, verb: int | None = None) -> None:
+    def _exec_instruction(self, verbose: bool = False) -> bool:
         """
-        Excecute the loaded program until opcode `99` is reached, terminating the program.
+        Execute the next machine instruction in the loaded code.
 
-        Prior to execution, the computer state is reset and, if provided, the noun/verb pair is
-        applied.
+        Returns `True` if the program has halted (opcode `99`).
         """
-        self.reset()
-        self._apply_noun_verb(noun, verb)
+        # Parameter modes are stored in the same value as the instruction's opcode; the opcode
+        # is a two-digit number based only on the ones and tens digit of the value. Parameter
+        # modes are single digits, one per parameter, read right-to-left from the opcode: the
+        # first parameter's mode is in the hundreds digit, the second parameter's mode is in the
+        # thousands digit, etc.. Any missing modes are 0.
+        opc_chunk = self.read()
+        opc = opc_chunk % 100
+        if opc == 99:  # Terminate program
+            return True
+
+        instruction = self.OPCODES.get(opc, None)
+        if instruction is None:
+            raise Exception(f"Unknown opcode: {opc}")
+
+        params = self._resolve_params(
+            raw_params=[self.step() for _ in range(instruction.n_params)],
+            modes=opc_chunk // 100,
+            instruction=instruction,
+        )
+
+        if opc in (5, 6):
+            # Don't increment the pointer if a jump instruction made a jump
+            jumped = instruction.op(params)
+            if not jumped:
+                self.step()
+        else:
+            instruction.op(params)
+            self.step()
+
+        if verbose:
+            print(f"Opcode: {instruction.name}, params: {params}")
+            print(f"State: {self._state}")
+
+        return False
+
+    def run(
+        self,
+        noun: int | None = None,
+        verb: int | None = None,
+        reset: bool = True,
+        verbose: bool = False,
+    ) -> bool:
+        """
+        Excecute the loaded program until completion or until blocked.
+
+        Returns `True` if execution was blocked, `False` if program was halted (opcode `99`).
+
+        If the `reset` flag is `True`, prior to execution the computer state is reset and, if
+        provided, the noun/verb pair is applied.
+        """
+        if reset:
+            self.reset()
+            self._apply_noun_verb(noun, verb)
+
+        if verbose:
+            print(f"Starting state: {self._state}")
 
         cycle = 0
         while True:
-            # Parameter modes are stored in the same value as the instruction's opcode; the opcode
-            # is a two-digit number based only on the ones and tens digit of the value. Parameter
-            # modes are single digits, one per parameter, read right-to-left from the opcode: the
-            # first parameter's mode is in the hundreds digit, the second parameter's mode is in the
-            # thousands digit, etc.. Any missing modes are 0.
-            opc_chunk = self.read()
-            opc = opc_chunk % 100
-            if opc == 99:  # Terminate program
-                return
-
             if cycle > self.MAX_CYCLES:
                 raise Exception(f"Maximum cycles exceeded: {self.MAX_CYCLES}")
 
-            instruction = self.OPCODES.get(opc, None)
-            if instruction is None:
-                raise Exception(f"Unknown opcode: {opc}")
-
-            params = self._resolve_params(
-                raw_params=[self.step() for _ in range(instruction.n_params)],
-                modes=opc_chunk // 100,
-                instruction=instruction,
-            )
-
-            if opc in (5, 6):
-                # Don't increment the pointer if a jump instruction made a jump
-                jumped = instruction.op(params)
-                if not jumped:
-                    self.step()
-            else:
-                instruction.op(params)
-                self.step()
+            try:
+                halted = self._exec_instruction(verbose=verbose)
+                if halted:
+                    return False
+            except NoInput:
+                return True
 
             cycle += 1
 
@@ -193,8 +223,13 @@ class IntcodeMachine:
 
     def inp(self, params: t.Iterable[int]) -> None:
         """Pop input from stdin and place it at the specified index."""
+        if not self.stdin:
+            # No input, rewind and raise
+            self.step(-len(params))
+            raise NoInput
+
         (put_idx,) = params  # Should only have one incoming parameter
-        self._state[put_idx] = int(self.stdin.pop())
+        self._state[put_idx] = int(self.stdin.popleft())
 
     def out(self, params: t.Iterable[int]) -> None:
         """Append the specified input to stdout, newest -> oldest."""
@@ -248,7 +283,7 @@ def find_noun_verb(program: str, target_output: int, max_val: int = 99) -> tuple
             continue
 
         im.run(noun, verb)
-        if im.output == target_output:
+        if im._state[0] == target_output:
             return (noun, verb)
 
     raise ValueError("No noun/verb pair found that produces the output target.")
