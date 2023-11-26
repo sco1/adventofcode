@@ -4,6 +4,8 @@ from pathlib import Path
 
 from intcode.machine import IntcodeMachine, find_noun_verb
 
+# Tests for this day are contained in ./intcode/test_machine.py
+
 if __name__ == "__main__":
     puzzle_input = Path("./puzzle_input.txt")
     in_program = puzzle_input.read_text().strip()
