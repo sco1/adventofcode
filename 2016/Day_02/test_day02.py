@@ -2,7 +2,7 @@ from textwrap import dedent
 
 import pytest
 
-from .aoc_2022_day02 import DIAMOND_KEYPAD, KEYPAD, find_bathroom_code, parse_keypad
+from .aoc_2016_day02 import DIAMOND_KEYPAD, KEYPAD, find_bathroom_code, parse_keypad
 
 SAMPLE_INPUT = dedent(
     """\

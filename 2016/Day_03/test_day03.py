@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from .aoc_2022_day03 import is_possible_triangle, parse_triangle_columns
+from .aoc_2016_day03 import is_possible_triangle, parse_triangle_columns
 
 
 def test_is_triangle() -> None:

@@ -1,6 +1,6 @@
 import pytest
 
-from .aoc_2022_day01 import first_repeat_block_distance, headquarters_distance
+from .aoc_2016_day01 import first_repeat_block_distance, headquarters_distance
 
 SAMPLE_CASES = (
     ("R2, L3", 5),

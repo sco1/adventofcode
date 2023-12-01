@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from .aoc_2022_day08 import Screen, calculate_lit_pixels, parse_instructions
+from .aoc_2016_day08 import Screen, calculate_lit_pixels, parse_instructions
 
 SAMPLE_INPUT = dedent(
     """\

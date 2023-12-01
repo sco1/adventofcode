@@ -2,7 +2,7 @@ from textwrap import dedent
 
 import pytest
 
-from .aoc_2022_day04 import (
+from .aoc_2016_day04 import (
     decrypt_room_name,
     is_valid_room,
     parse_room_encryption,

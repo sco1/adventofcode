@@ -1,4 +1,4 @@
-from .aoc_2022_day05 import calculate_door_password, calculate_door_password_positional
+from .aoc_2016_day05 import calculate_door_password, calculate_door_password_positional
 
 
 def test_password_gen() -> None:

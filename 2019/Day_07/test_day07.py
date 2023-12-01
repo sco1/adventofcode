@@ -1,6 +1,6 @@
 import pytest
 
-from .aoc_2022_day07 import (
+from .aoc_2019_day07 import (
     SEQUENCE_T,
     find_max_thruster_setting,
     find_max_thruster_setting_feedback,

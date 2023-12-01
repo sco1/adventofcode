@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from .aoc_2022_day06 import correct_message
+from .aoc_2016_day06 import correct_message
 
 SAMPLE_INPUT = dedent(
     """\
