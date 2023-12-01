@@ -21,7 +21,7 @@ def extract_calibration_value(calibration_string: str, include_spelled: bool = F
     single two-digit number.
 
     If `include_spelled` is `True`, valid digits may also be spelled out, e.g. `"one" = 1`,
-    `"two"=2`, etc.
+    `"two" = 2`, etc.
 
     NOTE: Compound numbers may contain valid digits, e.g. `"sixteen" = 6`
     NOTE: Characters are not consumed as they match, e.g. `"twone"` gives `2` and `1`.
