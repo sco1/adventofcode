@@ -6,7 +6,6 @@ BASE_DIR = Path(__file__).parent.parent
 PUZZLE_FILES = (
     "puzzle_input.txt",
     "README.md",
-    "sample_input.txt",
 )
 
 PY_BASE = """\
