@@ -37,7 +37,7 @@ def parse_instructions(sequence: str) -> list[Instruction]:
         else:
             raise ValueError(f"Unsupported instruction: '{line}'")
 
-        a, b, *_ = map(int, re.findall(r"\d+", line))
+        a, b, *_ = (int(v) for v in re.findall(r"\d+", line))
         instructions.append(Instruction(instruction_type, a, b))
 
     return instructions
