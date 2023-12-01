@@ -1,6 +1,6 @@
 import pytest
 
-from .aoc_2022_day09 import decompress
+from .aoc_2016_day09 import decompress
 
 TEST_CASES = (
     ("ADVENT", "ADVENT"),

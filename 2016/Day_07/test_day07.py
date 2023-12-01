@@ -1,6 +1,6 @@
 import pytest
 
-from .aoc_2022_day07 import supports_ssl, supports_tls
+from .aoc_2016_day07 import supports_ssl, supports_tls
 
 TLS_TEST_CASES = (
     ("abba[mnop]qrst", True),

@@ -32,7 +32,7 @@ SAMPLE_INPUT = dedent(
 
 PY_FILES = (
     "__init__.py",
-    ("aoc_2022_day{:02d}.py", PY_BASE),
+    ("aoc_{}_day{:02d}.py", PY_BASE),
     ("test_day{:02d}.py", TEST_BASE),
 )
 
@@ -53,7 +53,13 @@ def init_puzzle_day(year: int, day: int) -> None:  # noqa: D103
             (day_dir / filename).touch()
         else:
             filename, contents = file
-            filename = filename.format(day)
+
+            # Dirty hack to put the correct year in the solution file
+            if filename.count("{") == 2:
+                filename = filename.format(year, day)
+            else:
+                filename = filename.format(day)
+
             (day_dir / filename).write_text(contents)
 
 

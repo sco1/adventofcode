@@ -1,6 +1,6 @@
 import pytest
 
-from .aoc_2022_day01 import extract_calibration_value
+from .aoc_2023_day01 import extract_calibration_value
 
 EXTRACTION_CASES = (
     ("1abc2", 12),
