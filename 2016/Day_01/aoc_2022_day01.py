@@ -1,8 +1,7 @@
-import typing as t
 from collections import abc
 from pathlib import Path
 
-COORD: t.TypeAlias = tuple[int, int]
+from helpers.geometry import COORD
 
 
 def walk_instructions(instructions: str) -> abc.Iterable[COORD]:

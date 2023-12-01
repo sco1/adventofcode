@@ -1,8 +1,7 @@
-import typing as t
 from pathlib import Path
 from textwrap import dedent
 
-COORD: t.TypeAlias = tuple[int, int]
+from helpers.geometry import COORD
 
 KEYPAD = dedent(
     """\
