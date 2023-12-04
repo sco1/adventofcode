@@ -1,3 +1,4 @@
+import itertools
 import typing as t
 from collections import abc
 from enum import Enum
@@ -90,3 +91,27 @@ class BoundingBox:
     def __contains__(self, query: COORD) -> bool:
         x, y = query
         return x in self.x_bound and y in self.y_bound
+
+    def iter_points(self) -> abc.Iterable[COORD]:
+        """Iterate over all coordinates contained in the bounding box."""
+        for coord in itertools.product(self.x_bound, self.y_bound):
+            yield coord
+
+    def iter_edges(self) -> abc.Iterable[COORD]:
+        """Iterate over the edge coordinates of the bounding box."""
+        # top/bottom
+        for coord in itertools.product((self.x_bound[0], self.x_bound[-1]), self.y_bound):
+            yield coord
+
+        # left/right
+        for coord in itertools.product(self.x_bound, (self.y_bound[0], self.y_bound[-1])):
+            yield coord
+
+
+def manhattan_distance(p1: COORD, p2: COORD) -> int:
+    """
+    Calculate the Manhattan distance between the provided pair of 2D coordinates.
+
+    See: https://en.wikipedia.org/wiki/Taxicab_geometry
+    """
+    return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
