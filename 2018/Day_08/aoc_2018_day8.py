@@ -1,55 +1,84 @@
-from collections import deque
+from __future__ import annotations
+
+from collections import abc, deque
+from dataclasses import dataclass, field
 from pathlib import Path
 
-import networkx as nx
+
+@dataclass
+class Node:
+    header: tuple[int, int]
+    children: list[Node]
+    metadata: list[int]
+
+    value: int = field(init=False)
+
+    def __post_init__(self) -> None:
+        """
+        Calculate the value of the node.
+
+        The value of a node depends on whether it has child nodes; if a node has no child nodes, its
+        value is the sum of its metadata entries.
+
+        If a node does have child nodes, the metadata entries become indexes which refer to those
+        child nodes. A metadata entry of `1` refers to the first child node, `2` to the second, `3`
+        to the third, and so on. The value of this node is the sum of the values of the child nodes
+        referenced by the metadata entries. If a referenced child node does not exist, that
+        reference is skipped. A child node can be referenced multiple time and counts each time it
+        is referenced. A metadata entry of `0` does not refer to any child node.
+
+        NOTE: It is assumed that if a node has children then it also has metadata entries.
+        """
+        if not self.children:
+            self.value = sum(self.metadata)
+            return
+
+        self.value = 0
+        for idx in self.metadata:
+            try:
+                # Metadata is 1-indexed
+                self.value += self.children[idx - 1].value
+            except IndexError:
+                pass
 
 
-def build_nodes(
-    puzzle_input: deque, idx: int = 0, dg: nx.DiGraph | None = None
-) -> tuple[nx.DiGraph, int]:
-    """
-    Recurse & build the tree from the input puzzle_data.
+def parse_license_file(license: str) -> Node:
+    license_vals = [int(n) for n in license.split()]
+    tree, _ = parse_tree(license_vals)
 
-    Thanks PyDis user Phoenix#2694 for fixing my recursion <3
-    """
-    if dg is None:
-        dg = nx.DiGraph()
-
-    n_child_nodes = puzzle_input.popleft()
-    n_metadata_entries = puzzle_input.popleft()
-
-    parent_idx = idx
-    for _ in range(n_child_nodes):
-        # Recurse here to account for child nodes
-        dg, idx = build_nodes(puzzle_input, idx, dg)
-        dg.add_edge(parent_idx, idx)
-
-    # Once we get here we should only have metadata to pop
-    node_metadata = []
-    for _ in range(n_metadata_entries):
-        node_metadata.append(puzzle_input.popleft())
-
-    # print(idx, node_metadata)
-    dg.add_node(idx, metadata=node_metadata)
-
-    return dg, idx + 1
+    return tree
 
 
-def part1(tree: nx.DiGraph) -> int:
-    """Calculate the sum of all of the node's metadata."""
+def parse_tree(vals: abc.Iterable[int]) -> tuple[Node, deque[int]]:
+    queue = deque(vals)
+    n_children, n_metadata = (queue.popleft() for _ in range(2))
+
+    children = []
+    for _ in range(n_children):
+        child, queue = parse_tree(queue)
+        children.append(child)
+
+    metadata = [queue.popleft() for _ in range(n_metadata)]
+
+    return Node(header=(n_children, n_metadata), children=children, metadata=metadata), queue
+
+
+def sum_tree_metadata(tree: Node) -> int:
+    queue = deque([tree])
     metadata_sum = 0
-    tree_metadata = nx.get_node_attributes(tree, "metadata")
+    while queue:
+        node = queue.pop()
+        metadata_sum += sum(node.metadata)
 
-    for metadata in tree_metadata.values():
-        metadata_sum += sum(metadata)
+        queue.extend(node.children)
 
     return metadata_sum
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("puzzle_input.txt")
-    with puzzle_input_file.open(mode="r") as f:
-        puzzle_input = deque([int(x) for x in f.read().strip().split()])
+    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input = puzzle_input_file.read_text().strip()
 
-    tree, _ = build_nodes(puzzle_input)
-    print(part1(tree))
+    tree = parse_license_file(puzzle_input)
+    print(f"Part One: {sum_tree_metadata(tree)}")
+    print(f"Part Two: {tree.value}")
