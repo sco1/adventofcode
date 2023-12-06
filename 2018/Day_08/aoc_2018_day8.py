@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 @dataclass
-class Node:
+class Node:  # noqa: D101
     header: tuple[int, int]
     children: list[Node]
     metadata: list[int]
@@ -43,6 +43,7 @@ class Node:
 
 
 def parse_license_file(license: str) -> Node:
+    """Parse the provided license file into its tree representation."""
     license_vals = [int(n) for n in license.split()]
     tree, _ = parse_tree(license_vals)
 
@@ -50,6 +51,16 @@ def parse_license_file(license: str) -> Node:
 
 
 def parse_tree(vals: abc.Iterable[int]) -> tuple[Node, deque[int]]:
+    """
+    Create a tree representation of the provided license file values.
+
+    The tree is made up of nodes; a single, outermost node forms the tree's root, and it contains
+    all other nodes in the tree; nodes may be nested.
+
+    A node consists of a header, which is always two numbers: the quantity of child nodes and the
+    quantity of metadata entries. Following the header are zero or more child nodes and one or more
+    metadata entries.
+    """
     queue = deque(vals)
     n_children, n_metadata = (queue.popleft() for _ in range(2))
 
@@ -64,6 +75,7 @@ def parse_tree(vals: abc.Iterable[int]) -> tuple[Node, deque[int]]:
 
 
 def sum_tree_metadata(tree: Node) -> int:
+    """Recurse through the given tree & sum the metadata values from all nodes."""
     queue = deque([tree])
     metadata_sum = 0
     while queue:
