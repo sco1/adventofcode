@@ -4,6 +4,8 @@ import typing as t
 from enum import IntEnum, StrEnum, auto
 from pathlib import Path
 
+from cogapp import Cog
+
 BASE_DIR = Path(__file__).parent.parent
 
 
@@ -130,6 +132,11 @@ def main() -> None:  # noqa: D103
         f.write(f"<!-- {json.dumps(data_table)} -->\n")
         f.write(f"{HEADER}\n\n")
         f.write(f"{build_table(data_table)}\n")
+    print(f"Puzzle status updated: ({args.year}, {args.day}, {args.lang}, {args.state})")
+
+    # Update the base README with the new status using Cog & a dummy sys.argv
+    cog = Cog()
+    cog.main(["", "-r", str((BASE_DIR / "README.MD").resolve())])
 
 
 if __name__ == "__main__":
