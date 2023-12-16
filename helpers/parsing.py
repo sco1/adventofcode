@@ -1,6 +1,16 @@
-import typing as t
+from collections import abc
 
-COORD: t.TypeAlias = tuple[int, int]
+from helpers.geometry import COORD
+
+
+def parse_map_objects(
+    raw_map: str, x_start: int = 0, y_start: int = 0, empty_tile: str = "."
+) -> abc.Iterator[tuple[COORD, str]]:
+    """Parse the provided map and yield coordinate, value tuples for each non-empty tile."""
+    for y, line in enumerate(raw_map.splitlines(), start=y_start):
+        for x, c in enumerate(line, start=x_start):
+            if c != empty_tile:
+                yield ((x, y), c)
 
 
 def parse_hashed_map(raw_map: str, x_start: int = 0, y_start: int = 0) -> set[COORD]:
@@ -11,9 +21,8 @@ def parse_hashed_map(raw_map: str, x_start: int = 0, y_start: int = 0) -> set[CO
     downwards.
     """
     coords = set()
-    for y, line in enumerate(raw_map.splitlines(), start=y_start):
-        for x, c in enumerate(line, start=x_start):
-            if c == "#":
-                coords.add((x, y))
+    for coord, c in parse_map_objects(raw_map, x_start, y_start):
+        if c == "#":
+            coords.add(coord)
 
     return coords
