@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import itertools
 import typing as t
 from collections import abc
@@ -106,6 +108,30 @@ class BoundingBox:
         # left/right
         for coord in itertools.product(self.x_bound, (self.y_bound[0], self.y_bound[-1])):
             yield coord
+
+    def render_points(self, points: set[COORD]) -> str:
+        """Render a hashmap of the provided coordinates inside the bounding box."""
+        rows = []
+        for y in self.y_bound:
+            cols = []
+            for x in self.x_bound:
+                if (x, y) in points:
+                    cols.append("#")
+                else:
+                    cols.append(".")
+
+            rows.append("".join(cols))
+
+        return "\n".join(rows)
+
+    @classmethod
+    def enclose_map(cls, raw_map: str) -> BoundingBox:
+        """Build a bounding box that encloses the entirety of the provided map."""
+        rows = raw_map.splitlines()
+        max_y = len(rows) - 1
+        max_x = len(rows[0]) - 1
+
+        return cls(((0, 0), (max_x, max_y)))
 
 
 def manhattan_distance(p1: COORD, p2: COORD) -> int:
