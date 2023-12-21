@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 from collections import abc, defaultdict, deque
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -239,10 +240,65 @@ def press_until_sand(modules: dict[str, Module]) -> int:
             signal_queue.extend(modules[signal.destination].process(signal))
 
 
+def sand_cycles(modules: dict[str, Module]) -> int:
+    """Count the number of button presses required until the `rx` module receives a low pulse."""
+    # Reset module state
+    for m in modules.values():
+        m._reset()
+
+    sand_machine = modules.get("rx")
+    if sand_machine is None:
+        raise ValueError("No 'rx' module found.")
+
+    # Given how the puzzle input is constructed, it's assumed that there is a single conjunction
+    # module feeding into the puzzle machine, which is fed by some number of modules. We should be
+    # able to monitor these modules for cycles to find where the conjunction module will eventually
+    # send a low pulse
+    sand_conjunction = None
+    for m in modules.values():
+        if isinstance(m, Conjunction):
+            for d in m.destinations:
+                if d is sand_machine:
+                    sand_conjunction = m
+                    break
+
+    if sand_conjunction is None:
+        raise ValueError("Could not find conjunction module feeding the 'rx' module.")
+
+    monitor = []
+    for m in modules.values():
+        for d in m.destinations:
+            if d is sand_conjunction:
+                monitor.append(m.name)
+                break
+
+    # Hit the button until we get 2 high signals from each of the modules we're monitoring in order
+    # to find the cycle length
+    first_high: dict[str, list[int]] = {m: [] for m in monitor}
+    n_presses = 0
+    signal_queue: deque[Signal] = deque()
+    while any((len(i) != 2 for i in first_high.values())):
+        if not signal_queue:
+            signal_queue.append(Signal("button", "broadcaster", False))
+            n_presses += 1
+
+        signal = signal_queue.popleft()
+        if signal.value and (signal.origin in first_high):
+            first_high[signal.origin].append(n_presses)
+
+        if not isinstance(modules[signal.destination], Dump):
+            signal_queue.extend(modules[signal.destination].process(signal))
+
+    # Looking at the outputs I'm not sure why we don't need to account for the fact that the cycles
+    # don't seem to start at 0. But this works for the puzzle solution v0v
+    cycle_lengths = [v[1] - v[0] for v in first_high.values()]
+    return math.lcm(*cycle_lengths)
+
+
 if __name__ == "__main__":
     puzzle_input_file = Path("./puzzle_input.txt")
     puzzle_input = puzzle_input_file.read_text().strip()
 
     modules = parse_module_configuration(puzzle_input)
     print(f"Part One: {press_button(modules)}")
-    print(f"Part Two: {press_until_sand(modules)}")
+    print(f"Part Two: {sand_cycles(modules)}")
