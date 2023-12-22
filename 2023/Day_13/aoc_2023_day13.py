@@ -78,29 +78,47 @@ def reflect(pattern: Pattern, axis: int, loc: int) -> Pattern:
     return Pattern(reflected, pattern.bbox)
 
 
-def find_reflections(pattern: Pattern) -> tuple[list[int], list[int]]:
-    """Identify reflection locations across the xy axes that replicate the provided pattern."""
+def find_reflections(pattern: Pattern, use_smudged: bool = False) -> tuple[list[int], list[int]]:
+    """
+    Identify reflection locations across the xy axes that replicate the provided pattern.
+
+    If `use_smudged` is `True`, we assume that the mirror has a smudge and exactly one `.` or `#`
+    should be the opposite type. Fixing this smudge causes a different reflection line to be valid;
+    the non-smudged line of reflection won't necessarily continue being valid afterwards.
+    """
     axis_map = {0: pattern.bbox.x_bound, 1: pattern.bbox.y_bound}
     valid_rocks = []
     for axis in (0, 1):
         valid = []
         for idx in range(1, axis_map[axis][-1] + 1):
             reflected = reflect(pattern, axis, idx)
-            if reflected.rocks == pattern.rocks:
-                valid.append(idx)
+            if use_smudged:
+                # We should be able to locate the smudge by identifying a reflection that differs
+                # by at most one point, i.e. the symmetric difference between the two sets of rocks
+                # will be of length 1
+                n_diff = len(pattern.rocks ^ reflected.rocks)
+                if n_diff == 1:
+                    valid.append(idx)
+            else:
+                if reflected.rocks == pattern.rocks:
+                    valid.append(idx)
 
         valid_rocks.append(valid)
 
     return tuple(valid_rocks)  # type: ignore[return-value]
 
 
-def summarize_patterns(patterns: abc.Iterable[Pattern]) -> int:
+def summarize_patterns(patterns: abc.Iterable[Pattern], use_smudged: bool = False) -> int:
     """
     Provide a reflection summary hash of the provided collection of patterns.
 
     For each pattern, the location of a vertical or horizontal reflection point is calculated that
     yields the given reflection pattern. It is assumed that each pattern has one horizontal OR one
     vertical reflection.
+
+    If `use_smudged` is `True`, we assume that the mirror has a smudge and exactly one `.` or `#`
+    should be the opposite type. Fixing this smudge causes a different reflection line to be valid;
+    the non-smudged line of reflection won't necessarily continue being valid afterwards.
 
     The reflection hash for a given collection of patterns is calculated by adding the number of
     columns to the left of each vertical reflection to 100 multiplied by the number of rows above
@@ -110,7 +128,7 @@ def summarize_patterns(patterns: abc.Iterable[Pattern]) -> int:
     n_vertical = 0
     n_horizontal = 0
     for p in patterns:
-        vert_col, horiz_col = find_reflections(p)
+        vert_col, horiz_col = find_reflections(p, use_smudged)
         if vert_col and horiz_col:
             raise ValueError(
                 f"Found both horizontal and vertical reflectons. Vertical: {vert_col}, Horizontal: {horiz_col}"  # noqa: E501
@@ -128,4 +146,4 @@ if __name__ == "__main__":
 
     patterns = parse_patterns(puzzle_input)
     print(f"Part One: {summarize_patterns(patterns)}")
-    print(f"Part Two: {...}")
+    print(f"Part Two: {summarize_patterns(patterns, use_smudged=True)}")

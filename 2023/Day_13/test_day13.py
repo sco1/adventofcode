@@ -79,3 +79,8 @@ SAMPLE_INPUT = dedent(
 def test_summarize() -> None:
     patterns = parse_patterns(SAMPLE_INPUT)
     assert summarize_patterns(patterns) == 405
+
+
+def test_smudged() -> None:
+    patterns = parse_patterns(SAMPLE_INPUT)
+    assert summarize_patterns(patterns, use_smudged=True) == 400
