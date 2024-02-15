@@ -55,7 +55,7 @@ def run_sim(instructions: t.Iterator[Instruction], n_knots: int = 2) -> int:
     one step diagonally to keep up.
     """
     rope = [(0, 0)] * n_knots
-    knot_seen = [set([knot]) for knot in rope]
+    knot_seen = [{[knot]} for knot in rope]
 
     for step_t in instructions:
         dx, dy = STEP_DELTA[step_t.direction]

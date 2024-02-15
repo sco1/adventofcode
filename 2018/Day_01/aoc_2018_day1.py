@@ -9,7 +9,7 @@ def part1(frequency_changes: list[int]) -> int:
 def part2(frequency_changes: list[int]) -> int:
     """Identify the first repeat frequency while applying the provided frequency changes."""
     frequency = 0
-    seen = set([frequency])
+    seen = {0}
 
     while True:
         for shift in frequency_changes:

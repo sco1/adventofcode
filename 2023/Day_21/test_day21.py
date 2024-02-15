@@ -47,5 +47,4 @@ INFINITE_GRID_CASES = (
 
 @pytest.mark.skip(reason="Not implemented")
 @pytest.mark.parametrize(("n_steps", "truth_reachable"), INFINITE_GRID_CASES)
-def test_infinite_grid(n_steps: int, truth_reachable: int) -> None:
-    ...
+def test_infinite_grid(n_steps: int, truth_reachable: int) -> None: ...

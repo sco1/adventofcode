@@ -20,7 +20,7 @@ class Passport:
     pid: t.Optional[str] = None  # Passport ID (can have leading zeros)
     cid: t.Optional[int] = None  # Country ID
 
-    _int_fields = set(("byr", "iyr", "eyr", "cid"))  # Convert these to int while parsing
+    _int_fields = {"byr", "iyr", "eyr", "cid"}  # Convert these to int while parsing
 
     def __post_init__(self):
         self._available_fields = frozenset(field.name for field in fields(self))
@@ -114,7 +114,7 @@ class Passport:
 
         Eye colors must be exactly one of: "amb", "blu", "brn", "gry", "grn", "hzl", or "oth"
         """
-        valid_colors = set(("amb", "blu", "brn", "gry", "grn", "hzl", "oth"))
+        valid_colors = {"amb", "blu", "brn", "gry", "grn", "hzl", "oth"}
         return query_value in valid_colors
 
     @staticmethod

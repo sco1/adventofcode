@@ -5,7 +5,7 @@ VALID_LETTERS = "abcdefghjkmnnpqrstuvwxyz"
 INVALID_LETTERS = "iol"  # Shouldn't be necessary but defined for the generic case
 DOUBLED_LETTERS = [letter * 2 for letter in VALID_LETTERS]
 LETTER_RUNS = [VALID_LETTERS[i : i + 3] for i in range(len(VALID_LETTERS) - 2)]
-NEXT_LETTER = {a: b for a, b in zip(VALID_LETTERS, VALID_LETTERS[1:] + "a")}  # Add 'a' to wrap 'z'
+NEXT_LETTER = dict(zip(VALID_LETTERS, VALID_LETTERS[1:] + "a"))  # Add 'a' to wrap 'z'
 NEXT_LETTER.update({"i": "j", "o": "p", "l": "m"})  # Add for the generic case
 
 

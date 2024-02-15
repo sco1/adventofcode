@@ -118,7 +118,7 @@ def sim_n_pieces(
     jets = itertools.cycle(jet_scan)
 
     total_height = 0
-    solid = set(((x, 0) for x in range(tunnel_width)))  # Initialize with the floor coordinates
+    solid = {(x, 0) for x in range(tunnel_width)}  # Initialize with the floor coordinates
     for _ in range(n_pieces):
         piece = next(pieces)
 

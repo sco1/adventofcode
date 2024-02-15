@@ -39,7 +39,7 @@ def parse_triangle_columns(full_spec: str) -> t.Iterable[str]:
     for line_group in miter.chunked(full_spec.strip().splitlines(), n=3, strict=True):
         chunk = []
         for line in line_group:
-            chunk.append([side for side in line.split()])
+            chunk.append(line.split())
 
         for triangle in zip(*chunk):
             yield " ".join(triangle)

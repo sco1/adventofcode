@@ -24,13 +24,13 @@ SAMPLE_INPUT = dedent(
 
 def test_part_one() -> None:
     fields = SensorField.cluster_from_sensor_map(SAMPLE_INPUT)
-    beacons = set(thing for _, thing in parse_sensor_map(SAMPLE_INPUT))
+    beacons = {thing for _, thing in parse_sensor_map(SAMPLE_INPUT)}
 
     assert n_nonbeacon_1d(fields, beacons, 10) == 26
 
 
 def test_part_two() -> None:
     fields = SensorField.cluster_from_sensor_map(SAMPLE_INPUT)
-    beacons = set(thing for _, thing in parse_sensor_map(SAMPLE_INPUT))
+    beacons = {thing for _, thing in parse_sensor_map(SAMPLE_INPUT)}
 
     assert identify_tuning_frequency(fields, beacons, (0, 20), (0, 20)) == 56_000_011
