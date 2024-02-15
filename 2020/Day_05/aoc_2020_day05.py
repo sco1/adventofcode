@@ -49,6 +49,6 @@ if __name__ == "__main__":
     puzzle_input_file = Path("./puzzle_input.txt")
     puzzle_input = puzzle_input_file.read_text().splitlines()
 
-    all_seat_ids = set(decode_boarding_pass(specifier)[2] for specifier in puzzle_input)
+    all_seat_ids = {decode_boarding_pass(specifier)[2] for specifier in puzzle_input}
     print(f"Part One: The maximum seat ID is {max(all_seat_ids)}")
     print(f"Part Two: My seat ID is {find_my_seat(all_seat_ids)}")

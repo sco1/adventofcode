@@ -112,15 +112,13 @@ class SeedState:  # noqa: D101
 @t.overload
 def parse_almanac(  # noqa: D103
     almanac: str, use_seed_range: t.Literal[True]
-) -> tuple[list[range], list[Mapping]]:
-    ...
+) -> tuple[list[range], list[Mapping]]: ...
 
 
 @t.overload
 def parse_almanac(  # noqa: D103
     almanac: str, use_seed_range: t.Literal[False] = False
-) -> tuple[list[int], list[Mapping]]:
-    ...
+) -> tuple[list[int], list[Mapping]]: ...
 
 
 def parse_almanac(almanac, use_seed_range: t.Literal[True, False] = False):

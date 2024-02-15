@@ -62,9 +62,9 @@ class OnOffGrid(LightGrid):
 
         Numpy indexing is (row, column) and coordinates are provided as (column, row)
         """
-        self.light_grid[
-            top_left[1] : bottom_right[1] + 1, top_left[0] : bottom_right[0] + 1
-        ] = False
+        self.light_grid[top_left[1] : bottom_right[1] + 1, top_left[0] : bottom_right[0] + 1] = (
+            False
+        )
 
     def lights_toggle(self, top_left: List[int], bottom_right: List[int]) -> None:
         """

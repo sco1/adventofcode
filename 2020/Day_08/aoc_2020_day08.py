@@ -7,7 +7,7 @@ class RepeatInstructionError(RuntimeError):  # noqa: D101
     ...
 
 
-class MaxIterExceeded(RuntimeError):  # noqa: D101
+class MaxIterExceededError(RuntimeError):  # noqa: D101
     ...
 
 
@@ -74,7 +74,8 @@ class GameGear:
         Instructions will be executed until one of (hopefully) three conditions are met:
             * The end of the instructions is reached
             * Access to a specific instruction is repeated (raises `RepeatInstructionError`)
-            * The total number of steps exceeds a configured threshold (raises `MaxIterExceeded`)
+            * The total number of steps exceeds a configured threshold (raises
+            `MaxIterExceededError`)
         """
         while True:
             # Reached the end of the instruction set
@@ -89,7 +90,7 @@ class GameGear:
 
             # Just in case, prevent an actual infinite loop
             if self._n_steps > self._max_iter:
-                raise MaxIterExceeded(f"{self._max_iter}")
+                raise MaxIterExceededError(f"{self._max_iter}")
 
             self._visited_instructions.add(self.current_instruction)
             instruction = self.instruction_set[self.current_instruction]
@@ -127,7 +128,7 @@ def mutate_until_fixed(initial_instructions: str) -> int:
         machine = GameGear(new_instruction_set)
         try:
             status = machine.run()
-        except (RepeatInstructionError, MaxIterExceeded):
+        except (RepeatInstructionError, MaxIterExceededError):
             continue
 
         if status == 1:

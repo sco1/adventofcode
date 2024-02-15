@@ -156,7 +156,7 @@ if __name__ == "__main__":
 
     # Can be smarter and not parse twice but it's not important enough
     fields = SensorField.cluster_from_sensor_map(puzzle_input)
-    beacons = set(thing for _, thing in parse_sensor_map(puzzle_input))
+    beacons = {thing for _, thing in parse_sensor_map(puzzle_input)}
 
     print(f"Part One: {n_nonbeacon_1d(fields, beacons)}")
     print(f"Part Two: {identify_tuning_frequency(fields, beacons)}")

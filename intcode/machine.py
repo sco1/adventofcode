@@ -7,7 +7,7 @@ from collections import deque
 from dataclasses import dataclass
 
 
-class NoInput(Exception):  # noqa: D101
+class NoInputError(Exception):  # noqa: D101
     pass
 
 
@@ -194,7 +194,7 @@ class IntcodeMachine:
                 halted = self._exec_instruction(verbose=verbose)
                 if halted:
                     return False
-            except NoInput:
+            except NoInputError:
                 return True
 
             cycle += 1
@@ -226,7 +226,7 @@ class IntcodeMachine:
         if not self.stdin:
             # No input, rewind and raise
             self.step(-len(params))
-            raise NoInput
+            raise NoInputError
 
         (put_idx,) = params  # Should only have one incoming parameter
         self._state[put_idx] = int(self.stdin.popleft())

@@ -50,7 +50,7 @@ def build_garden_network(plots: set[COORD], rocks: set[COORD]) -> nx.Graph:
 
 def step_search(garden_network: nx.Graph, start: COORD, n_steps: int = 64) -> set[COORD]:
     """Determine the garden plots reachable after `n_steps` from the start location."""
-    visited_plots = set((start,))
+    visited_plots = {(start,)}
     for _ in range(n_steps):
         neighbors = set()
         for p in visited_plots:
