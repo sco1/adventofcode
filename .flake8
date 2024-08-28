@@ -3,7 +3,7 @@ max-line-length=100
 import-order-style=pycharm
 extend-ignore=
     # pycodestyle
-    E203,E226,
+    E203,E226,E701
     # flake8-annotations
     ANN002,ANN003,ANN101,ANN102,ANN204,ANN206,
 extend-exclude=
