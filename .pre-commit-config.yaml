@@ -18,7 +18,7 @@ repos:
         additional_dependencies:
           - flake8-annotations
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-case-conflict
       - id: check-json
@@ -40,6 +40,6 @@ repos:
       - id: matlab-reflow-comments
         args: [--line-length=100]
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.2
+    rev: v0.6.9
     hooks:
       - id: ruff
