@@ -2,7 +2,7 @@ FROM ubuntu:focal
 ARG PYTHON_PACKAGES="\
 python3.11 python3.11-distutils python3.11-venv python3.11-tk \
 python3.12 python3.12-distutils python3.12-venv python3.12-tk \
-python3.12 python3.12-distutils python3.13-venv python3.13-tk \
+python3.13 python3.13-distutils python3.13-venv python3.13-tk \
 "
 
 # Base utils
