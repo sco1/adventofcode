@@ -1,10 +1,10 @@
 puzzle_input = read_puzzle_input("./puzzle_input.txt");
 
 test_part_1
-sprintf("Part 1: %d", part_1(puzzle_input))
+fprintf("Part 1: %d\n", part_1(puzzle_input))
 
 test_part_2
-sprintf("Part 2: %d", part_2(puzzle_input))
+fprintf("Part 2: %d\n", part_2(puzzle_input))
 
 
 function puzzle_input = read_puzzle_input(puzzle_input_path)
