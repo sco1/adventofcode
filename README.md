@@ -10,7 +10,7 @@ This repository contains my attempted solutions for each year's Advent of Code e
 In most cases the provided solutions represent a "first-thoughts" approach to the day's problem rather than the most efficient.
 
 ## Solution Progress
-The table below is generated from data contained in each year's README.md file. The per-language summary is provided as (full solve, partial solve) pairs.
+The table below is [generated](https://github.com/sco1/adventofcode/blob/main/helpers/update_progress.py) from data contained in each year's README.md file. The per-language summary is provided as (full solve, partial solve) pairs.
 
 <!-- [[[cog
 from datetime import datetime
@@ -31,7 +31,7 @@ cog.out(f"{build_summary_table()}\n\nLast generated: `{datetime.now()}`")
 | `2021` | `21,  0` | ` 2,  0` | ` 0,  0` | ` 2,  0` | ` 0,  0` | ` 0,  0` |
 | `2022` | `19,  2` | ` 4,  0` | ` 1,  0` | ` 0,  0` | ` 1,  0` | ` 0,  0` |
 | `2023` | `16,  5` | ` 0,  0` | ` 0,  0` | ` 0,  0` | ` 0,  0` | ` 0,  0` |
-| `2024` | ` 1,  0` | ` 0,  0` | ` 0,  0` | ` 0,  0` | ` 0,  0` | ` 0,  0` |
+| `2024` | ` 2,  0` | ` 0,  0` | ` 0,  0` | ` 0,  0` | ` 0,  0` | ` 0,  0` |
 
-Last generated: `2024-12-01 10:16:14.951030`
+Last generated: `2024-12-02 10:33:07.180856`
 <!-- [[[end]]] -->
