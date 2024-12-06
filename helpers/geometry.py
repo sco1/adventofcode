@@ -51,6 +51,20 @@ def iter_neighbors(
         yield move.shift(start)
 
 
+def iter_diagonals(start: COORD) -> abc.Generator[COORD, None, None]:
+    """
+    Iterate over the 2D diagonal neighbors of the provided coordinate.
+
+    NOTE: It is assumed that the y-axis points downwards.
+    NOTE: Iteration order is dependent on the definition of the `MoveDir` enum.
+    """
+    for move in MoveDir:
+        if move not in DIAGONALS:
+            continue
+
+        yield move.shift(start)
+
+
 def get_bounds(coords: abc.Iterable[abc.Sequence[int]], padding: int = 0) -> tuple[range, ...]:
     """
     Calculate the bounding range(s) for each dimension of the provided coordinates.
