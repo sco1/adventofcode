@@ -29,6 +29,18 @@ class MoveDir(Enum):
         dx, dy = self.value
         return (x + dx, y + dy)
 
+    def rot_90(self, reverse: bool = False) -> MoveDir:
+        """
+        Rotate the current direction 90 degrees.
+
+        If `reverse` is `True`, the direction is rotated CCW, otherwise it is rotated CW.
+        """
+        s_x, s_y = self.value
+        if reverse:
+            return MoveDir((s_y, -s_x))
+        else:
+            return MoveDir((-s_y, s_x))
+
 
 DIAGONALS = {MoveDir.NORTHWEST, MoveDir.NORTHEAST, MoveDir.SOUTHEAST, MoveDir.SOUTHWEST}
 
@@ -99,6 +111,17 @@ class BoundingBox:
 
     def __init__(self, coords: abc.Iterable[COORD]) -> None:
         self.x_bound, self.y_bound = get_bounds(coords)
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, BoundingBox):
+            return NotImplemented
+
+        return all(
+            (
+                (self.x_bound == other.x_bound),
+                (self.y_bound == other.y_bound),
+            )
+        )
 
     @cached_property
     def area(self) -> int:  # noqa: D102
