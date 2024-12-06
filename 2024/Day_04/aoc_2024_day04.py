@@ -1,7 +1,7 @@
 import typing as t
 from pathlib import Path
 
-from helpers.geometry import COORD, iter_neighbors
+from helpers.geometry import BoundingBox, COORD, iter_diagonals, iter_neighbors
 from helpers.parsing import parse_map_objects
 
 LETTER_MAP_T: t.TypeAlias = dict[str, set[COORD]]
@@ -45,6 +45,9 @@ def count_word(
     n_occurrences = 0
     start_coords = letter_map[query[0]]
     for sc in start_coords:
+        # Could probably not even bother doing this initial check and just build candidates from the
+        # first letter locations but I already had this half written and it's a fun little filter so
+        # I'm just going with it.
         for n in iter_neighbors(sc, include_diagonal=True):
             if n in letter_map[query[1]]:
                 dx, dy = (n[0] - sc[0], n[1] - sc[1])
@@ -72,7 +75,37 @@ def count_x_mas(letter_map: LETTER_MAP_T, letter_coords: LETTER_COORDS_T) -> int
 
     X-MASes may be found in any orientation as long as the X shape is retained.
     """
-    raise NotImplementedError
+    bbox = BoundingBox(letter_coords.keys())
+    n_occurrences = 0
+    start_coords = letter_map["M"]
+    for sc in start_coords:
+        for n in iter_diagonals(sc):
+            if n in letter_map["A"]:
+                # One MAS candidate found, check it before continuing
+                dx, dy = (n[0] - sc[0], n[1] - sc[1])
+                diag_a = [(sc[0] + (i * dx), sc[1] + (i * dy)) for i in range(3)]
+
+                # Should only need to bounds check once since we're just mirroring corners
+                if not all((c in bbox for c in diag_a)):
+                    continue
+                if "".join(letter_coords[c] for c in diag_a) != "MAS":
+                    continue
+
+                # Since we know one diagonal direction, we have two possible candidates for the next
+                corners = ((n[0] - dx, n[1] + dy), (n[0] + dx, n[1] - dy))
+                diag_b = [corners[0], n, corners[1]]
+                diag_c = [corners[1], n, corners[0]]
+
+                if any(
+                    (
+                        "".join(letter_coords[c] for c in diag_b) == "MAS",
+                        "".join(letter_coords[c] for c in diag_c) == "MAS",
+                    )
+                ):
+                    n_occurrences += 1
+
+    # Due to the way we're iterating, each X-MAS found is going to be double counted
+    return n_occurrences // 2
 
 
 if __name__ == "__main__":
@@ -82,4 +115,4 @@ if __name__ == "__main__":
     letter_map, letter_coords = parse_word_search(puzzle_input)
 
     print(f"Part One: {count_word(letter_map, letter_coords)}")
-    print(f"Part Two: {...}")
+    print(f"Part Two: {count_x_mas(letter_map, letter_coords)}")
