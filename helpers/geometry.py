@@ -178,3 +178,9 @@ def manhattan_distance(p1: COORD, p2: COORD) -> int:
     See: https://en.wikipedia.org/wiki/Taxicab_geometry
     """
     return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
+
+
+def slope(p1: COORD, p2: COORD) -> tuple[int, int]:
+    """Calculate the slope of the line from `p1` to `p2` as a `(dx, dy)` tuple."""
+    dx, dy = (p2[0] - p1[0]), (p2[1] - p1[1])
+    return (dx, dy)
