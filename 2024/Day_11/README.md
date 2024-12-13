@@ -22,11 +22,11 @@ How will the stones evolve if you keep blinking at them? You take a note of the 
 
 If you have an arrangement of five stones engraved with the numbers `0 1 10 99 999` and you blink once, the stones transform as follows:
 
-* The first stone, 0, becomes a stone marked 1.
-* The second stone, 1, is multiplied by 2024 to become 2024.
-* The third stone, 10, is split into a stone marked 1 followed by a stone marked 0.
-* The fourth stone, 99, is split into two stones marked 9.
-* The fifth stone, 999, is replaced by a stone marked 2021976.
+* The first stone, `0`, becomes a stone marked `1`.
+* The second stone, `1`, is multiplied by `2024` to become `2024`.
+* The third stone, `10`, is split into a stone marked `1` followed by a stone marked `0`.
+* The fourth stone, `99`, is split into two stones marked `9`.
+* The fifth stone, `999`, is replaced by a stone marked `2021976`.
 
 So, after blinking once, your five stones would become an arrangement of seven stones engraved with the numbers `1 2024 1 0 9 9 2021976`.
 
