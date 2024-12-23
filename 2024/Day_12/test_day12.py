@@ -3,7 +3,7 @@ from textwrap import dedent
 import networkx as nx
 import pytest
 
-from .aoc_2024_day12 import build_plant_graph, calculate_fence_cost, calculate_bulk_fence_cost
+from .aoc_2024_day12 import build_plant_graph, calculate_bulk_fence_cost, calculate_fence_cost
 
 SAMPLE_INPUT_1 = dedent(
     """\

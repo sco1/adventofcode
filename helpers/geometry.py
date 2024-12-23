@@ -161,6 +161,16 @@ class BoundingBox:
 
         return "\n".join(rows)
 
+    def wrap_shift(self, start: COORD, dx: int, dy: int) -> COORD:
+        """Bounds-aware wrapping translation of the provided start coordinate."""
+        width = max(self.x_bound)
+        height = max(self.y_bound)
+
+        sx, sy = start
+        tx, ty = sx + dx, sy + dy
+
+        return ((tx % (width + 1)), (ty % (height + 1)))
+
     @classmethod
     def enclose_map(cls, raw_map: str) -> BoundingBox:
         """Build a bounding box that encloses the entirety of the provided map."""
@@ -169,6 +179,11 @@ class BoundingBox:
         max_x = len(rows[0]) - 1
 
         return cls(((0, 0), (max_x, max_y)))
+
+    @classmethod
+    def from_dims(cls, width: int, height: int) -> BoundingBox:
+        """Build a bounding box that encloses a rectangle of the provided dimensions."""
+        return cls(((0, 0), (width - 1, 0), (width - 1, height - 1), (0, height - 1)))
 
 
 def manhattan_distance(p1: COORD, p2: COORD) -> int:
