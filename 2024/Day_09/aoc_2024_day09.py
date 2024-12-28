@@ -11,7 +11,7 @@ class FileBlock(t.NamedTuple):  # noqa: D101
     n_free: int
 
     def __str__(self) -> str:
-        return f"{str(self.id_)*self.n_blocks}{"."*self.n_free}"
+        return f"{str(self.id_)*self.n_blocks}{'.'*self.n_free}"
 
 
 def parse_disk_map(raw_map: str) -> list[FileBlock]:
@@ -81,8 +81,10 @@ def defrag_continuous(file_blocks: list[FileBlock]) -> list[int | str]:
     For example: `00...111...2...333.44.5555.6666.777.888899` becomes
     `00992111777.44.333....5555.6666.....8888..`
     """
+    # Initialize the block start locations along with the gaps mapped by gap size: start location,
+    # using a heap to keep the start locations sorted
     block_pos = {}
-    gaps = defaultdict(list)
+    gaps: dict[int, list[int]] = defaultdict(list)
     curs = 0
     for b in file_blocks:
         block_pos[b.id_] = curs
@@ -94,23 +96,29 @@ def defrag_continuous(file_blocks: list[FileBlock]) -> list[int | str]:
 
     disk_size = curs
 
-    for b in file_blocks[:0:-1]:
-        block_start = block_pos[b.id_]
-        has_gap = False
-        for i in range(b.n_blocks, 10):
-            if i in gaps:
-                has_gap = True
-                break
+    for b in reversed(file_blocks):
+        # Find the leftmost candidate gap that is large enough to fit our file to move
+        min_idx = disk_size
+        min_width = 10
+        for w in range(b.n_blocks, 10):
+            if gaps[w] and gaps[w][0] < min_idx:
+                min_width = w
+                min_idx = gaps[w][0]
 
-        if not has_gap or not gaps[i]:
+        # Only move our file block if the available gap is to the left
+        if min_idx > block_pos[b.id_]:
             continue
+        else:
+            block_pos[b.id_] = min_idx
 
-        new_start = heappop(gaps[i])
-        block_pos[b.id_] = new_start
-        new_gap_size = i - b.n_blocks
-        heappush(gaps[new_gap_size], (new_start + b.n_blocks))
+        # If we've used a gap, remove it and update the gap with any new gap that we've left
+        # I'm haven't investigated why, but it doesn't seem to matter that we don't try and coalesce
+        # adjacent gaps
+        heappop(gaps[min_width])
+        if min_width > b.n_blocks:
+            heappush(gaps[min_width - b.n_blocks], min_idx + b.n_blocks)
 
-    disk_map = ["."] * disk_size
+    disk_map: list[int | str] = ["."] * disk_size
     for b in file_blocks:
         block_start = block_pos[b.id_]
         block_end = block_start + b.n_blocks
@@ -143,4 +151,6 @@ if __name__ == "__main__":
     parsed_blocks = parse_disk_map(puzzle_input)
 
     print(f"Part One: {calculate_checksum(defrag(parsed_blocks))}")
+
+    # Warning! While this approach does technically work it takes forever to run :)
     print(f"Part Two: {calculate_checksum(defrag_continuous(parsed_blocks))}")
