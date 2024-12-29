@@ -2,7 +2,7 @@ from pathlib import Path
 
 import networkx as nx
 
-from helpers.geometry import iter_neighbors
+from helpers.geometry import MoveDir, iter_neighbors
 from helpers.parsing import parse_map_objects
 
 
@@ -76,7 +76,54 @@ def calculate_bulk_fence_cost(plant_graph: nx.Graph) -> int:
     sides each region has is used instead. Each straight section of fence counts as a side,
     regardless of how long it is.
     """
-    raise NotImplementedError
+    total_cost = 0
+    for region in nx.connected_components(plant_graph):
+        area = len(region)
+
+        # Because every corner is a joint between sides, for a closed polygon there is a 1:1
+        # relation between sides and corners. We can iterate through possible neighbors that would
+        # form both the inner and outer corners and create a count.
+        n_sides = 0
+
+        # For outer corners, check that both neighbors are not in the region
+        OUTER_CORNERS = (
+            (MoveDir.NORTH, MoveDir.WEST),
+            (MoveDir.NORTH, MoveDir.EAST),
+            (MoveDir.SOUTH, MoveDir.EAST),
+            (MoveDir.SOUTH, MoveDir.WEST),
+        )
+
+        # For inner corners, check that two neighbors are in the region and the diagonal is not
+        INNER_CORNERS = (
+            (MoveDir.NORTH, MoveDir.WEST, MoveDir.NORTHWEST),
+            (MoveDir.NORTH, MoveDir.EAST, MoveDir.NORTHEAST),
+            (MoveDir.SOUTH, MoveDir.EAST, MoveDir.SOUTHEAST),
+            (MoveDir.SOUTH, MoveDir.WEST, MoveDir.SOUTHWEST),
+        )
+
+        for node in region:
+            for dir_a, dir_b in OUTER_CORNERS:
+                if all(
+                    (
+                        dir_a.shift(node) not in region,
+                        dir_b.shift(node) not in region,
+                    )
+                ):
+                    n_sides += 1
+
+            for dir_a, dir_b, diag in INNER_CORNERS:
+                if all(
+                    (
+                        dir_a.shift(node) in region,
+                        dir_b.shift(node) in region,
+                        diag.shift(node) not in region,
+                    )
+                ):
+                    n_sides += 1
+
+        total_cost += area * n_sides
+
+    return total_cost
 
 
 if __name__ == "__main__":
@@ -86,4 +133,4 @@ if __name__ == "__main__":
     pg = build_plant_graph(puzzle_input)
 
     print(f"Part One: {calculate_fence_cost(pg)}")
-    print(f"Part Two: {...}")
+    print(f"Part Two: {calculate_bulk_fence_cost(pg)}")

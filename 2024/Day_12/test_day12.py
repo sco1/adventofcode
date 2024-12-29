@@ -96,7 +96,7 @@ FENCE_BULK_COST_TEST_CASES = (
 )
 
 
-@pytest.mark.parametrize(("plant_map", "truth_fence_cost"), FENCE_COST_TEST_CASES)
+@pytest.mark.parametrize(("plant_map", "truth_fence_cost"), FENCE_BULK_COST_TEST_CASES)
 def test_calculate_bulk_fence_cost(plant_map: str, truth_fence_cost: int) -> None:
     pg = build_plant_graph(plant_map)
     assert calculate_bulk_fence_cost(pg) == truth_fence_cost
