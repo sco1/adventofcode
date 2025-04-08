@@ -178,7 +178,7 @@ def parse_module_configuration(config: str) -> dict[str, Module]:
     # Initialize conjunction internal state
     for conj_name, incoming in conjunctions.items():
         # If we're accessing a module here then we know it's a conjunction module
-        modules[conj_name].state = {s: False for s in incoming}  # type: ignore[attr-defined]
+        modules[conj_name].state = dict.fromkeys(incoming, False)  # type: ignore[attr-defined]
 
     return modules
 
