@@ -18,6 +18,8 @@ select = [
 ]
 
 ignore = [
+    # bugbear
+    "B905",
     # pydocstyle
     "D100",
     "D104",
