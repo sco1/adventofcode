@@ -70,8 +70,8 @@ def calculate_spread(polymer: str) -> int:
 # How about a smarter not harder approach instead
 def non_brute_deconstruct(template: str, rules: dict[str, str], n_cycles: int) -> int:
     """Calculate the element spread of the provided polymer after the target insertion cycle(s)."""
-    l: str
-    r: str
+    left: str
+    right: str
 
     # Since we don't care about order, we can keep track of the pairs created by each step and
     # use these counts to determine element counts once we run through all of the insertion cycles
@@ -80,12 +80,12 @@ def non_brute_deconstruct(template: str, rules: dict[str, str], n_cycles: int) -
     for _ in range(n_cycles):
         updated_pairs: Counter[str] = Counter()
         for pair, count in pairs_counter.items():
-            l, r = pair
+            left, right = pair
             # Each pair will add the corresponding number of pairs composed of the inserted element
             # and the left/right sides
             # This will end up double counting the middle element but we can fix that later
-            updated_pairs[f"{l}{rules[pair]}"] += count
-            updated_pairs[f"{rules[pair]}{r}"] += count
+            updated_pairs[f"{left}{rules[pair]}"] += count
+            updated_pairs[f"{rules[pair]}{right}"] += count
 
         # Now that we've updated our pairs we can replace our starting point
         pairs_counter = updated_pairs
@@ -94,9 +94,9 @@ def non_brute_deconstruct(template: str, rules: dict[str, str], n_cycles: int) -
     # quantities. As noted above, our inserted elements have all been double counted, except for the
     # first & last elements. So we can just double the first & last and divide the counts by 2.
     element_counts: Counter[str] = Counter()
-    for (l, r), count in pairs_counter.items():
-        element_counts[l] += count
-        element_counts[r] += count
+    for (left, right), count in pairs_counter.items():
+        element_counts[left] += count
+        element_counts[right] += count
     element_counts[template[0]] += 1
     element_counts[template[-1]] += 1
 
