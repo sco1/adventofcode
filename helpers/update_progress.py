@@ -41,7 +41,7 @@ HEADER = f"""\
 DATA_T: t.TypeAlias = dict[str, list[State]]
 
 
-def build_table(data: DATA_T) -> str:  # noqa: D103
+def build_table(data: DATA_T, n_days: int) -> str:  # noqa: D103
     header = f"|    |{'|'.join(la.title().center(MIN_WIDTH+2) for la in Lang)}|"
     header = header.replace("Matlab", "MATLAB")  # Special case name
 
@@ -49,7 +49,7 @@ def build_table(data: DATA_T) -> str:  # noqa: D103
     divider = f"|----|{sub_div*len(Lang)}"
 
     rows = []
-    for day in range(25):
+    for day in range(n_days):
         rows.append(
             f"|{day+1:^4}|{'|'.join(ICONS[data[la][day]].center(MIN_WIDTH+2) for la in Lang)}|"
         )
@@ -58,15 +58,15 @@ def build_table(data: DATA_T) -> str:  # noqa: D103
     return f"{header}\n{divider}\n{all_rows}"
 
 
-def ensure_lang(data: DATA_T) -> DATA_T:
+def ensure_lang(data: DATA_T, n_days: int) -> DATA_T:
     """Ensure that the data table contains all the languages defined by `Lang`."""
     for lang in Lang - data.keys():
-        data[lang] = [State.NOT] * 25
+        data[lang] = [State.NOT] * n_days
 
     return data
 
 
-def parse_progress_json(filepath: Path) -> DATA_T:
+def parse_progress_json(filepath: Path, n_days: int) -> DATA_T:
     """
     Parse the progress data from the provided README file.
 
@@ -80,9 +80,9 @@ def parse_progress_json(filepath: Path) -> DATA_T:
         data_table = json.loads(
             first_line.rstrip().removeprefix("<!--").removesuffix("-->").strip()
         )
-        data_table = ensure_lang(data_table)
+        data_table = ensure_lang(data_table, n_days=n_days)
     else:
-        data_table = {lang.value: ([State.NOT] * 25) for lang in Lang}
+        data_table = {lang.value: ([State.NOT] * n_days) for lang in Lang}
 
     return data_table  # type: ignore[no-any-return]
 
@@ -99,7 +99,14 @@ def build_summary_table() -> str:
     rows = []
     for filepath in sorted(BASE_DIR.glob("2*/README.md"), key=lambda x: x.parent):
         year = filepath.parent.name
-        data = parse_progress_json(filepath)
+
+        # Starting in 2025, the event is 12 long days rather than the historical 25
+        if int(year) >= 2025:
+            n_days = 12
+        else:
+            n_days = 25
+
+        data = parse_progress_json(filepath, n_days=n_days)
 
         row = []
         for la in Lang:
@@ -123,15 +130,21 @@ def main() -> None:  # noqa: D103
 
     args = parser.parse_args()
 
+    # Starting in 2025, the event is 12 long days rather than the historical 25
+    if args.year >= 2025:
+        n_days = 12
+    else:
+        n_days = 25
+
     filepath = BASE_DIR / f"{args.year}" / "README.md"
-    data_table = parse_progress_json(filepath)
+    data_table = parse_progress_json(filepath, n_days=n_days)
 
     data_table[args.lang][args.day - 1] = State[args.state.upper()]
 
     with filepath.open("w") as f:
         f.write(f"<!-- {json.dumps(data_table)} -->\n")
         f.write(f"{HEADER}\n\n")
-        f.write(f"{build_table(data_table)}\n")
+        f.write(f"{build_table(data_table, n_days=n_days)}\n")
     print(f"Puzzle status updated: ({args.year}, {args.day}, {args.lang}, {args.state})")
 
     # Update the base README with the new status using Cog & a dummy sys.argv
