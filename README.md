@@ -12,6 +12,8 @@ In most cases the provided solutions represent a "first-thoughts" approach to th
 ## Solution Progress
 The table below is [generated](https://github.com/sco1/adventofcode/blob/main/helpers/update_progress.py) from data contained in each year's README.md file. The per-language summary is provided as (full solve, partial solve) pairs.
 
+**NOTE:** Starting in 2025, the length of the event has been shortened to `12` days from `25`.
+
 <!-- [[[cog
 from datetime import datetime
 
@@ -32,6 +34,7 @@ cog.out(f"{build_summary_table()}\n\nLast generated: `{datetime.now()}`")
 | `2022` | `19,  2` | ` 4,  0` | ` 1,  0` | ` 0,  0` | ` 1,  0` | ` 0,  0` |
 | `2023` | `16,  5` | ` 0,  0` | ` 0,  0` | ` 0,  0` | ` 0,  0` | ` 0,  0` |
 | `2024` | `18,  5` | ` 0,  0` | ` 0,  0` | ` 0,  0` | ` 0,  0` | ` 0,  0` |
+| `2025` | ` 0,  0` | ` 0,  0` | ` 0,  0` | ` 0,  0` | ` 0,  0` | ` 0,  0` |
 
-Last generated: `2024-12-28 21:40:47.113947`
+Last generated: `2025-10-22 12:10:01.261504`
 <!-- [[[end]]] -->
