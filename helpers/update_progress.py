@@ -11,11 +11,12 @@ BASE_DIR = Path(__file__).parent.parent
 
 class Lang(StrEnum):  # noqa: D101
     PYTHON = auto()
+    DART = auto()
+    GO = auto()
+    JULIA = auto()
+    LOX = auto()
     MATLAB = auto()
     RUST = auto()
-    LOX = auto()
-    JULIA = auto()
-    GO = auto()
 
 
 class State(IntEnum):  # noqa: D101
