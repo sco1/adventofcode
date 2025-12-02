@@ -1,3 +1,7 @@
+# Don't commit puzzle data
+**/Day_*/puzzle_input.txt
+**/Day_*/README.md
+
 # Caches
 .vscode/
 __pycache__/
