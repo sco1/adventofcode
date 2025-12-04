@@ -13,16 +13,18 @@ def parse_map_objects(
                 yield ((x, y), c)
 
 
-def parse_hashed_map(raw_map: str, x_start: int = 0, y_start: int = 0) -> set[COORD]:
+def parse_hashed_map(
+    raw_map: str, marker: str = "#", x_start: int = 0, y_start: int = 0
+) -> set[COORD]:
     """
-    Parse the provided map into a set of coordinates marking points of interest (`#`).
+    Parse the provided map into a set of coordinates for its marked points of interest.
 
     NOTE: The origin is assumed to be the top left corner of the map, with the y-axis facing
     downwards.
     """
     coords = set()
     for coord, c in parse_map_objects(raw_map, x_start, y_start):
-        if c == "#":
+        if c == marker:
             coords.add(coord)
 
     return coords
