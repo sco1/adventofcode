@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import itertools
+import math
 import typing as t
 from collections import abc
 from enum import Enum
@@ -202,6 +203,20 @@ def manhattan_distance(p1: COORD, p2: COORD) -> int:
     See: https://en.wikipedia.org/wiki/Taxicab_geometry
     """
     return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
+
+
+def euclidean_distance(p1: abc.Collection[int], p2: abc.Collection[int]) -> float:
+    """
+    Calculate the Euclidean distance between the provided pair of ND coordinates.
+
+    See: https://en.wikipedia.org/wiki/Euclidean_distance
+    """
+    if len(p1) != len(p2):
+        raise ValueError(
+            f"Input coordinates must be the same dimension. Received: {(len(p1), len(p2))}"
+        )
+
+    return math.sqrt(sum(pow(p - q, 2) for p, q in zip(p1, p2)))
 
 
 def slope(p1: COORD, p2: COORD) -> tuple[int, int]:

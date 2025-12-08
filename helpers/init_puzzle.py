@@ -21,13 +21,8 @@ if __name__ == "__main__":
 """
 
 TEST_BASE = '''\
-from textwrap import dedent
-
-
-SAMPLE_INPUT = dedent(
-    """\\
-    """
-)
+SAMPLE_INPUT = """\\
+"""
 '''
 
 PY_FILES = (
