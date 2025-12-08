@@ -131,10 +131,19 @@ class BoundingBox:
         x, y = query
         return x in self.x_bound and y in self.y_bound
 
-    def iter_points(self) -> abc.Iterable[COORD]:
-        """Iterate over all coordinates contained in the bounding box."""
-        for coord in itertools.product(self.x_bound, self.y_bound):
-            yield coord
+    def iter_points(self, row_major: bool = False) -> abc.Iterable[COORD]:
+        """
+        Iterate over all coordinates contained in the bounding box.
+
+        If `row_major` is `True`, coordinates are yielded right and then down, otherwise
+        coordinates are yielded down and then right.
+        """
+        if row_major:
+            for y, x in itertools.product(self.y_bound, self.x_bound):
+                yield (x, y)
+        else:
+            for x, y in itertools.product(self.x_bound, self.y_bound):
+                yield (x, y)
 
     def iter_edges(self) -> abc.Iterable[COORD]:
         """Iterate over the edge coordinates of the bounding box."""
