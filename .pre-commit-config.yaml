@@ -40,6 +40,6 @@ repos:
       - id: matlab-reflow-comments
         args: [--line-length=100]
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.8
+    rev: v0.14.10
     hooks:
       - id: ruff-check
