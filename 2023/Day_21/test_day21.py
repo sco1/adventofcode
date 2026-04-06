@@ -4,8 +4,7 @@ import pytest
 
 from .aoc_2023_day21 import build_garden_network, parse_garden_map, step_search
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     ...........
     .....###.#.
     .###.##..#.
@@ -17,8 +16,7 @@ SAMPLE_INPUT = dedent(
     .##.#.####.
     .##..##.##.
     ...........
-    """
-)
+    """)
 
 
 def test_map_parsing() -> None:

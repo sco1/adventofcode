@@ -5,27 +5,22 @@ import pytest
 
 from .aoc_2024_day12 import build_plant_graph, calculate_bulk_fence_cost, calculate_fence_cost
 
-SAMPLE_INPUT_1 = dedent(
-    """\
+SAMPLE_INPUT_1 = dedent("""\
     AAAA
     BBCD
     BBCC
     EEEC
-    """
-)
+    """)
 
-SAMPLE_INPUT_2 = dedent(
-    """\
+SAMPLE_INPUT_2 = dedent("""\
     OOOOO
     OXOXO
     OOOOO
     OXOXO
     OOOOO
-    """
-)
+    """)
 
-SAMPLE_INPUT_3 = dedent(
-    """\
+SAMPLE_INPUT_3 = dedent("""\
     RRRRIICCFF
     RRRRIICCCF
     VVRRRCCFFF
@@ -36,8 +31,7 @@ SAMPLE_INPUT_3 = dedent(
     MIIIIIJJEE
     MIIISIJEEE
     MMMISSJEEE
-    """
-)
+    """)
 
 REGION_TEST_CASES = (
     (SAMPLE_INPUT_1, 5),
@@ -67,26 +61,22 @@ def test_calculate_fence_cost(plant_map: str, truth_fence_cost: int) -> None:
     assert calculate_fence_cost(pg) == truth_fence_cost
 
 
-SAMPLE_INPUT_4 = dedent(
-    """\
+SAMPLE_INPUT_4 = dedent("""\
     EEEEE
     EXXXX
     EEEEE
     EXXXX
     EEEEE
-    """
-)
+    """)
 
-SAMPLE_INPUT_5 = dedent(
-    """\
+SAMPLE_INPUT_5 = dedent("""\
     AAAAAA
     AAABBA
     AAABBA
     ABBAAA
     ABBAAA
     AAAAAA
-    """
-)
+    """)
 
 FENCE_BULK_COST_TEST_CASES = (
     (SAMPLE_INPUT_1, 80),

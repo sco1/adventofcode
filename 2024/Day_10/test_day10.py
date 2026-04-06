@@ -4,17 +4,14 @@ import pytest
 
 from .aoc_2024_day10 import find_all_trails, find_good_trails, parse_topo_map
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     0123
     1234
     8765
     9876
-    """
-)
+    """)
 
-LARGER_SAMPLE_INPUT = dedent(
-    """\
+LARGER_SAMPLE_INPUT = dedent("""\
     89010123
     78121874
     87430965
@@ -23,8 +20,7 @@ LARGER_SAMPLE_INPUT = dedent(
     32019012
     01329801
     10456732
-    """
-)
+    """)
 
 TRAILHEAD_TEST_CASES = (
     (SAMPLE_INPUT, 1),

@@ -3,8 +3,7 @@ from textwrap import dedent
 from helpers.geometry import BoundingBox
 from .aoc_2024_day06 import parse_lab_map, trap_guard, walk_patrol
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     ....#.....
     .........#
     ..........
@@ -15,8 +14,7 @@ SAMPLE_INPUT = dedent(
     ........#.
     #.........
     ......#...
-    """
-)
+    """)
 TRUTH_START_LOC = (4, 6)
 TRUTH_OBSTRUCTIONS = {(4, 0), (9, 1), (2, 3), (7, 4), (1, 6), (8, 7), (0, 8), (6, 9)}
 TRUTH_BBOX = BoundingBox(((0, 0), (0, 9), (9, 0), (9, 9)))

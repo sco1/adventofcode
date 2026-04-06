@@ -21,8 +21,7 @@ def test_mapping_parse(map_str: str, truth_src: list[int], truth_dest: list[int]
     assert [mapping[src_idx] for src_idx in mapping._source_range] == truth_dest
 
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     seeds: 79 14 55 13
 
     seed-to-soil map:
@@ -56,8 +55,7 @@ SAMPLE_INPUT = dedent(
     humidity-to-location map:
     60 56 37
     56 93 4
-    """
-)
+    """)
 
 TRUTH_END_STATE = (
     (79, 81, 81, 81, 74, 78, 78, 82),

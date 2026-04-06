@@ -4,8 +4,7 @@ import pytest
 
 from .aoc_2024_day13 import Button, ClawMachine, Prize, parse_machine_spec
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     Button A: X+94, Y+34
     Button B: X+22, Y+67
     Prize: X=8400, Y=5400
@@ -21,18 +20,15 @@ SAMPLE_INPUT = dedent(
     Button A: X+69, Y+23
     Button B: X+27, Y+71
     Prize: X=18641, Y=10279
-    """
-)
+    """)
 
 
 def test_machine_parse() -> None:
-    raw_spec = dedent(
-        """\
+    raw_spec = dedent("""\
         Button A: X+94, Y+34
         Button B: X+22, Y+67
         Prize: X=8400, Y=5400
-        """
-    )
+        """)
 
     truth_machine = ClawMachine(a=Button(94, 34), b=Button(22, 67), prize=Prize(8400, 5400))
 

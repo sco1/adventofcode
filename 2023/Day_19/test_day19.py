@@ -3,8 +3,7 @@ from textwrap import dedent
 
 from .aoc_2023_day19 import parse_instructions, sort_parts
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     px{a<2006:qkq,m>2090:A,rfg}
     pv{a>1716:R,A}
     lnx{m>1548:A,A}
@@ -22,8 +21,7 @@ SAMPLE_INPUT = dedent(
     {x=2036,m=264,a=79,s=2244}
     {x=2461,m=1339,a=466,s=291}
     {x=2127,m=1623,a=2188,s=1013}
-    """
-)
+    """)
 
 
 def test_rating_sum() -> None:

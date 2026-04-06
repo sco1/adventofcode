@@ -6,17 +6,14 @@ from .aoc_2022_day18 import calc_exterior_surface_area, calc_surface_area, parse
 
 SAMPLE_GRIDS = (
     (
-        dedent(
-            """\
+        dedent("""\
             1,1,1
             2,1,1
-            """
-        ),
+            """),
         10,
     ),
     (
-        dedent(
-            """\
+        dedent("""\
             2,2,2
             1,2,2
             3,2,2
@@ -30,8 +27,7 @@ SAMPLE_GRIDS = (
             3,2,5
             2,1,5
             2,3,5
-            """
-        ),
+            """),
         64,
     ),
 )
@@ -43,8 +39,7 @@ def test_part_one(lava_scan: str, truth_sides: int) -> None:
     assert calc_surface_area(cubes) == truth_sides
 
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     2,2,2
     1,2,2
     3,2,2
@@ -58,8 +53,7 @@ SAMPLE_INPUT = dedent(
     3,2,5
     2,1,5
     2,3,5
-    """
-)
+    """)
 
 
 def test_part_two() -> None:

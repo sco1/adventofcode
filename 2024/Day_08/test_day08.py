@@ -3,8 +3,7 @@ from textwrap import dedent
 from helpers.geometry import BoundingBox, COORD
 from .aoc_2024_day08 import find_antinodes, parse_antenna_map
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     ............
     ........0...
     .....0......
@@ -17,8 +16,7 @@ SAMPLE_INPUT = dedent(
     .........A..
     ............
     ............
-    """
-)
+    """)
 
 TRUTH_ANTENNAS = {
     "0": {(4, 4), (5, 2), (7, 3), (8, 1)},

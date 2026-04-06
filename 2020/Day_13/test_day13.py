@@ -4,12 +4,10 @@ import pytest
 
 from .aoc_2020_day13 import find_bus_id, find_golden_timestamp, parse_bus_schedule
 
-SAMPLE_SCHEDULE = dedent(
-    """\
+SAMPLE_SCHEDULE = dedent("""\
     939
     7,13,x,x,59,x,31,19
-    """
-)
+    """)
 
 
 def test_part_one() -> None:  # noqa: D103

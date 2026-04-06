@@ -5,8 +5,7 @@ import pytest
 from helpers.geometry import COORD
 from .aoc_2023_day17 import minimize_heat_loss, parse_heat_map
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     2413432311323
     3215453535623
     3255245654254
@@ -20,8 +19,7 @@ SAMPLE_INPUT = dedent(
     1224686865563
     2546548887735
     4322674655533
-    """
-)
+    """)
 HEAT_MAP = parse_heat_map(SAMPLE_INPUT)
 
 
@@ -29,8 +27,7 @@ def test_minimized_path() -> None:
     assert minimize_heat_loss(HEAT_MAP) == 102
 
 
-ULTRA_SAMPLE_1 = dedent(
-    """\
+ULTRA_SAMPLE_1 = dedent("""\
     2413432311323
     3215453535623
     3255245654254
@@ -44,18 +41,15 @@ ULTRA_SAMPLE_1 = dedent(
     1224686865563
     2546548887735
     4322674655533
-    """
-)
+    """)
 
-ULTRA_SAMPLE_2 = dedent(
-    """\
+ULTRA_SAMPLE_2 = dedent("""\
     111111111111
     999999999991
     999999999991
     999999999991
     999999999991
-    """
-)
+    """)
 
 ULTRA_CRUCIBLE_CASES = (
     (parse_heat_map(ULTRA_SAMPLE_1), 94),

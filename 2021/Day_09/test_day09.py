@@ -4,15 +4,13 @@ import numpy as np
 
 from .aoc_2021_day09 import find_low_points, n_largest_basins, parse_topography, total_risk_level
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     2199943210
     3987894921
     9856789892
     8767896789
     9899965678
-    """
-).splitlines()
+    """).splitlines()
 TOPO_MAP = parse_topography(SAMPLE_INPUT)
 
 

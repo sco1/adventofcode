@@ -4,8 +4,7 @@ import pytest
 from aoc_2015_day7 import CircuitDiagram
 
 PART_ONE = {
-    "input": dedent(
-        """\
+    "input": dedent("""\
         123 -> x
         456 -> y
         x AND y -> d
@@ -14,8 +13,7 @@ PART_ONE = {
         y RSHIFT 2 -> g
         NOT x -> h
         NOT y -> i
-        """
-    ),
+        """),
     "output": [
         ("d", 72),
         ("e", 507),

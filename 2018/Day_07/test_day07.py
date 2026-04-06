@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2018_day7 import _parse_edges, determine_step_order, elf_assembly
 
-SAMPLE_INSTRUCTIONS = dedent(
-    """\
+SAMPLE_INSTRUCTIONS = dedent("""\
     Step C must be finished before step A can begin.
     Step C must be finished before step F can begin.
     Step A must be finished before step B can begin.
@@ -11,8 +10,7 @@ SAMPLE_INSTRUCTIONS = dedent(
     Step B must be finished before step E can begin.
     Step D must be finished before step E can begin.
     Step F must be finished before step E can begin.
-    """
-).splitlines()
+    """).splitlines()
 EDGES = _parse_edges(SAMPLE_INSTRUCTIONS)
 
 

@@ -12,26 +12,22 @@ from .aoc_2022_day05 import (
 
 SAMPLE_STACKS = (
     (
-        dedent(
-            """\
+        dedent("""\
                 [D]
             [N] [C]
             [Z] [M] [P]
              1   2   3
-            """
-        ),
+            """),
         [["Z", "N"], ["M", "C", "D"], ["P"]],
     ),
     (
-        dedent(
-            """\
+        dedent("""\
                     [Z]
                     [N]
             [M]     [D]
             [C]     [P]
              1   2   3
-            """
-        ),
+            """),
         [["C", "M"], [], ["P", "D", "N", "Z"]],
     ),
 )
@@ -42,20 +38,17 @@ def test_stack_parse(stack_map: str, truth_stacks: list[list[str]]) -> None:
     assert _parse_stack_map(stack_map) == truth_stacks
 
 
-SAMPLE_INSTRUCTIONS = dedent(
-    """\
+SAMPLE_INSTRUCTIONS = dedent("""\
     move 1 from 2 to 1
     move 3 from 1 to 3
-    """
-)
+    """)
 
 
 def test_instruction_parse() -> None:
     assert _parse_instructions(SAMPLE_INSTRUCTIONS) == [Instruction(1, 1, 0), Instruction(3, 0, 2)]
 
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
         [D]
     [N] [C]
     [Z] [M] [P]
@@ -65,8 +58,7 @@ SAMPLE_INPUT = dedent(
     move 3 from 1 to 3
     move 2 from 2 to 1
     move 1 from 1 to 2
-    """
-)
+    """)
 
 
 def test_instruction_execute() -> None:

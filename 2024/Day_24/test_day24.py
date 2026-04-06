@@ -4,8 +4,7 @@ import pytest
 
 from .aoc_2024_day24 import Wiring, parse_schematic, run_circuit, wire_and, wire_or, wire_xor
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     x00: 1
     x01: 1
     x02: 1
@@ -16,11 +15,9 @@ SAMPLE_INPUT = dedent(
     x00 AND y00 -> z00
     x01 XOR y01 -> z01
     x02 OR y02 -> z02
-    """
-)
+    """)
 
-LONGER_SAMPLE_INPUT = dedent(
-    """\
+LONGER_SAMPLE_INPUT = dedent("""\
     x00: 1
     x01: 0
     x02: 1
@@ -68,8 +65,7 @@ LONGER_SAMPLE_INPUT = dedent(
     hwm AND bqk -> z03
     tgd XOR rvg -> z12
     tnw OR pbm -> gnj
-    """
-)
+    """)
 
 TRUTH_INITIAL_STATE = {
     "x00": 1,

@@ -20,16 +20,14 @@ def test_rucksack_check(rucksack: str, truth_priority: int) -> None:
     assert priority == truth_priority
 
 
-SAMPLE_CONTENTS = dedent(
-    """\
+SAMPLE_CONTENTS = dedent("""\
     vJrwpWtwJgWrhcsFMMfFFhFp
     jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
     PmmdzqPrVvPwwTWBwg
     wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
     ttgJtRGJQctTZtZT
     CrZsJsPPZsGzwwsLwLmpwMDw
-    """
-)
+    """)
 
 
 def test_priority_check() -> None:
@@ -38,36 +36,30 @@ def test_priority_check() -> None:
 
 SAMPLE_GROUPS = (
     (
-        dedent(
-            """\
+        dedent("""\
             vJrwpWtwJgWrhcsFMMfFFhFp
             jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
             PmmdzqPrVvPwwTWBwg
-            """
-        ),
+            """),
         18,
     ),
     (
-        dedent(
-            """\
+        dedent("""\
             wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
             ttgJtRGJQctTZtZT
             CrZsJsPPZsGzwwsLwLmpwMDw
-            """
-        ),
+            """),
         52,
     ),
     (
-        dedent(
-            """\
+        dedent("""\
             vJrwpWtwJgWrhcsFMMfFFhFp
             jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
             PmmdzqPrVvPwwTWBwg
             wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
             ttgJtRGJQctTZtZT
             CrZsJsPPZsGzwwsLwLmpwMDw
-            """
-        ),
+            """),
         70,
     ),
 )

@@ -5,8 +5,7 @@ import pytest
 from helpers.geometry import MoveDir
 from .aoc_2023_day18 import Instruction, dig_trench, parse_dig_instructions
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     R 6 (#70c710)
     D 5 (#0dc571)
     L 2 (#5713f0)
@@ -21,8 +20,7 @@ SAMPLE_INPUT = dedent(
     U 3 (#a77fa3)
     L 2 (#015232)
     U 2 (#7a21e3)
-    """
-)
+    """)
 INSTRUCTIONS = parse_dig_instructions(SAMPLE_INPUT)
 
 

@@ -4,15 +4,13 @@ import networkx as nx
 
 from .aoc_2022_day12 import build_valid_steps, find_shortest_hike, parse_map
 
-SAMPLE_MAP = dedent(
-    """
+SAMPLE_MAP = dedent("""
     Sabqponm
     abcryxxl
     accszExk
     acctuvwj
     abdefghi
-    """
-)
+    """)
 
 
 def test_part_one() -> None:

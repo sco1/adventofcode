@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2022_day15 import SensorField, identify_tuning_frequency, n_nonbeacon_1d, parse_sensor_map
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     Sensor at x=2, y=18: closest beacon is at x=-2, y=15
     Sensor at x=9, y=16: closest beacon is at x=10, y=16
     Sensor at x=13, y=2: closest beacon is at x=15, y=3
@@ -18,8 +17,7 @@ SAMPLE_INPUT = dedent(
     Sensor at x=16, y=7: closest beacon is at x=15, y=3
     Sensor at x=14, y=3: closest beacon is at x=15, y=3
     Sensor at x=20, y=1: closest beacon is at x=15, y=3
-    """
-)
+    """)
 
 
 def test_part_one() -> None:

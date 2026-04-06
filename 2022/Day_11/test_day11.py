@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2022_day11 import MonkeyGame
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     Monkey 0:
     Starting items: 79, 98
     Operation: new = old * 19
@@ -31,8 +30,7 @@ SAMPLE_INPUT = dedent(
     Test: divisible by 17
         If true: throw to monkey 0
         If false: throw to monkey 1
-    """
-)
+    """)
 
 
 def test_part_one() -> None:

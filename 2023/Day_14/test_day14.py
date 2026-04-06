@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2023_day14 import PlatformMap, TiltDirection
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     O....#....
     O.OO#....#
     .....##...
@@ -14,8 +13,7 @@ SAMPLE_INPUT = dedent(
     .......O..
     #....###..
     #OO..#....
-    """
-)
+    """)
 
 
 def test_support_load() -> None:

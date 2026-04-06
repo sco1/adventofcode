@@ -6,8 +6,7 @@ from .aoc_2021_day12 import parse_map, path_search
 
 TEST_CASES = [
     (
-        dedent(
-            """\
+        dedent("""\
             start-A
             start-b
             A-c
@@ -15,14 +14,12 @@ TEST_CASES = [
             b-d
             A-end
             b-end
-            """
-        ).splitlines(),
+            """).splitlines(),
         10,
         36,
     ),
     (
-        dedent(
-            """\
+        dedent("""\
             dc-end
             HN-start
             start-kj
@@ -33,14 +30,12 @@ TEST_CASES = [
             kj-sa
             kj-HN
             kj-dc
-            """
-        ).splitlines(),
+            """).splitlines(),
         19,
         103,
     ),
     (
-        dedent(
-            """\
+        dedent("""\
             fs-end
             he-DX
             fs-he
@@ -59,8 +54,7 @@ TEST_CASES = [
             zg-he
             pj-fs
             start-RW
-            """
-        ).splitlines(),
+            """).splitlines(),
         226,
         3509,
     ),

@@ -4,8 +4,7 @@ import pytest
 
 from .aoc_2022_day07 import calculate_candidate_dir_size, find_best_deletion, parse_terminal_session
 
-SAMPLE_SESSION = dedent(
-    """\
+SAMPLE_SESSION = dedent("""\
     $ cd /
     $ ls
     dir a
@@ -29,8 +28,7 @@ SAMPLE_SESSION = dedent(
     8033020 d.log
     5626152 d.ext
     7214296 k
-    """
-)
+    """)
 DIR_SIZES = parse_terminal_session(SAMPLE_SESSION.splitlines())
 
 

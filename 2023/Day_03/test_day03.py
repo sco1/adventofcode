@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2023_day03 import find_adjacent_parts, find_gears, parse_schematic, sum_gear_ratios
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     467..114..
     ...*......
     ..35..633.
@@ -14,8 +13,7 @@ SAMPLE_INPUT = dedent(
     ......755.
     ...$.*....
     .664.598..
-    """
-)
+    """)
 TRUTH_N_SYMBOLS = sum(1 for c in SAMPLE_INPUT if c in {"*", "#", "+", "$"})
 
 
@@ -33,13 +31,11 @@ def test_adjacent_parts() -> None:
     assert not (emitted_set & {141, 58})  # 114 and 58 aren't valid part numbers
 
 
-SAMPLE_ADJACENT = dedent(
-    """\
+SAMPLE_ADJACENT = dedent("""\
     467..114..
     ...*......
     467..123..
-    """
-)
+    """)
 
 
 def test_multiple_part_instances() -> None:

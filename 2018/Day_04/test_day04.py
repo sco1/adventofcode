@@ -7,8 +7,7 @@ from .aoc_2018_day4 import (
     find_sleepiest_minute,
 )
 
-SAMPLE_LOGS = dedent(
-    """\
+SAMPLE_LOGS = dedent("""\
     [1518-11-01 00:00] Guard #10 begins shift
     [1518-11-01 00:05] falls asleep
     [1518-11-01 00:25] wakes up
@@ -26,8 +25,7 @@ SAMPLE_LOGS = dedent(
     [1518-11-05 00:03] Guard #99 begins shift
     [1518-11-05 00:45] falls asleep
     [1518-11-05 00:55] wakes up
-    """
-).splitlines()
+    """).splitlines()
 LOGS = _parse_logs(SAMPLE_LOGS)
 SCHEDULE = _build_sleep_schedule(LOGS)
 

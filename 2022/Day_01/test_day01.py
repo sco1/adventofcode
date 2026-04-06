@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2022_day01 import find_best_snack_trio, find_most_caloric_dense_elf, parse_puzzle_input
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     1000
     2000
     3000
@@ -18,8 +17,7 @@ SAMPLE_INPUT = dedent(
     9000
 
     10000
-    """
-)
+    """)
 TRUTH_CALORIE_COUNT = [6_000, 4_000, 11_000, 24_000, 10_000]
 
 

@@ -5,8 +5,7 @@ import pytest
 from helpers.geometry import COORD
 from .aoc_2023_day11 import galaxy_dist, parse_galaxy_map, sum_galaxy_pdist
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     ...#......
     .......#..
     #.........
@@ -17,11 +16,9 @@ SAMPLE_INPUT = dedent(
     ..........
     .......#..
     #...#.....
-    """
-)
+    """)
 
-TRUTH_EXPANDED = dedent(
-    """\
+TRUTH_EXPANDED = dedent("""\
     ....1........
     .........2...
     3............
@@ -34,8 +31,7 @@ TRUTH_EXPANDED = dedent(
     .............
     .........7...
     8....9.......
-    """
-)
+    """)
 TRUTH_COORDS = set()
 for y, line in enumerate(TRUTH_EXPANDED.splitlines()):
     for x, c in enumerate(line):

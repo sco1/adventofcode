@@ -4,14 +4,12 @@ import pytest
 
 from .aoc_2016_day02 import DIAMOND_KEYPAD, KEYPAD, find_bathroom_code, parse_keypad
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     ULL
     RRDDD
     LURDL
     UUUUD
-    """
-)
+    """)
 
 
 TEST_CASES = (

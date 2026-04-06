@@ -1,7 +1,6 @@
 from textwrap import dedent
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     root: pppw + sjmn
     dbpl: 5
     cczh: sllz + lgvd
@@ -17,5 +16,4 @@ SAMPLE_INPUT = dedent(
     lgvd: ljgn * ptdq
     drzm: hmdt - zczc
     hmdt: 32
-    """
-)
+    """)

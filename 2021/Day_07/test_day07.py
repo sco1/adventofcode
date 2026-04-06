@@ -2,11 +2,9 @@ from textwrap import dedent
 
 from .aoc_2021_day07 import min_horizontal_burn
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     16,1,2,0,4,2,7,1,2,14
-    """
-).strip()
+    """).strip()
 DISTANCES = [int(distance) for distance in SAMPLE_INPUT.split(",")]
 
 

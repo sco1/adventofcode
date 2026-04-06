@@ -4,8 +4,7 @@ import pytest
 
 from .aoc_2024_day16 import calculate_lowest_score, n_seat_locations, parse_reindeer_map
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     ###############
     #.......#....E#
     #.#.###.#.###.#
@@ -21,11 +20,9 @@ SAMPLE_INPUT = dedent(
     #.###.#.#.#.#.#
     #S..#.....#...#
     ###############
-    """
-)
+    """)
 
-ANOTHER_SAMPLE_INPUT = dedent(
-    """\
+ANOTHER_SAMPLE_INPUT = dedent("""\
     #################
     #...#...#...#..E#
     #.#.#.#.#.#.#.#.#
@@ -43,8 +40,7 @@ ANOTHER_SAMPLE_INPUT = dedent(
     #.#.#.#########.#
     #S#.............#
     #################
-    """
-)
+    """)
 
 LOW_SCORE_TEST_CASES = (
     (SAMPLE_INPUT, 7036),

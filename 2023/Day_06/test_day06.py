@@ -5,12 +5,10 @@ import pytest
 
 from .aoc_2023_day06 import RaceSpec, winning_strategies
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     Time:      7  15   30
     Distance:  9  40  200
-    """
-)
+    """)
 
 TRUTH_SPECS = (
     (7, 9),

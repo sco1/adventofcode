@@ -6,8 +6,7 @@ from .aoc_2022_day09 import parse_instructions, run_sim
 
 SAMPLE_INPUTS = (
     (
-        dedent(
-            """\
+        dedent("""\
             R 4
             U 4
             L 3
@@ -16,14 +15,12 @@ SAMPLE_INPUTS = (
             D 1
             L 5
             R 2
-            """
-        ),
+            """),
         13,
         1,
     ),
     (
-        dedent(
-            """\
+        dedent("""\
             R 5
             U 8
             L 8
@@ -32,8 +29,7 @@ SAMPLE_INPUTS = (
             D 10
             L 25
             U 20
-            """
-        ),
+            """),
         88,
         36,
     ),

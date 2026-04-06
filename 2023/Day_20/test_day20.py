@@ -4,25 +4,21 @@ import pytest
 
 from .aoc_2023_day20 import parse_module_configuration, press_button
 
-SAMPLE_INPUT_1 = dedent(
-    """\
+SAMPLE_INPUT_1 = dedent("""\
     broadcaster -> a, b, c
     %a -> b
     %b -> c
     %c -> inv
     &inv -> a
-    """
-)
+    """)
 
-SAMPLE_INPUT_2 = dedent(
-    """\
+SAMPLE_INPUT_2 = dedent("""\
     broadcaster -> a
     %a -> inv, con
     &inv -> b
     %b -> con
     &con -> output
-    """
-)
+    """)
 
 BUTTON_PRESS_TEST_CASES = (
     (SAMPLE_INPUT_1, 32, 32_000_000),

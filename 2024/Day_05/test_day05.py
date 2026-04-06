@@ -12,15 +12,13 @@ from .aoc_2024_day05 import (
     reorder_spec,
 )
 
-PARSING_SAMPLE = dedent(
-    """\
+PARSING_SAMPLE = dedent("""\
     47|53
     97|13
 
     75,47,61,53,29
     75,29,13
-    """
-)
+    """)
 
 TRUTH_RULES = [PageOrderRule(47, 53), PageOrderRule(97, 13)]
 TRUTH_UPDATE_SPEC = [[75, 47, 61, 53, 29], [75, 29, 13]]
@@ -54,8 +52,7 @@ def test_compile_order_rules() -> None:
     assert compile_order_rules(order_rules, reversed=True) == truth_reverse_compiled
 
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     47|53
     97|13
     97|61
@@ -84,8 +81,7 @@ SAMPLE_INPUT = dedent(
     75,97,47,61,53
     61,13,29
     97,13,75,29,47
-    """
-)
+    """)
 SAMPLE_ORDERING_RULES, _ = parse_print_spec(SAMPLE_INPUT)
 SAMPLE_COMPILED_RULES = compile_order_rules(SAMPLE_ORDERING_RULES)
 

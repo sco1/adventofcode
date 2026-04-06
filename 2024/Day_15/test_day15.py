@@ -5,14 +5,12 @@ import pytest
 from helpers.geometry import MoveDir
 from .aoc_2024_day15 import Warehouse, parse_instructions, parse_warehouse_map
 
-SAMPLE_MAP = dedent(
-    """\
+SAMPLE_MAP = dedent("""\
     ####
     #.O#
     ##@#
     ####
-    """
-)
+    """)
 
 # fmt: off
 TRUTH_WALLS = {(0, 1), (1, 2), (0, 0), (3, 1), (0, 3), (2, 0), (3, 0), (2, 3), (0, 2), (3, 3), (1, 0), (3, 2), (1, 3)}  # noqa: E501
@@ -38,8 +36,7 @@ def test_parse_instructions() -> None:
     assert instructions == TRUTH_INSTRUCTIONS
 
 
-SHORT_EXAMPLE = dedent(
-    """\
+SHORT_EXAMPLE = dedent("""\
     ########
     #..O.O.#
     ##@.O..#
@@ -50,11 +47,9 @@ SHORT_EXAMPLE = dedent(
     ########
 
     <^^>>>vv<v>>v<<
-    """
-)
+    """)
 
-LONG_EXAMPLE = dedent(
-    """\
+LONG_EXAMPLE = dedent("""\
     ##########
     #..O..O.O#
     #......O.#
@@ -76,14 +71,12 @@ LONG_EXAMPLE = dedent(
     <><^^>^^^<><vvvvv^v<v<<>^v<v>v<<^><<><<><<<^^<<<^<<>><<><^^^>^^<>^>v<>
     ^^>vv<^v^v<vv>^<><v<^v>^^^>>>^^vvv^>vvv<>>>^<^>>>>>^<<^v>^vvv<>^<><<v>
     v^^>>><<^^<>>^v^<v^vv<>v^<<>^<^v^v><^<<<><<^<v><v<>vv>>v><v^<vv<>v^<<^
-    """
-)
+    """)
 
 RENDERING_TEST_CASES = (
     (
         SHORT_EXAMPLE,
-        dedent(
-            """\
+        dedent("""\
             ########
             #..O.O.#
             ##@.O..#
@@ -91,13 +84,11 @@ RENDERING_TEST_CASES = (
             #.#.O..#
             #...O..#
             #......#
-            ########"""
-        ),
+            ########"""),
     ),
     (
         LONG_EXAMPLE,
-        dedent(
-            """\
+        dedent("""\
             ##########
             #..O..O.O#
             #......O.#
@@ -107,8 +98,7 @@ RENDERING_TEST_CASES = (
             #O..O..O.#
             #.OO.O.OO#
             #....O...#
-            ##########"""
-        ),
+            ##########"""),
     ),
 )
 
@@ -123,8 +113,7 @@ def test_warehouse_render(raw_doc: str, truth_rendered: str) -> None:
 EXECUTION_TEST_CASES = (
     (
         SHORT_EXAMPLE,
-        dedent(
-            """\
+        dedent("""\
             ########
             #....OO#
             ##.....#
@@ -132,13 +121,11 @@ EXECUTION_TEST_CASES = (
             #.#O@..#
             #...O..#
             #...O..#
-            ########"""
-        ),
+            ########"""),
     ),
     (
         LONG_EXAMPLE,
-        dedent(
-            """\
+        dedent("""\
             ##########
             #.O.O.OOO#
             #........#
@@ -148,8 +135,7 @@ EXECUTION_TEST_CASES = (
             #O.....OO#
             #O.....OO#
             #OO....OO#
-            ##########"""
-        ),
+            ##########"""),
     ),
 )
 

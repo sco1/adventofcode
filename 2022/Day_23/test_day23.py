@@ -3,8 +3,7 @@ from textwrap import dedent
 from helpers.parsing import parse_hashed_map
 from .aoc_2022_day23 import run_sim, run_until_static
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     ....#..
     ..###.#
     #...#.#
@@ -12,8 +11,7 @@ SAMPLE_INPUT = dedent(
     #.###..
     ##.#.##
     .#..#..
-    """
-)
+    """)
 
 
 def test_part_one() -> None:

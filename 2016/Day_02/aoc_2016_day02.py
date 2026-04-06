@@ -3,21 +3,17 @@ from textwrap import dedent
 
 from helpers.geometry import COORD
 
-KEYPAD = dedent(
-    """\
+KEYPAD = dedent("""\
     123
     456
-    789"""
-)
+    789""")
 
-DIAMOND_KEYPAD = dedent(
-    """\
+DIAMOND_KEYPAD = dedent("""\
       1
      234
     56789
      ABC
-      D"""
-)
+      D""")
 
 DELTA = {
     "U": (0, -1),
@@ -63,7 +59,7 @@ def find_bathroom_code(instructions: str, keypad: dict[COORD, str], start_loc: C
     for digit_line in instructions.splitlines():
         for move in digit_line:
             dx, dy = DELTA[move]
-            (nx, ny) = (x + dx, y + dy)
+            nx, ny = (x + dx, y + dy)
 
             if (nx, ny) in keypad:
                 x, y = nx, ny

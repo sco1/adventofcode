@@ -14,14 +14,12 @@ class PuzzleTestCase(t.NamedTuple):
     escaped_len: int
 
 
-puzzle_input = dedent(
-    r"""
+puzzle_input = dedent(r"""
     ""
     "abc"
     "aaa\"aaa"
     "\x27"
-    """
-)[1:].splitlines()
+    """)[1:].splitlines()
 test_cases = [
     PuzzleTestCase(puzzle_input[0], 2, 0, 6),
     PuzzleTestCase(puzzle_input[1], 5, 3, 9),

@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2021_day13 import fold_paper, parse_instructions, prettyprint
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     6,10
     0,14
     9,10
@@ -25,8 +24,7 @@ SAMPLE_INPUT = dedent(
 
     fold along y=7
     fold along x=5
-    """
-)
+    """)
 DOT_COORDS, FOLDS = parse_instructions(SAMPLE_INPUT)
 
 
@@ -34,14 +32,12 @@ def test_part_one() -> None:
     assert len(fold_paper(DOT_COORDS, [FOLDS[0]])) == 17
 
 
-EXPECTED_PRETTYPRINT = dedent(
-    """\
+EXPECTED_PRETTYPRINT = dedent("""\
     #####
     #   #
     #   #
     #   #
-    #####"""
-)
+    #####""")
 
 
 def test_part_two() -> None:
