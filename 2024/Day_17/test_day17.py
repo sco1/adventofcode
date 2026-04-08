@@ -2,15 +2,13 @@ from textwrap import dedent
 
 from .aoc_2024_day17 import ChronoComp
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     Register A: 729
     Register B: 0
     Register C: 0
 
     Program: 0,1,5,4,3,0
-    """
-)
+    """)
 TRUTH_STDOUT = "4,6,3,5,6,3,5,2,1,0"
 
 

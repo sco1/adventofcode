@@ -2,14 +2,12 @@ from textwrap import dedent
 
 from .AoC2017_Day8 import execute
 
-SAMPLE_INSTRUCTIONS = dedent(
-    """\
+SAMPLE_INSTRUCTIONS = dedent("""\
     b inc 5 if a > 1
     a inc 1 if b < 5
     c dec -10 if a >= 1
     c inc -20 if c == 10
-    """
-).splitlines()
+    """).splitlines()
 
 
 def test_part_one() -> None:

@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .AoC2017_Day7 import _build_tower, balance_tower, find_bottom_program
 
-SAMPLE_TOWER = dedent(
-    """\
+SAMPLE_TOWER = dedent("""\
     pbga (66)
     xhth (57)
     ebii (61)
@@ -17,8 +16,7 @@ SAMPLE_TOWER = dedent(
     ugml (68) -> gyxo, ebii, jptl
     gyxo (61)
     cntj (57)
-    """
-).splitlines()
+    """).splitlines()
 TOWER = _build_tower(SAMPLE_TOWER)
 
 

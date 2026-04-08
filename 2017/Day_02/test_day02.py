@@ -6,13 +6,11 @@ from .AoC2017_Day2 import checksum_divisible, checksum_minmax, parse_spreadsheet
 
 PART_ONE_CASES = (
     (
-        dedent(
-            """\
+        dedent("""\
             5 1 9 5
             7 5 3
             2 4 6 8
-            """
-        ).splitlines(),
+            """).splitlines(),
         18,
     ),
 )
@@ -26,13 +24,11 @@ def test_part_one(raw_spreadsheet: list[str], truth_solution: int) -> None:
 
 PART_TWO_CASES = (
     (
-        dedent(
-            """\
+        dedent("""\
             5 9 2 8
             9 4 7 3
             3 8 6 5
-            """
-        ).splitlines(),
+            """).splitlines(),
         9,
     ),
 )

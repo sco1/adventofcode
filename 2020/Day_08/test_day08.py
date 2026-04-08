@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2020_day08 import GameGear, RepeatInstructionError, mutate_until_fixed
 
-SAMPLE_INSTRUCTIONS = dedent(
-    """\
+SAMPLE_INSTRUCTIONS = dedent("""\
     nop +0
     acc +1
     jmp +4
@@ -13,8 +12,7 @@ SAMPLE_INSTRUCTIONS = dedent(
     acc +1
     jmp -4
     acc +6
-    """
-)
+    """)
 
 MACHINE = GameGear(SAMPLE_INSTRUCTIONS)
 

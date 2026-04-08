@@ -7,16 +7,14 @@ from .aoc_2018_day6 import (
     parse_coordinates,
 )
 
-SAMPLE_COORDINATES = dedent(
-    """\
+SAMPLE_COORDINATES = dedent("""\
     1, 1
     1, 6
     8, 3
     3, 4
     5, 5
     8, 9
-    """
-)
+    """)
 
 
 def test_finite_areas() -> None:

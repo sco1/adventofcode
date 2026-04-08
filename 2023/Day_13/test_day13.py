@@ -4,8 +4,7 @@ import pytest
 
 from .aoc_2023_day13 import Pattern, find_reflections, parse_patterns, summarize_patterns
 
-SAMPLE_INPUT_EXTENDED = dedent(
-    """\
+SAMPLE_INPUT_EXTENDED = dedent("""\
     #.##..##.
     ..#.##.#.
     ##......#
@@ -39,8 +38,7 @@ SAMPLE_INPUT_EXTENDED = dedent(
     ...#....#...###
     ##...##...#####
     ....#..........
-    """
-)
+    """)
 PATTERNS = parse_patterns(SAMPLE_INPUT_EXTENDED)
 
 REFLECTION_TEST_CASES = (  # type: ignore[var-annotated]
@@ -55,8 +53,7 @@ def test_find_reflection(pattern: Pattern, truth_reflection: tuple[list[int], li
     assert find_reflections(pattern) == truth_reflection
 
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     #.##..##.
     ..#.##.#.
     ##......#
@@ -72,8 +69,7 @@ SAMPLE_INPUT = dedent(
     #####.##.
     ..##..###
     #....#..#
-    """
-)
+    """)
 
 
 def test_summarize() -> None:

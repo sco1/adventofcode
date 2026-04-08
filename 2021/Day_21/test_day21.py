@@ -2,12 +2,10 @@ from textwrap import dedent
 
 from .aoc_2021_day21 import DiracDice, get_starting_positions, play_quantum
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     Player 1 starting position: 4
     Player 2 starting position: 8
-    """
-)
+    """)
 
 
 def test_part_one() -> None:

@@ -4,8 +4,7 @@ import pytest
 
 from .aoc_2024_day07 import calculate_calibration_result, can_solve, parse_calibration_equations
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     190: 10 19
     3267: 81 40 27
     83: 17 5
@@ -15,8 +14,7 @@ SAMPLE_INPUT = dedent(
     192: 17 8 14
     21037: 9 7 18 13
     292: 11 6 16 20
-    """
-)
+    """)
 
 TRUTH_PARSED = [
     (190, [10, 19]),

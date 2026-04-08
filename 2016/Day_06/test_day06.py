@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2016_day06 import correct_message
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     eedadn
     drvtee
     eandsr
@@ -20,8 +19,7 @@ SAMPLE_INPUT = dedent(
     vrdear
     dvrsen
     enarar
-    """
-)
+    """)
 
 
 def test_error_correction() -> None:

@@ -2,20 +2,14 @@ from textwrap import dedent
 
 from .aoc_2024_day01 import calculate_similarity_score, calculate_total_distance, split_id_locations
 
-SAMPLE_INPUT = (
-    dedent(
-        """\
+SAMPLE_INPUT = dedent("""\
     3   4
     4   3
     2   5
     1   3
     3   9
     3   3
-    """
-    )
-    .strip()
-    .splitlines()
-)
+    """).strip().splitlines()
 
 
 def test_split_id_locations() -> None:

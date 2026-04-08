@@ -4,8 +4,7 @@ import pytest
 
 from .aoc_2023_day08 import parse_map, traverse_as_ghost, traverse_as_ghost_bf, traverse_map
 
-SAMPLE_MAP_1 = dedent(
-    """\
+SAMPLE_MAP_1 = dedent("""\
     RL
 
     AAA = (BBB, CCC)
@@ -15,18 +14,15 @@ SAMPLE_MAP_1 = dedent(
     EEE = (EEE, EEE)
     GGG = (GGG, GGG)
     ZZZ = (ZZZ, ZZZ)
-    """
-)
+    """)
 
-SAMPLE_MAP_2 = dedent(
-    """\
+SAMPLE_MAP_2 = dedent("""\
     LLR
 
     AAA = (BBB, BBB)
     BBB = (AAA, ZZZ)
     ZZZ = (ZZZ, ZZZ)
-    """
-)
+    """)
 
 
 def test_map_parse() -> None:
@@ -47,8 +43,7 @@ def test_map_traversal(raw_map: str, truth_n_steps: int) -> None:
     assert traverse_map(instructions, nodes) == truth_n_steps
 
 
-SAMPLE_MAP_GHOSTS = dedent(
-    """\
+SAMPLE_MAP_GHOSTS = dedent("""\
     LR
 
     11A = (11B, XXX)
@@ -59,8 +54,7 @@ SAMPLE_MAP_GHOSTS = dedent(
     22C = (22Z, 22Z)
     22Z = (22B, 22B)
     XXX = (XXX, XXX)
-    """
-)
+    """)
 
 
 def test_ghost_traversal() -> None:

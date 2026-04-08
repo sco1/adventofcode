@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2020_day09 import find_weakness, process_stream
 
-SAMPLE_STREAM = dedent(
-    """\
+SAMPLE_STREAM = dedent("""\
     35
     20
     15
@@ -24,8 +23,7 @@ SAMPLE_STREAM = dedent(
     277
     309
     576
-    """
-)
+    """)
 
 INT_STREAM = [int(line) for line in SAMPLE_STREAM.splitlines()]
 

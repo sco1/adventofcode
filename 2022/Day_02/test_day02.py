@@ -24,13 +24,11 @@ def test_round_score(round: str, truth_score: int) -> None:
     assert score_round(round) == truth_score
 
 
-SAMPLE_GAME = dedent(
-    """\
+SAMPLE_GAME = dedent("""\
     A Y
     B X
     C Z
-    """
-)
+    """)
 
 
 def test_total_score() -> None:

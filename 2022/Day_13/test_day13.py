@@ -35,8 +35,7 @@ def test_comparisons(left: list, right: list, truth_comp: bool) -> None:
     assert (check_order(left, right) < 0) == truth_comp
 
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     [1,1,3,1,1]
     [1,1,5,1,1]
 
@@ -60,8 +59,7 @@ SAMPLE_INPUT = dedent(
 
     [1,[2,[3,[4,[5,6,7]]]],8,9]
     [1,[2,[3,[4,[5,6,0]]]],8,9]
-    """
-)
+    """)
 
 
 def test_part_one() -> None:

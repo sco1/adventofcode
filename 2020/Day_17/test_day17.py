@@ -2,13 +2,11 @@ from textwrap import dedent
 
 from .aoc_2020_day17 import ConwayCube
 
-STARTING_SLICE = dedent(
-    """\
+STARTING_SLICE = dedent("""\
     .#.
     ..#
     ###
-    """
-)
+    """)
 
 
 def test_part_one() -> None:  # noqa: D103

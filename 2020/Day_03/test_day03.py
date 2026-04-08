@@ -4,8 +4,7 @@ import pytest
 
 from .aoc_2020_day03 import TobogganMap
 
-TOBOGGAN_MAP = dedent(
-    """\
+TOBOGGAN_MAP = dedent("""\
     ..##.......
     #...#...#..
     .#....#..#.
@@ -17,8 +16,7 @@ TOBOGGAN_MAP = dedent(
     #.##...#...
     #...##....#
     .#..#...#.#
-    """
-)
+    """)
 TOBOGGAN_RUN = TobogganMap(TOBOGGAN_MAP)
 
 

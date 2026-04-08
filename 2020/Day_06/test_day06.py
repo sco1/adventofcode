@@ -16,64 +16,52 @@ class CustomsTestCase(t.NamedTuple):
 
 FORM_TEST_CASES = [
     CustomsTestCase(
-        dedent(
-            """\
+        dedent("""\
             abcx
             abcy
             abcz
-            """
-        ),
+            """),
         6,
         3,
     ),
     CustomsTestCase(
-        dedent(
-            """\
+        dedent("""\
             abc
-            """
-        ),
+            """),
         3,
         3,
     ),
     CustomsTestCase(
-        dedent(
-            """\
+        dedent("""\
             a
             b
             c
-            """
-        ),
+            """),
         3,
         0,
     ),
     CustomsTestCase(
-        dedent(
-            """\
+        dedent("""\
             ab
             ac
-            """
-        ),
+            """),
         3,
         1,
     ),
     CustomsTestCase(
-        dedent(
-            """\
+        dedent("""\
             a
             a
             a
             a
-            """
-        ),
+            """),
         1,
         1,
     ),
     CustomsTestCase(
-        dedent(
-            """\
+        dedent("""\
             b
-            """
-        ),
+            """),
         1,
         1,
     ),

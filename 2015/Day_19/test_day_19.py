@@ -12,37 +12,31 @@ class ReactionTestCase(t.NamedTuple):
 
 REACTION_CASES = [
     ReactionTestCase(
-        dedent(
-            """\
+        dedent("""\
             H => HO
             H => OH
             O => HH
 
             HOH
-            """
-        ),
+            """),
         4,
     ),
     ReactionTestCase(
-        dedent(
-            """\
+        dedent("""\
             H => HO
             H => OH
             O => HH
 
             HOHOHO
-            """
-        ),
+            """),
         7,
     ),
     ReactionTestCase(
-        dedent(
-            """\
+        dedent("""\
             H => OO
 
             H2O
-            """
-        ),
+            """),
         1,
     ),
 ]

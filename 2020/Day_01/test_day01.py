@@ -2,16 +2,14 @@ from textwrap import dedent
 
 from .aoc_2020_day01 import find_sum_combo
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     1721
     979
     366
     299
     675
     1456
-    """
-).splitlines()
+    """).splitlines()
 
 PUZZLE_INPUT = [int(line) for line in SAMPLE_INPUT]
 

@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2022_day20 import DECRYPTION_KEY, decrypt, parse_file
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     1
     2
     -3
@@ -11,8 +10,7 @@ SAMPLE_INPUT = dedent(
     -2
     0
     4
-    """
-)
+    """)
 ENCRYPTED = parse_file(SAMPLE_INPUT)
 
 

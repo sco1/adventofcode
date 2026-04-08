@@ -20,15 +20,13 @@ def test_hand_parsing(player_spec: str, truth_kind: HandType, truth_bid: int) ->
     assert p.bid == truth_bid
 
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     32T3K 765
     T55J5 684
     KK677 28
     KTJJT 220
     QQQJA 483
-    """
-)
+    """)
 
 TRUTH_RANKING = (1, 4, 3, 2, 5)
 TRUTH_WINNINGS = 6440

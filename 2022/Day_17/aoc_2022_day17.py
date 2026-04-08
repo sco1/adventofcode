@@ -43,8 +43,7 @@ class Elfomino:  # noqa: D101
         return cls(coords)
 
 
-SHAPE_SPEC = dedent(
-    """\
+SHAPE_SPEC = dedent("""\
     ####
 
     .#.
@@ -62,8 +61,7 @@ SHAPE_SPEC = dedent(
 
     ##
     ##
-    """
-)
+    """)
 PIECES = tuple(Elfomino.from_raw(piece) for piece in SHAPE_SPEC.split("\n\n"))
 
 

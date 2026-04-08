@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2024_day23 import find_n_length_connections, find_password, find_t_cliques, parse_lan_map
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     kh-tc
     qp-kh
     de-cg
@@ -36,8 +35,7 @@ SAMPLE_INPUT = dedent(
     wh-qp
     tb-vc
     td-yn
-    """
-)
+    """)
 
 
 def test_3_cliques() -> None:

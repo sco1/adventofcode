@@ -7,16 +7,14 @@ def test_is_triangle() -> None:
     assert is_possible_triangle("5 10 25") is False
 
 
-VERTICAL_SPEC = dedent(
-    """\
+VERTICAL_SPEC = dedent("""\
     101 301 501
     102 302 502
     103 303 503
     201 401 601
     202 402 602
     203 403 603
-    """
-)
+    """)
 
 TRUTH_TRIANGLES = (
     "101 102 103",

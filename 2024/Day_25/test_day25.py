@@ -6,8 +6,7 @@ from .aoc_2024_day25 import Key, Lock, fits, n_fits, parse_schematics
 
 
 def test_parse_lock() -> None:
-    schematic = dedent(
-        """\
+    schematic = dedent("""\
         #####
         .####
         .####
@@ -15,14 +14,12 @@ def test_parse_lock() -> None:
         .#.#.
         .#...
         .....
-        """
-    )
+        """)
     assert Lock.from_raw(schematic) == Lock((0, 5, 3, 4, 3))
 
 
 def test_parse_key() -> None:
-    schematic = dedent(
-        """\
+    schematic = dedent("""\
         .....
         #....
         #....
@@ -30,13 +27,11 @@ def test_parse_key() -> None:
         #.#.#
         #.###
         #####
-        """
-    )
+        """)
     assert Key.from_raw(schematic) == Key((5, 0, 2, 1, 3))
 
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     #####
     .####
     .####
@@ -76,8 +71,7 @@ SAMPLE_INPUT = dedent(
     #.#..
     #.#.#
     #####
-    """
-)
+    """)
 
 TRUTH_LOCKS = [
     Lock((0, 5, 3, 4, 3)),

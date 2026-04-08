@@ -23,8 +23,7 @@ def test_is_possible(pattern: str, truth_is_possible: bool) -> None:
     assert is_possible(TOWELS, pattern) == truth_is_possible
 
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     r, wr, b, g, bwu, rb, gb, br
 
     brwrr
@@ -35,8 +34,7 @@ SAMPLE_INPUT = dedent(
     bwurrg
     brgr
     bbrgwb
-    """
-)
+    """)
 
 
 def test_n_possible() -> None:

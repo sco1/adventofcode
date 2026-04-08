@@ -2,15 +2,13 @@ from textwrap import dedent
 
 from .aoc_2020_day12 import AdventFerry
 
-SAMPLE_INSTRUCTIONS = dedent(
-    """\
+SAMPLE_INSTRUCTIONS = dedent("""\
     F10
     N3
     F7
     R90
     F11
-    """
-)
+    """)
 
 
 def test_ferry_driving() -> None:

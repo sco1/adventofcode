@@ -3,8 +3,7 @@ from textwrap import dedent
 from aoc_2019_day6 import get_to_santa, n_total_orbits, system_from_orbits
 
 PART_ONE = (
-    dedent(
-        """\
+    dedent("""\
         COM)B
         B)C
         C)D
@@ -16,14 +15,12 @@ PART_ONE = (
         E)J
         J)K
         K)L
-        """
-    ).splitlines(),
+        """).splitlines(),
     42,
 )
 
 PART_TWO = (
-    dedent(
-        """\
+    dedent("""\
         COM)B
         B)C
         C)D
@@ -37,8 +34,7 @@ PART_TWO = (
         K)L
         K)YOU
         I)SAN
-        """
-    ).splitlines(),
+        """).splitlines(),
     4,
 )
 

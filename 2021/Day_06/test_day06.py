@@ -2,11 +2,9 @@ from textwrap import dedent
 
 from .aoc_2021_day06 import spawn_until
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     3,4,3,1,2
-    """
-).strip()
+    """).strip()
 AGES = [int(age) for age in SAMPLE_INPUT.split(",")]
 
 

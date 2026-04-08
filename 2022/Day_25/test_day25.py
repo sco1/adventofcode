@@ -50,8 +50,7 @@ def test_snafu_to_decimal(snafu_val: str, truth_decimal: int) -> None:
     assert snafu2dec(snafu_val) == truth_decimal
 
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     1=-0-2
     12111
     2=0=
@@ -65,8 +64,7 @@ SAMPLE_INPUT = dedent(
     12
     1=
     122
-    """
-)
+    """)
 
 
 def test_part_one() -> None:

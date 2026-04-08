@@ -15,8 +15,7 @@ class AdapterTestCase(t.NamedTuple):  # noqa: D101
 
 PUZZLE_TEST_CASES = [
     AdapterTestCase(
-        dedent(
-            """\
+        dedent("""\
             16
             10
             15
@@ -28,15 +27,13 @@ PUZZLE_TEST_CASES = [
             6
             12
             4
-            """
-        ),
+            """),
         7,
         5,
         8,
     ),
     AdapterTestCase(
-        dedent(
-            """\
+        dedent("""\
             28
             33
             18
@@ -68,8 +65,7 @@ PUZZLE_TEST_CASES = [
             34
             10
             3
-            """
-        ),
+            """),
         22,
         10,
         19208,

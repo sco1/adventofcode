@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2021_day10 import parse_subsystem_code, score_autocomplete
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     [({(<(())[]>[[{[]{<()<>>
     [(()[<>])]({[<{<<[]>>(
     {([(<{}[<>[]}>{[]{[(<()>
@@ -14,8 +13,7 @@ SAMPLE_INPUT = dedent(
     [<(<(<(<{}))><([]([]()
     <{([([[(<>()){}]>(<<{{
     <{([{{}}[<[[[<>{}]]]>[]]
-    """
-).splitlines()
+    """).splitlines()
 
 
 def test_part_one() -> None:

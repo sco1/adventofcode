@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2021_day04 import parse_bingo, run_bingo
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1
 
     22 13 17 11  0
@@ -23,8 +22,7 @@ SAMPLE_INPUT = dedent(
     18  8 23 26 20
     22 11 13  6  5
      2  0 12  3  7
-    """
-).splitlines()
+    """).splitlines()
 
 
 def test_part_one() -> None:

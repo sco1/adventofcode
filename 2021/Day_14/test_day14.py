@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2021_day14 import non_brute_deconstruct, parse_polymer_formula
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     NNCB
 
     CH -> B
@@ -22,8 +21,7 @@ SAMPLE_INPUT = dedent(
     BC -> B
     CC -> N
     CN -> C
-    """
-)
+    """)
 TEMPLATE, RULES = parse_polymer_formula(SAMPLE_INPUT)
 
 

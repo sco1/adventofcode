@@ -2,16 +2,14 @@ from textwrap import dedent
 
 from .aoc_2021_day02 import SubMcSubFace
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     forward 5
     down 5
     forward 8
     up 3
     down 8
     forward 2
-    """
-).splitlines()
+    """).splitlines()
 
 
 def test_part_one() -> None:

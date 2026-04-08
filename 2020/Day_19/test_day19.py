@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2020_day19 import check_messages
 
-SAMPLE_1 = dedent(
-    """\
+SAMPLE_1 = dedent("""\
     0: 4 1 5
     1: 2 3 | 3 2
     2: 4 4 | 5 5
@@ -16,11 +15,9 @@ SAMPLE_1 = dedent(
     abbbab
     aaabbb
     aaaabbb
-    """
-)
+    """)
 
-SAMPLE_2 = dedent(
-    """\
+SAMPLE_2 = dedent("""\
     42: 9 14 | 10 1
     9: 14 27 | 1 26
     10: 23 14 | 28 1
@@ -68,8 +65,7 @@ SAMPLE_2 = dedent(
     aaaabbaabbaaaaaaabbbabbbaaabbaabaaa
     babaaabbbaaabaababbaabababaaab
     aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba
-    """
-)
+    """)
 
 
 def test_part_one() -> None:  # noqa: D103

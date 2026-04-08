@@ -4,16 +4,14 @@ import pytest
 
 from .aoc_2024_day02 import is_level_safe, is_level_safe_with_dampener, parse_level_report
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     7 6 4 2 1
     1 2 7 8 9
     9 7 6 2 1
     1 3 2 4 5
     8 6 4 4 1
     1 3 6 7 9
-    """
-).strip()
+    """).strip()
 
 
 def test_report_parse() -> None:

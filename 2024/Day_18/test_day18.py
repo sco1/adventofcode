@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2024_day18 import build_grid, find_first_blocker, parse_byte_positions, shortest_path
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     5,4
     4,2
     4,5
@@ -29,8 +28,7 @@ SAMPLE_INPUT = dedent(
     0,5
     1,6
     2,0
-    """
-)
+    """)
 
 
 def test_shortest_path_len() -> None:

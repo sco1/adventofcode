@@ -32,8 +32,7 @@ def test_rotate_n(start: int, rotation: Rotation, truth_out: int) -> None:
     assert rotate_dial(start, rotation) == truth_out
 
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     L68
     L30
     R48
@@ -44,8 +43,7 @@ SAMPLE_INPUT = dedent(
     L99
     R14
     L82
-    """
-)
+    """)
 
 
 def test_find_password() -> None:

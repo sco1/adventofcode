@@ -2,8 +2,7 @@ from textwrap import dedent
 
 from .aoc_2021_day05 import find_overlaps
 
-SAMPLE_INPUT = dedent(
-    """\
+SAMPLE_INPUT = dedent("""\
     0,9 -> 5,9
     8,0 -> 0,8
     9,4 -> 3,4
@@ -14,8 +13,7 @@ SAMPLE_INPUT = dedent(
     3,4 -> 1,4
     0,0 -> 8,8
     5,5 -> 8,2
-    """
-).splitlines()
+    """).splitlines()
 
 
 def test_part_one() -> None:

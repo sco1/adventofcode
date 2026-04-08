@@ -4,15 +4,13 @@ import pytest
 
 from .aoc_2024_day04 import count_word, count_x_mas, parse_word_search
 
-SAMPLE_INPUT_1 = dedent(
-    """\
+SAMPLE_INPUT_1 = dedent("""\
     ..X...
     .SAMX.
     .A..A.
     XMAS.S
     .X....
-    """
-)
+    """)
 
 TRUTH_COORDS_SAMPLE_1 = {
     "X": {(0, 3), (2, 0), (1, 4), (4, 1)},
@@ -30,8 +28,7 @@ def test_parse_word_search() -> None:
     assert letter_map == TRUTH_COORDS_SAMPLE_1
 
 
-SAMPLE_INPUT_2 = dedent(
-    """\
+SAMPLE_INPUT_2 = dedent("""\
     MMMSXXMASM
     MSAMXMSMSA
     AMXSXMAAMM
@@ -42,11 +39,9 @@ SAMPLE_INPUT_2 = dedent(
     SAXAMASAAA
     MAMMMXMMMM
     MXMXAXMASX
-    """
-)
+    """)
 
-SAMPLE_INPUT_3 = dedent(
-    """\
+SAMPLE_INPUT_3 = dedent("""\
     ....XXMAS.
     .SAMXMS...
     ...S..A...
@@ -57,8 +52,7 @@ SAMPLE_INPUT_3 = dedent(
     .A.A.A.A.A
     ..M.M.M.MM
     .X.X.XMASX
-    """
-)
+    """)
 
 COUNTING_TEST_CASES = (
     (SAMPLE_INPUT_1, 4),
@@ -73,8 +67,7 @@ def test_count_xmas(raw_puzzle: str, truth_n: int) -> None:
     assert count_word(letter_map, letter_coords) == truth_n
 
 
-XMAS_SAMPLE = dedent(
-    """\
+XMAS_SAMPLE = dedent("""\
     .M.S......
     ..A..MSMS.
     .M.S.MAA..
@@ -85,8 +78,7 @@ XMAS_SAMPLE = dedent(
     .A.A.A.A..
     M.M.M.M.M.
     ..........
-    """
-)
+    """)
 
 
 def test_count_x_mas() -> None:
