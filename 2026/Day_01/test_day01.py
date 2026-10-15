@@ -1,0 +1,2 @@
+SAMPLE_INPUT = """\
+"""
