@@ -1,7 +1,8 @@
 from textwrap import dedent
 
 import pytest
-from aoc_2019_day12 import Planet
+
+from .aoc_2019_day12 import Planet
 
 # Provide test cases as (starting moon map, steps to simulate, truth energy)
 PART_ONE = [

@@ -28,6 +28,6 @@ def test_part_one(input: str, n_phases: int, truth_output: str) -> None:
 
 
 @pytest.mark.parametrize("input, truth_message", PART_TWO)
-def test_part_two(input: str, truth_output: str) -> None:
+def test_part_two(input: str, truth_message: str) -> None:
     """Test for correct decoding of the message in the input signal."""
     raise NotImplementedError

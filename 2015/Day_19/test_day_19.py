@@ -2,7 +2,8 @@ import typing as t
 from textwrap import dedent
 
 import pytest
-from aoc_2015_day_19 import count_unique_products, parse_input
+
+from .aoc_2015_day19 import count_unique_products, parse_input
 
 
 class ReactionTestCase(t.NamedTuple):

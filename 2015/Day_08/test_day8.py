@@ -2,7 +2,8 @@ import typing as t
 from textwrap import dedent
 
 import pytest
-from aoc_2015_day8 import size_if_escaped, size_in_code, size_in_memory
+
+from .aoc_2015_day8 import size_if_escaped, size_in_code, size_in_memory
 
 
 class PuzzleTestCase(t.NamedTuple):

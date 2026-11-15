@@ -1,5 +1,6 @@
 import pytest
-from aoc_2019_day4 import is_valid_password
+
+from .aoc_2019_day4 import is_valid_password
 
 # Test cases as (password, is valid password) tuples
 PART_ONE = [

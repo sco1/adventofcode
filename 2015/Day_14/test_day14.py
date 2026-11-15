@@ -2,7 +2,8 @@ import typing as t
 from textwrap import dedent
 
 import pytest
-from aoc_2015_day14 import Reindeer, ReindeerRace
+
+from .aoc_2015_day14 import Reindeer, ReindeerRace
 
 PUZZLE_INPUT = dedent("""\
     Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds.

@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from aoc_2019_day6 import get_to_santa, n_total_orbits, system_from_orbits
+from .aoc_2019_day6 import get_to_santa, n_total_orbits, system_from_orbits
 
 PART_ONE = (
     dedent("""\

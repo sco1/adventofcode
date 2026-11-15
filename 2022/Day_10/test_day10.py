@@ -4,7 +4,8 @@ from textwrap import dedent
 
 from .aoc_2022_day10 import debug_register, render_image
 
-SAMPLE_INPUT = Path("./sample_input.txt").read_text().splitlines()
+PUZZLE_DIR = Path(__file__).parent
+SAMPLE_INPUT = (PUZZLE_DIR / "sample_input.txt").read_text().splitlines()
 
 
 def test_part_one() -> None:

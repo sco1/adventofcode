@@ -1,5 +1,6 @@
 import pytest
-from aoc_2019_day3 import Wire
+
+from .aoc_2019_day3 import Wire
 
 # Test cases as (wire a, wire b, truth Manhattan distance) tuples
 PART_ONE = [
