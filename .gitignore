@@ -1,5 +1,5 @@
 # Don't commit puzzle data
-**/Day_*/puzzle_input.txt
+**/Day_*/puzzle_input.*
 **/Day_*/README.md
 
 # Caches

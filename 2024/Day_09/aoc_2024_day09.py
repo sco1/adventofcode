@@ -29,7 +29,7 @@ def parse_disk_map(raw_map: str) -> list[FileBlock]:
     Each file is given an integer ID number based on the order it appears in the raw disk mapping.
     """
     blocks = []
-    for i, b in enumerate(itertools.batched(raw_map, 2)):
+    for i, b in enumerate(itertools.batched(raw_map, 2, strict=False)):
         if len(b) == 1:
             # Last block, no free space
             blocks.append(FileBlock(i, int(b[0]), 0))

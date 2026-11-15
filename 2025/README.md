@@ -5,17 +5,17 @@
 :white_check_mark: - Complete
 
 
-|    |       Python       |        Dart        |         Go         |       Julia        |        Lox         |       MATLAB       |        Rust        |
-|----|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|
-| 1  | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |
-| 2  | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |
-| 3  | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |
-| 4  | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |
-| 5  | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |
-| 6  | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |
-| 7  | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |
-| 8  | :white_check_mark: |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |
-| 9  |   :white_circle:   |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |
-| 10 |   :white_circle:   |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |
-| 11 |   :white_circle:   |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |
-| 12 |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |        :x:         |
+|    |       Python       |
+|----|:------------------:|
+| 1  | :white_check_mark: |
+| 2  | :white_check_mark: |
+| 3  | :white_check_mark: |
+| 4  | :white_check_mark: |
+| 5  | :white_check_mark: |
+| 6  | :white_check_mark: |
+| 7  | :white_check_mark: |
+| 8  | :white_check_mark: |
+| 9  |   :white_circle:   |
+| 10 |   :white_circle:   |
+| 11 |   :white_circle:   |
+| 12 |        :x:         |

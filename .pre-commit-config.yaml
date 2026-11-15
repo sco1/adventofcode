@@ -7,12 +7,12 @@ repos:
     hooks:
       - id: black
   - repo: https://github.com/pycqa/isort
-    rev: 9.0.2
+    rev: 10.0.0b3
     hooks:
       - id: isort
         name: isort
   - repo: https://github.com/pycqa/flake8
-    rev: 7.4.1
+    rev: 7.5.0
     hooks:
       - id: flake8
         additional_dependencies:
@@ -41,6 +41,6 @@ repos:
       - id: matlab-reflow-comments
         args: [--line-length=100]
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.17.0
+    rev: v0.17.5
     hooks:
       - id: ruff-check

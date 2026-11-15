@@ -1,6 +1,7 @@
 import argparse
 import json
 import typing as t
+from collections import abc
 from enum import IntEnum, StrEnum, auto
 from pathlib import Path
 
@@ -17,6 +18,13 @@ class Lang(StrEnum):  # noqa: D101
     LOX = auto()
     MATLAB = auto()
     RUST = auto()
+
+
+ALWAYS_SHOW: frozenset[Lang] = frozenset({Lang.PYTHON})
+
+DISPLAY_NAME_OVERRIDE: dict[Lang, str] = {
+    Lang.MATLAB: "MATLAB",
+}
 
 
 class State(IntEnum):  # noqa: D101
@@ -42,17 +50,33 @@ HEADER = f"""\
 DATA_T: t.TypeAlias = dict[str, list[State]]
 
 
+def active_langs(data_tables: abc.Iterable[DATA_T]) -> list[Lang]:
+    """
+    Determine which languages to emit a column for, in `Lang` definition order.
+
+    A language is considered active if it's in `ALWAYS_SHOW`, or if at least one day in any of the
+    provided data tables is not marked as `State.NOT`.
+    """
+    data_tables = list(data_tables)
+    return [
+        la
+        for la in Lang
+        if la in ALWAYS_SHOW
+        or any(state != State.NOT for data in data_tables for state in data[la])
+    ]
+
+
 def build_table(data: DATA_T, n_days: int) -> str:  # noqa: D103
-    header = f"|    |{'|'.join(la.title().center(MIN_WIDTH+2) for la in Lang)}|"
-    header = header.replace("Matlab", "MATLAB")  # Special case name
+    langs = active_langs((data,))
+    header = f"|    |{'|'.join(DISPLAY_NAME_OVERRIDE.get(la, la.title()).center(MIN_WIDTH+2) for la in langs)}|"  # noqa: E501
 
     sub_div = f":{'-'*MIN_WIDTH}:|"
-    divider = f"|----|{sub_div*len(Lang)}"
+    divider = f"|----|{sub_div*len(langs)}"
 
     rows = []
     for day in range(n_days):
         rows.append(
-            f"|{day+1:^4}|{'|'.join(ICONS[data[la][day]].center(MIN_WIDTH+2) for la in Lang)}|"
+            f"|{day+1:^4}|{'|'.join(ICONS[data[la][day]].center(MIN_WIDTH+2) for la in langs)}|"
         )
 
     all_rows = "\n".join(rows)
@@ -90,14 +114,7 @@ def parse_progress_json(filepath: Path, n_days: int) -> DATA_T:
 
 def build_summary_table() -> str:
     """Build a completion stats summary table from the data in each year's README."""
-    col_width = 8
-    header = f"|        |{'|'.join(la.title().center(col_width+2) for la in Lang)}|"
-    header = header.replace("Matlab", "MATLAB")  # Special case name
-
-    sub_div = f":{'-'*col_width}:|"
-    divider = f"|--------|{sub_div*len(Lang)}"
-
-    rows = []
+    yearly_data = {}
     for filepath in sorted(BASE_DIR.glob("2*/README.md"), key=lambda x: x.parent):
         year = filepath.parent.name
 
@@ -107,10 +124,21 @@ def build_summary_table() -> str:
         else:
             n_days = 25
 
-        data = parse_progress_json(filepath, n_days=n_days)
+        yearly_data[year] = parse_progress_json(filepath, n_days=n_days)
 
+    # Columns must be consistent across all rows, so use the union of each year's active languages
+    langs = active_langs(yearly_data.values())
+
+    col_width = 8
+    header = f"|        |{'|'.join(DISPLAY_NAME_OVERRIDE.get(la, la.title()).center(col_width+2) for la in langs)}|"  # noqa: E501
+
+    sub_div = f":{'-'*col_width}:|"
+    divider = f"|--------|{sub_div*len(langs)}"
+
+    rows = []
+    for year, data in yearly_data.items():
         row = []
-        for la in Lang:
+        for la in langs:
             partial = sum((day == State.PARTIAL) for day in data[la])
             full = sum((day == State.DONE) for day in data[la])
 
@@ -150,7 +178,7 @@ def main() -> None:  # noqa: D103
 
     # Update the base README with the new status using Cog & a dummy sys.argv
     cog = Cog()
-    cog.main(["", "-r", str((BASE_DIR / "README.MD").resolve())])
+    cog.main(["", "-r", str((BASE_DIR / "README.md").resolve())])
 
 
 if __name__ == "__main__":

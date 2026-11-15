@@ -128,7 +128,7 @@ def mutate_until_fixed(initial_instructions: str) -> int:
         machine = GameGear(new_instruction_set)
         try:
             status = machine.run()
-        except (RepeatInstructionError, MaxIterExceededError):
+        except RepeatInstructionError, MaxIterExceededError:
             continue
 
         if status == 1:
