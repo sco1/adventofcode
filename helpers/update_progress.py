@@ -1,11 +1,8 @@
-import argparse
 import json
 import typing as t
 from collections import abc
 from enum import IntEnum, StrEnum, auto
 from pathlib import Path
-
-from cogapp import Cog
 
 from helpers.common import n_puzzle_days, validate_puzzle_date
 
@@ -146,35 +143,25 @@ def build_summary_table() -> str:
     return f"{header}\n{divider}\n{all_rows}"
 
 
-def main() -> None:  # noqa: D103
-    parser = argparse.ArgumentParser()
-    parser.add_argument("year", type=int)
-    parser.add_argument("day", type=int)
-    parser.add_argument("lang", type=Lang)
-    parser.add_argument("state", choices=("not", "partial", "done"))
+def set_progress(year: int, day: int, lang: Lang, state: State) -> None:
+    """Set a puzzle day's completion state, then rebuild the year's and the repo's README tables."""
+    # cogapp is a dev dependency, so only import it when needed; the `aoc` CLI imports this module
+    from cogapp import Cog
 
-    args = parser.parse_args()
-    try:
-        validate_puzzle_date(args.year, args.day)
-    except ValueError as e:
-        parser.error(str(e))
+    validate_puzzle_date(year, day)
 
-    n_days = n_puzzle_days(args.year)
-    filepath = BASE_DIR / f"{args.year}" / "README.md"
+    n_days = n_puzzle_days(year)
+    filepath = BASE_DIR / f"{year}" / "README.md"
     data_table = parse_progress_json(filepath, n_days=n_days)
 
-    data_table[args.lang][args.day - 1] = State[args.state.upper()]
+    data_table[lang][day - 1] = state
 
     with filepath.open("w") as f:
         f.write(f"<!-- {json.dumps(data_table)} -->\n")
         f.write(f"{HEADER}\n\n")
         f.write(f"{build_table(data_table, n_days=n_days)}\n")
-    print(f"Puzzle status updated: ({args.year}, {args.day}, {args.lang}, {args.state})")
+    print(f"Puzzle status updated: ({year}, {day}, {lang}, {state.name.lower()})")
 
     # Update the base README with the new status using Cog & a dummy sys.argv
     cog = Cog()
     cog.main(["", "-r", str((BASE_DIR / "README.md").resolve())])
-
-
-if __name__ == "__main__":
-    main()

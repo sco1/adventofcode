@@ -1,4 +1,3 @@
-import argparse
 from pathlib import Path
 from string import Template
 
@@ -46,10 +45,12 @@ def init_puzzle_day(year: int, day: int, langs: list[str]) -> list[Path]:
 
     The day folder may already exist, allowing a language to be added to a day that was previously
     initialized. Existing files are never overwritten: if any language template would clobber an
-    existing file, a `FileExistsError` is raised before anything is written.
+    existing file, a `FileExistsError` is raised before anything is written. A `ValueError` is
+    raised if the year & day are not a puzzle day.
 
     Returns the paths of the files that were created.
     """
+    validate_puzzle_date(year, day)
     day_dir = puzzle_dir(year, day, base_dir=BASE_DIR)
 
     to_write: dict[Path, str] = {}
@@ -76,36 +77,3 @@ def init_puzzle_day(year: int, day: int, langs: list[str]) -> list[Path]:
         created.append(path)
 
     return created
-
-
-def main() -> None:  # noqa: D103
-    langs = available_langs()
-
-    parser = argparse.ArgumentParser(description="Initialize an Advent of Code puzzle day folder.")
-    parser.add_argument("year", type=int)
-    parser.add_argument("day", type=int)
-    parser.add_argument(
-        "--lang",
-        nargs="+",
-        choices=langs,
-        default=["python"],
-        help="Language template(s) to create (default: python)",
-    )
-
-    args = parser.parse_args()
-    try:
-        validate_puzzle_date(args.year, args.day)
-    except ValueError as e:
-        parser.error(str(e))
-
-    try:
-        created = init_puzzle_day(args.year, args.day, args.lang)
-    except FileExistsError as e:
-        parser.exit(1, f"{e}\n")
-
-    for path in created:
-        print(f"Created {path.relative_to(BASE_DIR).as_posix()}")
-
-
-if __name__ == "__main__":
-    main()
