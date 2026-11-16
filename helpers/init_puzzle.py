@@ -2,7 +2,7 @@ import argparse
 from pathlib import Path
 from string import Template
 
-from helpers.common import validate_puzzle_date
+from helpers.common import puzzle_dir, validate_puzzle_date
 
 BASE_DIR = Path(__file__).parent.parent
 TEMPLATE_DIR = Path(__file__).parent / "templates"
@@ -50,7 +50,7 @@ def init_puzzle_day(year: int, day: int, langs: list[str]) -> list[Path]:
 
     Returns the paths of the files that were created.
     """
-    day_dir = BASE_DIR / f"{year}" / f"Day_{day:02d}"
+    day_dir = puzzle_dir(year, day, base_dir=BASE_DIR)
 
     to_write: dict[Path, str] = {}
     for lang in langs:

@@ -1,4 +1,12 @@
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent.parent
 FIRST_EVENT_YEAR = 2015
+
+
+def puzzle_dir(year: int, day: int, base_dir: Path = BASE_DIR) -> Path:
+    """Return the folder for the given year & day's puzzle, e.g. `<base_dir>/2015/Day_01`."""
+    return base_dir / f"{year}" / f"Day_{day:02d}"
 
 
 def n_puzzle_days(year: int) -> int:

@@ -32,6 +32,7 @@ Homepage = "https://github.com/sco1/"
 Repository = "https://github.com/sco1/adventofcode"
 
 [project.scripts]
+aoc = "helpers.cli:main"
 aoc-init = "helpers.init_puzzle:main"
 set-prog = "helpers.update_progress:main"
 
