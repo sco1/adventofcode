@@ -1,0 +1,7 @@
+[package]
+name = "y2022_d01"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+normalize-line-endings = "0.3"

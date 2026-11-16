@@ -1,0 +1,8 @@
+[package]
+name = "y2015_d05"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+itertools = "0.10.0"
+counter = "0.5.2"

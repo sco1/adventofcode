@@ -1,0 +1,7 @@
+[package]
+name = "y2015_d04"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+md-5 = "0.9.1"

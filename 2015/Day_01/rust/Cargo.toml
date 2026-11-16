@@ -1,0 +1,6 @@
+[package]
+name = "y2015_d01"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
