@@ -7,6 +7,8 @@ from pathlib import Path
 
 from cogapp import Cog
 
+from helpers.common import n_puzzle_days, validate_puzzle_date
+
 BASE_DIR = Path(__file__).parent.parent
 
 
@@ -117,13 +119,7 @@ def build_summary_table() -> str:
     yearly_data = {}
     for filepath in sorted(BASE_DIR.glob("2*/README.md"), key=lambda x: x.parent):
         year = filepath.parent.name
-
-        # Starting in 2025, the event is 12 long days rather than the historical 25
-        if int(year) >= 2025:
-            n_days = 12
-        else:
-            n_days = 25
-
+        n_days = n_puzzle_days(int(year))
         yearly_data[year] = parse_progress_json(filepath, n_days=n_days)
 
     # Columns must be consistent across all rows, so use the union of each year's active languages
@@ -158,13 +154,12 @@ def main() -> None:  # noqa: D103
     parser.add_argument("state", choices=("not", "partial", "done"))
 
     args = parser.parse_args()
+    try:
+        validate_puzzle_date(args.year, args.day)
+    except ValueError as e:
+        parser.error(str(e))
 
-    # Starting in 2025, the event is 12 long days rather than the historical 25
-    if args.year >= 2025:
-        n_days = 12
-    else:
-        n_days = 25
-
+    n_days = n_puzzle_days(args.year)
     filepath = BASE_DIR / f"{args.year}" / "README.md"
     data_table = parse_progress_json(filepath, n_days=n_days)
 

@@ -1,0 +1,29 @@
+package main
+
+import (
+	"fmt"
+	"os"
+	"path/filepath"
+	"runtime"
+	"strings"
+)
+
+func main() {
+	_, sourceFile, _, _ := runtime.Caller(0)
+	rawInput, err := os.ReadFile(filepath.Join(filepath.Dir(sourceFile), "puzzle_input.txt"))
+	if err != nil {
+		panic(err)
+	}
+	puzzleInput := strings.TrimSpace(string(rawInput))
+
+	fmt.Printf("Part One: %v\n", partOne(puzzleInput))
+	fmt.Printf("Part Two: %v\n", partTwo(puzzleInput))
+}
+
+func partOne(puzzleInput string) int {
+	panic("not implemented")
+}
+
+func partTwo(puzzleInput string) int {
+	panic("not implemented")
+}
