@@ -50,7 +50,7 @@ def star_message(star_position: np.ndarray, star_velocity: np.ndarray) -> str:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     with puzzle_input_file.open(mode="r") as f:
         exp = r"(-?\d+)"
         puzzle_input = []

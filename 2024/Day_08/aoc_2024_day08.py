@@ -95,7 +95,7 @@ def find_antinodes(
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().strip()
 
     antenna_locations, map_bbox = parse_antenna_map(puzzle_input)

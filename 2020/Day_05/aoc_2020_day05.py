@@ -46,7 +46,7 @@ def find_my_seat(decoded_seat_ids: set[int]) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().splitlines()
 
     all_seat_ids = {decode_boarding_pass(specifier)[2] for specifier in puzzle_input}

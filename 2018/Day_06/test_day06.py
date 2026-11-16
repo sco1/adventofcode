@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from .aoc_2018_day6 import (
+from .aoc_2018_day06 import (
     build_distance_map,
     find_finite_areas,
     find_safe_region,

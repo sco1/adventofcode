@@ -118,7 +118,7 @@ def run_until_static(elf_coords: set[COORD]) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text()
 
     start_coords = parse_hashed_map(puzzle_input)

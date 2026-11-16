@@ -70,7 +70,7 @@ def calculate_instruction_result(instruction: str, do_dont: bool = False) -> int
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
 
     # The newlines are a misdirection! Just junk data.
     puzzle_input = puzzle_input_file.read_text().replace("\n", " ")

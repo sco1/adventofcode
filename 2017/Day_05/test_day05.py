@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from .AoC2017_Day5 import follow_jumps, follow_strange_jumps
+from .aoc_2017_day05 import follow_jumps, follow_strange_jumps
 
 SAMPLE_OFFSETS = dedent("""\
     0

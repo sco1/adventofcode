@@ -61,7 +61,7 @@ def run_phases(signal: np.array, n_phases: int) -> str:
 
 
 if __name__ == "__main__":
-    puzzle_input = Path("./puzzle_input.txt")
+    puzzle_input = Path(__file__).parent / "puzzle_input.txt"
 
     with puzzle_input.open("r") as f:
         raise NotImplementedError

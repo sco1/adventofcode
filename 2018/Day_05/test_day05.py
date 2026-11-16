@@ -1,6 +1,6 @@
 import pytest
 
-from .aoc_2018_day5 import improve_polymer, react_polymer
+from .aoc_2018_day05 import improve_polymer, react_polymer
 
 PART_ONE_CASES = (
     ("aA", 0),

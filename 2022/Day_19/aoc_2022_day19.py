@@ -50,7 +50,7 @@ def _can_build(robot_cost: MATERIALS, inventory: MATERIALS) -> bool:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text()
 
     blueprints = parse_blueprints(puzzle_input)

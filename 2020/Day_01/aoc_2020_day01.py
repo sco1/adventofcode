@@ -18,7 +18,7 @@ def find_sum_combo(
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = [int(line) for line in puzzle_input_file.read_text().splitlines()]
 
     expense_product_pair, entry_pair = find_sum_combo(puzzle_input)

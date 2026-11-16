@@ -70,7 +70,7 @@ def find_bathroom_code(instructions: str, keypad: dict[COORD, str], start_loc: C
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().strip()
 
     regular_keypad, start_loc = parse_keypad()

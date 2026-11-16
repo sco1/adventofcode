@@ -27,7 +27,7 @@ def spawn_until(starting_ages: list[int], n_days: int) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = [int(age) for age in puzzle_input_file.read_text().strip().split(",")]
 
     print(f"Part One: {spawn_until(puzzle_input, 80)}")

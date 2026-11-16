@@ -29,7 +29,7 @@ def accounting_sum(entry: Union[list, dict, str, int], ignore_red: bool = False)
         return entry
 
 
-puzzle_input_file = Path("./puzzle_input.json")
+puzzle_input_file = Path(__file__).parent / "puzzle_input.json"
 with puzzle_input_file.open(mode="r") as f:
     puzzle_input = json.load(f)
 

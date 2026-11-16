@@ -94,7 +94,7 @@ def react_max_fuel(reactions: Dict[str, Reaction], ore_cargo: int = 10**12) -> i
 
 
 if __name__ == "__main__":
-    puzzle_input = Path("./puzzle_input.txt")
+    puzzle_input = Path(__file__).parent / "puzzle_input.txt"
 
     with puzzle_input.open("r") as f:
         reaction_list = [line.strip() for line in f.readlines()]

@@ -64,7 +64,7 @@ def first_repeat_block_distance(instructions: str, origin: COORD = (0, 0)) -> in
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().strip()
 
     print(f"Part One: {headquarters_distance(puzzle_input)}")

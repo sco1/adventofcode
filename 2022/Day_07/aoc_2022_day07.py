@@ -72,7 +72,7 @@ def find_best_deletion(
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().splitlines()
 
     dir_sizes = parse_terminal_session(puzzle_input)

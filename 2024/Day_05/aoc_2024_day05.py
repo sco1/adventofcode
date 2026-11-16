@@ -135,7 +135,7 @@ def calculate_reordered_sum(raw_spec: str) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().strip()
 
     print(f"Part One: {calculate_valid_sum(puzzle_input)}")

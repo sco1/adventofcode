@@ -142,7 +142,7 @@ def sweep_laser(
 
 
 if __name__ == "__main__":
-    puzzle_input = Path("./puzzle_input.txt")
+    puzzle_input = Path(__file__).parent / "puzzle_input.txt"
 
     with puzzle_input.open("r") as f:
         raw_map = [line.strip() for line in f]

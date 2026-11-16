@@ -38,7 +38,7 @@ def find_best_snack_trio(calorie_counts: abc.Sequence[int]) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text()
 
     calorie_counts = parse_puzzle_input(puzzle_input)

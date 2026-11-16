@@ -127,7 +127,7 @@ def calculate_bulk_fence_cost(plant_graph: nx.Graph) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().strip()
 
     pg = build_plant_graph(puzzle_input)

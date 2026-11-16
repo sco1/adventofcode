@@ -83,7 +83,7 @@ def score_perfect_strat(strategy_guide: str) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text()
 
     print(f"Part One: {score_game(puzzle_input)}")

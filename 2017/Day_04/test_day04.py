@@ -1,6 +1,6 @@
 import pytest
 
-from .AoC2017_Day4 import _validate_password
+from .aoc_2017_day04 import _validate_password
 
 PART_ONE_CASES = (
     ("aa bb cc dd ee", True),

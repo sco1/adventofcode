@@ -56,7 +56,7 @@ def find_overlaps(raw_report: list[str], ignore_diag: bool = True) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().splitlines()
 
     print(f"Part One: {find_overlaps(puzzle_input)}")

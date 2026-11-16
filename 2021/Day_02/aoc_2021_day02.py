@@ -92,7 +92,7 @@ class SubMcSubFace:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().splitlines()
 
     toot_toot = SubMcSubFace(puzzle_input)

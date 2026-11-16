@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from .AoC2017_Day7 import _build_tower, balance_tower, find_bottom_program
+from .aoc_2017_day07 import _build_tower, balance_tower, find_bottom_program
 
 SAMPLE_TOWER = dedent("""\
     pbga (66)

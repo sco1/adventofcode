@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from .aoc_2018_day2 import part1, part2
+from .aoc_2018_day02 import part1, part2
 
 PART_ONE_SAMPLE = dedent("""\
     abcdef

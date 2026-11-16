@@ -80,7 +80,7 @@ def find_shortest_hike(elevation_map: MAP, valid_steps: nx.DiGraph, end_pos: COO
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text()
 
     elevation, start_pos, end_pos = parse_map(puzzle_input)

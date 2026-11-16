@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from .aoc_2018_day4 import (
+from .aoc_2018_day04 import (
     _build_sleep_schedule,
     _parse_logs,
     find_sleepiest_guard,

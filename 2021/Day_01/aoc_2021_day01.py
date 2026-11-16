@@ -20,7 +20,7 @@ def count_ascending(soundings: list[int], width: int = 1) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = [int(line) for line in puzzle_input_file.read_text().splitlines()]
 
     n_ascending_1 = count_ascending(puzzle_input, 1)

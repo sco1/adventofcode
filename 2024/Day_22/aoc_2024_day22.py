@@ -50,7 +50,7 @@ def nth_secret(seed: int, n: int = 2000) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().strip()
 
     market_seeds = [int(n) for n in puzzle_input.splitlines()]

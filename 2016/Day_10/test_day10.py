@@ -1,7 +1,7 @@
 import math
 from textwrap import dedent
 
-from .aoc_2022_day10 import Factory
+from .aoc_2016_day10 import Factory
 
 SAMPLE_INPUT = dedent("""\
     value 5 goes to bot 2

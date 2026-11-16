@@ -57,7 +57,7 @@ def calculate_similarity_score(
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().strip().splitlines()
     left_group, right_group = split_id_locations(puzzle_input)
 

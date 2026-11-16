@@ -1,4 +1,4 @@
-from .AoC2017_Day6 import reallocate_banks
+from .aoc_2017_day06 import reallocate_banks
 
 BANKS = (0, 2, 7, 0)
 

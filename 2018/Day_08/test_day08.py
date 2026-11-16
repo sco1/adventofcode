@@ -1,4 +1,4 @@
-from .aoc_2018_day8 import parse_license_file, sum_tree_metadata
+from .aoc_2018_day08 import parse_license_file, sum_tree_metadata
 
 SAMPLE_LICENSE = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"
 

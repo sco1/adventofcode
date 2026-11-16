@@ -1,6 +1,6 @@
 import pytest
 
-from .aoc_2018_day9 import play_game
+from .aoc_2018_day09 import play_game
 
 SAMPLE_GAME_SCORES = (
     (10, 1_618, 8_317),

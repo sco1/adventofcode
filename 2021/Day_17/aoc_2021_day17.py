@@ -99,7 +99,7 @@ def n_valid_launches(target_area_bounds: BOUNDS) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().strip()
     bounds = parse_target_area(puzzle_input)
 

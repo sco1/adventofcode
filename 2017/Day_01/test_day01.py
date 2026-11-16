@@ -1,6 +1,6 @@
 import pytest
 
-from .AoC2017_Day1 import solve_captcha
+from .aoc_2017_day01 import solve_captcha
 
 PART_ONE_CASES = (
     ("1122", 3),

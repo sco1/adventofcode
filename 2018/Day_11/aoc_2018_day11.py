@@ -62,7 +62,7 @@ def part2(serial: int, max_subgrid_size: int = 300) -> Tuple[int]:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     with puzzle_input_file.open(mode="r") as f:
         serial = int(f.read())
 

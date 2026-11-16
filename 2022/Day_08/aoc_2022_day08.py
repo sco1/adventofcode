@@ -63,7 +63,7 @@ def find_max_scenic_score(tree_map: np.ndarray) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text()
 
     tree_map = parse_tree_map(puzzle_input)

@@ -98,7 +98,7 @@ def trap_guard(start_loc: COORD, obstructions: set[COORD], lab_bbox: BoundingBox
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().strip()
 
     start_loc, obstructions, lab_bbox = parse_lab_map(puzzle_input)

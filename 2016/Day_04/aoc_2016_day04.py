@@ -78,7 +78,7 @@ def join_decrypted_room_names(room_list: str) -> str:  # noqa: D103
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text()
 
     print(f"Part One: {real_room_sector_sum(puzzle_input)}")

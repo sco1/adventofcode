@@ -80,7 +80,7 @@ def calc_decoder_key(packet_pairs: t.Iterable[PACKET_PAIR]) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text()
 
     print(f"Part One: {calc_valid_sum(parse_packets(puzzle_input))}")

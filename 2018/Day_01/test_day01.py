@@ -1,6 +1,6 @@
 import pytest
 
-from .aoc_2018_day1 import part1, part2
+from .aoc_2018_day01 import part1, part2
 
 PART_ONE_TEST_CASES = (
     ("+1\n-2\n+3\n+1", 3),

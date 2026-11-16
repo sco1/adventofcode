@@ -2,7 +2,7 @@ from textwrap import dedent
 
 import pytest
 
-from .AoC2017_Day2 import checksum_divisible, checksum_minmax, parse_spreadsheet
+from .aoc_2017_day02 import checksum_divisible, checksum_minmax, parse_spreadsheet
 
 PART_ONE_CASES = (
     (

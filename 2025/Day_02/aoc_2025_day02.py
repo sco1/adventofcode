@@ -97,7 +97,7 @@ def invalid_id_sum(invalid_ids: abc.Iterable[abc.Iterable[int]]) -> int:  # noqa
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().strip()
 
     ID_RANGES = [ProductIDRange.from_raw(s) for s in puzzle_input.split(",")]

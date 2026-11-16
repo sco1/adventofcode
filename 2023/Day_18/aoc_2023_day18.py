@@ -120,7 +120,7 @@ def dig_trench(
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().strip()
 
     instructions = parse_dig_instructions(puzzle_input)

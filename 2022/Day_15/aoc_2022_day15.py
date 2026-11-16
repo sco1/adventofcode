@@ -151,7 +151,7 @@ def identify_tuning_frequency(
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text()
 
     # Can be smarter and not parse twice but it's not important enough

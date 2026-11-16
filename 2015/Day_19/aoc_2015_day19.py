@@ -54,7 +54,7 @@ def make_reaction(reactions: dict[str, list[str]], base_molecule: str) -> abc.It
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().splitlines()
 
     reactions, starting_molecule = parse_input(puzzle_input)

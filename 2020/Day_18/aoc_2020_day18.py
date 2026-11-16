@@ -117,7 +117,7 @@ def calc_all_homework(homework: str, is_advanced_math: bool = False) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text()
 
     print(f"Part One: {calc_all_homework(puzzle_input)}")

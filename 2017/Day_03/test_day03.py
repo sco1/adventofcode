@@ -1,6 +1,6 @@
 import pytest
 
-from .AoC2017_Day3 import stress_test, walk_spiral
+from .aoc_2017_day03 import stress_test, walk_spiral
 
 PART_ONE_CASES = (
     (1, 0),

@@ -60,7 +60,7 @@ def find_weakness(int_stream: list[int], preamble_len: int = 25) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text()
 
     int_stream = [int(line) for line in puzzle_input.splitlines()]

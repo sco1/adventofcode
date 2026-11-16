@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from .aoc_2018_day7 import _parse_edges, determine_step_order, elf_assembly
+from .aoc_2018_day07 import _parse_edges, determine_step_order, elf_assembly
 
 SAMPLE_INSTRUCTIONS = dedent("""\
     Step C must be finished before step A can begin.

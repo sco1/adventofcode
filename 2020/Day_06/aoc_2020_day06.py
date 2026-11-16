@@ -50,7 +50,7 @@ def batch_check_forms(batched_answers: str, all_yes: bool = False) -> list[int]:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text()
 
     print(f"Part One: {sum(batch_check_forms(puzzle_input))} questions answered 'yes'")

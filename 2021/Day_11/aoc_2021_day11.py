@@ -63,7 +63,7 @@ def find_first_sync(starting_energy: np.ndarray) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().splitlines()
 
     starting_energy = parse_energy_levels(puzzle_input)

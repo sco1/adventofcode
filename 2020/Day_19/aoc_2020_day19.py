@@ -136,7 +136,7 @@ def check_messages(puzzle_input: str, mod_ruleset: bool = False) -> int:
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text()
 
     print(f"Part One: {check_messages(puzzle_input)} valid messages")

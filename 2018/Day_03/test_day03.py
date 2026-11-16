@@ -1,6 +1,11 @@
 from textwrap import dedent
 
-from .aoc_2018_day3 import _build_cloth, _parse_claims, calculate_overlap, find_nonoverlapping_claim
+from .aoc_2018_day03 import (
+    _build_cloth,
+    _parse_claims,
+    calculate_overlap,
+    find_nonoverlapping_claim,
+)
 
 SAMPLE_CLAIMS = dedent("""\
     #1 @ 1,3: 4x4

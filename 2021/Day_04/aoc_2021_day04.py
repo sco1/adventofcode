@@ -76,7 +76,7 @@ def run_bingo(draws: list[int], boards: np.ndarray) -> t.Generator[int, None, No
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().splitlines()
     draws, boards = parse_bingo(puzzle_input)
 

@@ -62,7 +62,7 @@ def step_search(garden_network: nx.Graph, start: COORD, n_steps: int = 64) -> se
 
 
 if __name__ == "__main__":
-    puzzle_input_file = Path("./puzzle_input.txt")
+    puzzle_input_file = Path(__file__).parent / "puzzle_input.txt"
     puzzle_input = puzzle_input_file.read_text().strip()
 
     plots, rocks, start = parse_garden_map(puzzle_input)

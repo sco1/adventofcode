@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from .AoC2017_Day8 import execute
+from .aoc_2017_day08 import execute
 
 SAMPLE_INSTRUCTIONS = dedent("""\
     b inc 5 if a > 1
