@@ -1,4 +1,4 @@
-puzzle_input = read_puzzle_input("./puzzle_input.txt");
+puzzle_input = read_puzzle_input(fullfile(fileparts(mfilename("fullpath")), "puzzle_input.txt"));
 
 test_part_1
 fprintf("Part 1: %d\n", part_1(puzzle_input))

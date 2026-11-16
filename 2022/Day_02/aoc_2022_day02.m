@@ -1,4 +1,4 @@
-game_rounds = parse_guide('./puzzle_input.txt');
+game_rounds = parse_guide(fullfile(fileparts(mfilename("fullpath")), "puzzle_input.txt"));
 % game_rounds = parse_guide('./sample_input.txt');
 
 % Map shape combinations to game point outcome, then add in the per-shape score. Keep as separate

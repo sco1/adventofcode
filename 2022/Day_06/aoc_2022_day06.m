@@ -1,4 +1,4 @@
-data_buffer = parse_buffer('./puzzle_input.txt');
+data_buffer = parse_buffer(fullfile(fileparts(mfilename("fullpath")), "puzzle_input.txt"));
 % data_buffer = parse_buffer('./sample_input.txt');
 
 fprintf('Part One: %u\n', locate_start_marker(data_buffer));

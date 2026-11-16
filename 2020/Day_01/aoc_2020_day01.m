@@ -1,4 +1,5 @@
-expense_report = parse_expense_report('./puzzle_input.txt');
+input_path = fullfile(fileparts(mfilename("fullpath")), "puzzle_input.txt");
+expense_report = parse_expense_report(input_path);
 
 target_value = 2020;
 fprintf('Part One: %u\n', find_entry_product(expense_report, target_value, 2));

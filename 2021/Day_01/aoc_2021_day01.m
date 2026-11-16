@@ -1,4 +1,4 @@
-soundings = parse_soundings('./puzzle_input.txt');
+soundings = parse_soundings(fullfile(fileparts(mfilename("fullpath")), "puzzle_input.txt"));
 % soundings = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263];
 
 fprintf('Part One: %u\n', count_adjacent(soundings));

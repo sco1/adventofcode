@@ -1,4 +1,4 @@
-specs = parse_password_spec('./puzzle_input.txt');
+specs = parse_password_spec(fullfile(fileparts(mfilename("fullpath")), "puzzle_input.txt"));
 
 % Validate each spec against the rules for both parts of the puzzle
 %  Column 1 for Part 1, Column 2 for Part 2

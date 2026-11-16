@@ -1,4 +1,4 @@
-function output = AoC2017_Day3a(n)
+function output = aoc_2017_day03a(n)
 % Each square on the grid is allocated in a spiral pattern starting at a location marked 1 and then
 % counting up while spiraling outward. For example, the first few squares are allocated like this:
 %

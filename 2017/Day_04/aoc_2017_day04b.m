@@ -1,4 +1,4 @@
-function output = AoC2017_Day4b(filepath)
+function output = aoc_2017_day04b(filepath)
 % For added security, yet another system policy has been put in place. Now, a valid passphrase must
 % contain no two words that are anagrams of each other - that is, a passphrase is invalid if any
 % word's letters can be rearranged to form any other word in the passphrase.

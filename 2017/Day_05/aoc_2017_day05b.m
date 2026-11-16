@@ -1,4 +1,4 @@
-function nsteps = AoC2017_Day5b(filepath)
+function nsteps = aoc_2017_day05b(filepath)
 % Now, the jumps are even stranger: after each jump, if the offset was three or more, instead
 % decrease it by 1. Otherwise, increase it by 1 as before.
 %

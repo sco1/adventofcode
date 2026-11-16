@@ -1,4 +1,4 @@
-function nsteps = AoC2017_Day6b(banklist)
+function nsteps = aoc_2017_day06b(banklist)
 % Out of curiosity, the debugger would also like to know the size of the loop: starting from a state
 % that has already been seen, how many block redistribution cycles must be performed before that
 % same state is seen again?

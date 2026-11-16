@@ -1,4 +1,4 @@
-rucksacks = parse_puzzle_input('./puzzle_input.txt');
+rucksacks = parse_puzzle_input(fullfile(fileparts(mfilename("fullpath")), "puzzle_input.txt"));
 % rucksacks = parse_puzzle_input('./sample_input.txt');
 
 fprintf('Part One: %u\n', score_rucksacks(rucksacks));

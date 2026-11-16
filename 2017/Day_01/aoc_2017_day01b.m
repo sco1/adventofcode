@@ -1,4 +1,4 @@
-function output = AoC2017_Day1b(str)
+function output = aoc_2017_day01b(str)
 % Input a string of digits Assume an even number of digits
 %
 % Consider the digit halfway around the circular list. That is, if your list contains 10 items, only

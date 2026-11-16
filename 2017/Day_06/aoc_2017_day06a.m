@@ -1,4 +1,4 @@
-function [nsteps, banklist] = AoC2017_Day6a(filepath)
+function [nsteps, banklist] = aoc_2017_day06a(filepath)
 % The reallocation routine operates in cycles. In each cycle, it finds the memory bank with the most
 % blocks (ties won by the lowest-numbered memory bank) and redistributes those blocks among the
 % banks. To do this, it removes all of the blocks from the selected bank, then moves to the next (by

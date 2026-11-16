@@ -1,4 +1,4 @@
-function output = AoC2017_Day1a(str)
+function output = aoc_2017_day01a(str)
 % Input a string of digits
 %
 % Review a sequence of digits and find the sum of all digits that match the next digit in the list.

@@ -1,4 +1,4 @@
-calorie_counts = parse_calories('./puzzle_input.txt');
+calorie_counts = parse_calories(fullfile(fileparts(mfilename("fullpath")), "puzzle_input.txt"));
 % calorie_counts = parse_calories('./sample_input.txt');
 
 fprintf('Part One: %u\n', densest_elf(calorie_counts));

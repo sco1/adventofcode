@@ -1,5 +1,6 @@
-function aoc_2019_day1()
-input_data = readmatrix("./puzzle_input.txt", "NumHeaderLines", 0);
+function aoc_2019_day01()
+input_path = fullfile(fileparts(mfilename("fullpath")), "puzzle_input.txt");
+input_data = readmatrix(input_path, "NumHeaderLines", 0);
 
 % Part 1
 disp(sum(calculate_propellant(input_data)))

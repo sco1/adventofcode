@@ -1,4 +1,4 @@
-function output = AoC2017_Day2a(filepath)
+function output = aoc_2017_day02a(filepath)
 % For each row, determine the difference between the largest value and the smallest value; the
 % checksum is the sum of all of these differences.
 %

@@ -1,4 +1,4 @@
-function output = AoC2017_Day4a(filepath)
+function output = aoc_2017_day04a(filepath)
 % A new system policy has been put in place that requires all accounts to use a passphrase instead
 % of simply a password. A passphrase consists of a series of words (lowercase letters) separated by
 % spaces.
