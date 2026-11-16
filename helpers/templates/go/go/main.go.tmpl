@@ -2,19 +2,12 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"path/filepath"
-	"runtime"
-	"strings"
+
+	"github.com/sco1/adventofcode/internal/aoc"
 )
 
 func main() {
-	_, sourceFile, _, _ := runtime.Caller(0)
-	rawInput, err := os.ReadFile(filepath.Join(filepath.Dir(sourceFile), "puzzle_input.txt"))
-	if err != nil {
-		panic(err)
-	}
-	puzzleInput := strings.TrimSpace(string(rawInput))
+	puzzleInput := aoc.ReadInput()
 
 	fmt.Printf("Part One: %v\n", partOne(puzzleInput))
 	fmt.Printf("Part Two: %v\n", partTwo(puzzleInput))

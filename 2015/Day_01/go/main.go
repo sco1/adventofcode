@@ -2,14 +2,12 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"strings"
+
+	"github.com/sco1/adventofcode/internal/aoc"
 )
 
-var puzzleInputFile = "./puzzle_input.txt"
-
 func main() {
-	puzzleInput := readPuzzleInput(puzzleInputFile)
+	puzzleInput := aoc.ReadInput()
 	fmt.Printf("Part One: %v\n", santaElevator(puzzleInput, 1))
 	fmt.Printf("Part Two: %v\n", santaElevator(puzzleInput, 2))
 }
@@ -32,13 +30,4 @@ func santaElevator(directions string, part int) int {
 	}
 
 	return level
-}
-
-func readPuzzleInput(filename string) string {
-	rawInput, err := os.ReadFile(filename)
-	if err != nil {
-		panic(err)
-	}
-
-	return strings.TrimSpace(string(rawInput))
 }
